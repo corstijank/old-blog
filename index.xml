@@ -7,18 +7,8 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 14:31:37 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 27 Dec 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://corstijank.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>.NET core delivery with Jenkins pipelines and Docker</title>
-      <link>https://corstijank.github.io/post/dotnetcore-jenkins/</link>
-      <pubDate>Sun, 01 Jan 2017 14:31:37 +0100</pubDate>
-      
-      <guid>https://corstijank.github.io/post/dotnetcore-jenkins/</guid>
-      <description>&lt;p&gt;BLA&lt;/p&gt;
-</description>
-    </item>
     
     <item>
       <title>System.out.println(&#34;Hello World&#34;)</title>
