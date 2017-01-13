@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Post-rsses on Statics Must Die!</title>
-    <link>http://corstijank.github.io/post/index.xml</link>
+    <link>https://corstijank.github.io/post/index.xml</link>
     <description>Recent content in Post-rsses on Statics Must Die!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</copyright>
     <lastBuildDate>Sun, 01 Jan 2017 14:31:37 +0100</lastBuildDate>
-    <atom:link href="http://corstijank.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://corstijank.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>.NET core delivery with Jenkins pipelines and Docker</title>
-      <link>http://corstijank.github.io/post/dotnetcore-jenkins/</link>
+      <link>https://corstijank.github.io/post/dotnetcore-jenkins/</link>
       <pubDate>Sun, 01 Jan 2017 14:31:37 +0100</pubDate>
       
-      <guid>http://corstijank.github.io/post/dotnetcore-jenkins/</guid>
+      <guid>https://corstijank.github.io/post/dotnetcore-jenkins/</guid>
       <description>&lt;p&gt;BLA&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>System.out.println(&#34;Hello World&#34;)</title>
-      <link>http://corstijank.github.io/post/hello-world/</link>
+      <link>https://corstijank.github.io/post/hello-world/</link>
       <pubDate>Tue, 27 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://corstijank.github.io/post/hello-world/</guid>
+      <guid>https://corstijank.github.io/post/hello-world/</guid>
       <description>&lt;p&gt;Greetings, dear reader, and welcome to my little corner of the web. It&amp;rsquo;s nearing the end of 2016, and I have decided I want to start my resolution of finally putting up some blogs before 2017 enters with a bang.&lt;/p&gt;
 
 &lt;p&gt;Or, at the very least, have a welcoming blog post up and running. Minimal Viable Product and all. So, with that ,I bid you welcome to &lt;strong&gt;Statics Must Die&lt;/strong&gt;, the ramblings of me, Corstijan Kortsmit.&lt;/p&gt;
