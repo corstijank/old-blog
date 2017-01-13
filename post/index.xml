@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Post-rsses on Statics Must Die!</title>
+    <link>http://corstijank.github.io/post/index.xml</link>
+    <description>Recent content in Post-rsses on Statics Must Die!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 14:31:37 +0100</lastBuildDate>
+    <atom:link href="http://corstijank.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>.NET core delivery with Jenkins pipelines and Docker</title>
+      <link>http://corstijank.github.io/post/dotnetcore-jenkins/</link>
+      <pubDate>Sun, 01 Jan 2017 14:31:37 +0100</pubDate>
+      
+      <guid>http://corstijank.github.io/post/dotnetcore-jenkins/</guid>
+      <description>&lt;p&gt;BLA&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>System.out.println(&#34;Hello World&#34;)</title>
+      <link>http://corstijank.github.io/post/hello-world/</link>
+      <pubDate>Tue, 27 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://corstijank.github.io/post/hello-world/</guid>
+      <description>&lt;p&gt;Greetings, dear reader, and welcome to my little corner of the web. It&amp;rsquo;s nearing the end of 2016, and I have decided I want to start my resolution of finally putting up some blogs before 2017 enters with a bang.&lt;/p&gt;
+
+&lt;p&gt;Or, at the very least, have a welcoming blog post up and running. Minimal Viable Product and all. So, with that ,I bid you welcome to &lt;strong&gt;Statics Must Die&lt;/strong&gt;, the ramblings of me, Corstijan Kortsmit.&lt;/p&gt;
+
+&lt;p&gt;About me; I&amp;rsquo;m a software engineer / consultant / beer lover living in the Netherlands. I could go on and on on how I like software, history, good books,  french fries, and so on. But we&amp;rsquo;ll get to all that in due time. For me, this is very much an experiment for 2017. &amp;lsquo;Can I blog?&amp;rsquo;. I know I have the capabilities to write articles, and I have plenty of inspiration. I want to find out if I can motivate myself to do this. To keep writing down interesting thoughts, experiments and generic ramblings, instead of just all keeping them to myself.&lt;/p&gt;
+
+&lt;p&gt;Anyway, for now, what can you expect here? A bunch of posts on interesting ideas I have had for a while now, involving topics like Java, build tooling, Docker and containers, software architecture, agile product ownership and so on. Maybe even a good tutorial on the proper preparation of french fries.&lt;/p&gt;
+
+&lt;p&gt;What can&amp;rsquo;t you expect here? Well for one, as you might guess, &lt;code&gt;static&lt;/code&gt;. Let me promise now, there will be a point in the future, where I will blog on the title. I will explain the evils of &lt;code&gt;static&lt;/code&gt;, and you will see how &lt;code&gt;static&lt;/code&gt; is really the dark side of the force at work.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
