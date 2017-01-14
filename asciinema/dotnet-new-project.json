@@ -1,0 +1,418 @@
+{
+  "version": 1,
+  "width": 90,
+  "height": 20,
+  "duration": 21.049377,
+  "command": null,
+  "title": null,
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/bin/zsh"
+  },
+  "stdout": [
+    [
+      0.761753,
+      "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                                         \r \r"
+    ],
+    [
+      9.7e-05,
+      "\u001b]2;corstijank@corstijank01-2: ~/blog-dotnet-jenkins\u0007\u001b]1;..otnet-jenkins\u0007"
+    ],
+    [
+      0.047114,
+      "\r\u001b[0m\u001b[27m\u001b[24m\u001b[J\u001b[1m\u001b[35mblog-dotnet-jenkins\u001b[1m\u001b[32m [master\u001b[1m\u001b[32m]\u001b[1m\u001b[35m \u001b[00m% \u001b[K"
+    ],
+    [
+      3.9e-05,
+      "\u001b[?1h\u001b=\u001b[?2004h"
+    ],
+    [
+      1.033226,
+      "l"
+    ],
+    [
+      0.143439,
+      "\bls"
+    ],
+    [
+      1.415575,
+      "\u001b[?1l\u001b>"
+    ],
+    [
+      4.3e-05,
+      "\u001b[?2004l\r\r\n"
+    ],
+    [
+      0.001256,
+      "\u001b]2;ls -G\u0007\u001b]1;ls\u0007"
+    ],
+    [
+      0.004958,
+      "LICENSE   README.md\r\n"
+    ],
+    [
+      0.000554,
+      "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                                         \r \r"
+    ],
+    [
+      0.000177,
+      "\u001b]2;corstijank@corstijank01-2: ~/blog-dotnet-jenkins\u0007\u001b]1;..otnet-jenkins\u0007"
+    ],
+    [
+      0.047026,
+      "\r\u001b[0m\u001b[27m\u001b[24m\u001b[J\u001b[1m\u001b[35mblog-dotnet-jenkins\u001b[1m\u001b[32m [master\u001b[1m\u001b[32m]\u001b[1m\u001b[35m \u001b[00m% \u001b[K"
+    ],
+    [
+      2.4e-05,
+      "\u001b[?1h\u001b=\u001b[?2004h"
+    ],
+    [
+      1.769995,
+      "d"
+    ],
+    [
+      0.087906,
+      "\bdo"
+    ],
+    [
+      0.136012,
+      "t"
+    ],
+    [
+      0.144075,
+      "n"
+    ],
+    [
+      0.103399,
+      "e"
+    ],
+    [
+      0.080598,
+      "t"
+    ],
+    [
+      0.391897,
+      " "
+    ],
+    [
+      0.128026,
+      "n"
+    ],
+    [
+      0.071268,
+      "e"
+    ],
+    [
+      0.048691,
+      "w"
+    ],
+    [
+      0.583984,
+      "\u001b[?1l\u001b>"
+    ],
+    [
+      3.3e-05,
+      "\u001b[?2004l\r\r\n"
+    ],
+    [
+      0.000935,
+      "\u001b]2;dotnet new\u0007\u001b]1;dotnet\u0007"
+    ],
+    [
+      0.124483,
+      "Created new C# project in /Users/corstijank/blog-dotnet-jenkins.\r\n"
+    ],
+    [
+      0.004867,
+      "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                                         \r \r"
+    ],
+    [
+      0.000171,
+      "\u001b]2;corstijank@corstijank01-2: ~/blog-dotnet-jenkins\u0007\u001b]1;..otnet-jenkins\u0007"
+    ],
+    [
+      0.040322,
+      "\r\u001b[0m\u001b[27m\u001b[24m\u001b[J\u001b[1m\u001b[35mblog-dotnet-jenkins\u001b[1m\u001b[32m [master\u001b[1m\u001b[31m●\u001b[32m]\u001b[1m\u001b[35m \u001b[00m% \u001b[K\u001b[?1h\u001b="
+    ],
+    [
+      2.3e-05,
+      "\u001b[?2004h"
+    ],
+    [
+      0.765138,
+      "d"
+    ],
+    [
+      0.144119,
+      "\bdo"
+    ],
+    [
+      0.199971,
+      "t"
+    ],
+    [
+      0.255971,
+      "n"
+    ],
+    [
+      0.072032,
+      "e"
+    ],
+    [
+      0.072024,
+      "t"
+    ],
+    [
+      0.175732,
+      " "
+    ],
+    [
+      0.168089,
+      "r"
+    ],
+    [
+      0.072073,
+      "e"
+    ],
+    [
+      0.175849,
+      "s"
+    ],
+    [
+      0.128188,
+      "t"
+    ],
+    [
+      0.119687,
+      "o"
+    ],
+    [
+      0.096196,
+      "r"
+    ],
+    [
+      0.048135,
+      "e"
+    ],
+    [
+      1.783869,
+      "\u001b[?1l\u001b>"
+    ],
+    [
+      3.4e-05,
+      "\u001b[?2004l\r\r\n"
+    ],
+    [
+      0.002439,
+      "\u001b]2;dotnet restore\u0007\u001b]1;dotnet\u0007"
+    ],
+    [
+      0.188664,
+      "log  : Restoring packages for /Users/corstijank/blog-dotnet-jenkins/project.json...\r\n"
+    ],
+    [
+      0.700992,
+      "log  : Writing lock file to disk. Path: /Users/corstijank/blog-dotnet-jenkins/project.lock.json\r\n"
+    ],
+    [
+      0.019969,
+      "log  : /Users/corstijank/blog-dotnet-jenkins/project.json\r\nlog  : Restore completed in 726ms.\r\n"
+    ],
+    [
+      0.023269,
+      "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                                         \r \r"
+    ],
+    [
+      0.000245,
+      "\u001b]2;corstijank@corstijank01-2: ~/blog-dotnet-jenkins\u0007\u001b]1;..otnet-jenkins\u0007"
+    ],
+    [
+      0.036917,
+      "\r\u001b[0m\u001b[27m\u001b[24m\u001b[J\u001b[1m\u001b[35mblog-dotnet-jenkins\u001b[1m\u001b[32m [master\u001b[1m\u001b[31m●\u001b[32m]\u001b[1m\u001b[35m \u001b[00m% \u001b[K\u001b[?1h\u001b="
+    ],
+    [
+      3.1e-05,
+      "\u001b[?2004h"
+    ],
+    [
+      0.899379,
+      "d"
+    ],
+    [
+      0.13601,
+      "\bdo"
+    ],
+    [
+      0.095882,
+      "t"
+    ],
+    [
+      0.127992,
+      "n"
+    ],
+    [
+      0.095831,
+      "e"
+    ],
+    [
+      0.064287,
+      "t"
+    ],
+    [
+      0.791941,
+      " "
+    ],
+    [
+      0.127796,
+      "r"
+    ],
+    [
+      0.11996,
+      "u"
+    ],
+    [
+      0.191885,
+      "n"
+    ],
+    [
+      0.432226,
+      "\u001b[?1l\u001b>"
+    ],
+    [
+      3.5e-05,
+      "\u001b[?2004l\r\r\n"
+    ],
+    [
+      0.000956,
+      "\u001b]2;dotnet run\u0007\u001b]1;dotnet\u0007"
+    ],
+    [
+      0.325064,
+      "Project blog-dotnet-jenkins (.NETCoreApp,Version=v1.1) will be compiled because expected outputs are missing\r\n"
+    ],
+    [
+      0.082871,
+      "Compiling "
+    ],
+    [
+      0.008026,
+      "\u001b[39;49m"
+    ],
+    [
+      0.000223,
+      "\u001b[33mblog-dotnet-jenkins\u001b[39;49m for \u001b[39;49m\u001b[33m.NETCoreApp,Version=v1.1\u001b[39;49m"
+    ],
+    [
+      1.8e-05,
+      "\r\n"
+    ],
+    [
+      0.935361,
+      "\r\n"
+    ],
+    [
+      8.7e-05,
+      "\u001b[39;49m\u001b[32mCompilation succeeded.\u001b[39;49m\r\n"
+    ],
+    [
+      2e-05,
+      "    0 Warning(s)\r\n    0 Error(s)\r\n\r\n"
+    ],
+    [
+      4.1e-05,
+      "Time elapsed 00:00:00.9355446\r\n"
+    ],
+    [
+      0.262008,
+      " \r\n\r\n"
+    ],
+    [
+      0.067379,
+      "Hello World!\r\n"
+    ],
+    [
+      0.04979,
+      "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                                         \r \r"
+    ],
+    [
+      0.000103,
+      "\u001b]2;corstijank@corstijank01-2: ~/blog-dotnet-jenkins\u0007\u001b]1;..otnet-jenkins\u0007"
+    ],
+    [
+      0.037646,
+      "\r\u001b[0m\u001b[27m\u001b[24m\u001b[J\u001b[1m\u001b[35mblog-dotnet-jenkins\u001b[1m\u001b[32m [master\u001b[1m\u001b[31m●\u001b[32m]\u001b[1m\u001b[35m \u001b[00m% \u001b[K\u001b[?1h\u001b="
+    ],
+    [
+      3e-05,
+      "\u001b[?2004h"
+    ],
+    [
+      2.005501,
+      "l"
+    ],
+    [
+      0.112205,
+      "\bls"
+    ],
+    [
+      0.375968,
+      "\u001b[?1l\u001b>"
+    ],
+    [
+      3.5e-05,
+      "\u001b[?2004l\r\r\n"
+    ],
+    [
+      0.000921,
+      "\u001b]2;ls -G\u0007\u001b]1;ls\u0007"
+    ],
+    [
+      0.005125,
+      "LICENSE           README.md         \u001b[1m\u001b[36mobj\u001b[39;49m\u001b[0m               \u001b[31mproject.lock.json\u001b[39;49m\u001b[0m\r\n\u001b[31mProgram.cs\u001b[39;49m\u001b[0m        \u001b[1m\u001b[36mbin\u001b[39;49m\u001b[0m               \u001b[31mproject.json\u001b[39;49m\u001b[0m\r\n"
+    ],
+    [
+      0.000505,
+      "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                                         \r \r"
+    ],
+    [
+      0.000142,
+      "\u001b]2;corstijank@corstijank01-2: ~/blog-dotnet-jenkins\u0007\u001b]1;..otnet-jenkins\u0007"
+    ],
+    [
+      0.045457,
+      "\r\u001b[0m\u001b[27m\u001b[24m\u001b[J\u001b[1m\u001b[35mblog-dotnet-jenkins\u001b[1m\u001b[32m [master\u001b[1m\u001b[31m●\u001b[32m]\u001b[1m\u001b[35m \u001b[00m% \u001b[K\u001b[?1h\u001b="
+    ],
+    [
+      3e-05,
+      "\u001b[?2004h"
+    ],
+    [
+      0.70782,
+      "e"
+    ],
+    [
+      0.143733,
+      "\bex"
+    ],
+    [
+      0.079902,
+      "i"
+    ],
+    [
+      0.120222,
+      "t"
+    ],
+    [
+      0.15181,
+      "\u001b[?1l\u001b>"
+    ],
+    [
+      3.5e-05,
+      "\u001b[?2004l\r\r\n"
+    ],
+    [
+      0.000902,
+      "\u001b]2;exit\u0007\u001b]1;exit\u0007"
+    ]
+  ]
+}

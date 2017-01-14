@@ -7,8 +7,41 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</copyright>
-    <lastBuildDate>Tue, 27 Dec 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Jan 2017 14:31:37 +0100</lastBuildDate>
     <atom:link href="https://corstijank.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>.NET core delivery with Jenkins pipelines and Docker</title>
+      <link>https://corstijank.github.io/post/dotnetcore-jenkins/</link>
+      <pubDate>Sun, 01 Jan 2017 14:31:37 +0100</pubDate>
+      
+      <guid>https://corstijank.github.io/post/dotnetcore-jenkins/</guid>
+      <description>
+
+&lt;p&gt;At the closing of last year, I presented an in-house talk, comparing Continuous Delivery solutions for both Java and .NET. Of course, this was not a simple side-by-side comparison; a microsoft oriented colleague and myself created a small challenge for ourselves. My colleague was going to build Java software in Team Foundation Server. And me? I was stuck creating a delivery pipeline for Microsoft .NET in Jenkins.&lt;/p&gt;
+
+&lt;p&gt;Luckily for me, Microsoft has been busy in 2016 with the excellent .NET core runtime. This runtime will run .NET programs, much like the regular .NET runtime. What&amp;rsquo;s new, however, is that the .NET core runtime is portable. It runs as well on windows as it does on Linux. I mean, it&amp;rsquo;s only logical if my colleague get&amp;rsquo;s to work with an awesome cross-platform runtime like the JVM, I should get an equal opportunity, right?&lt;/p&gt;
+
+&lt;p&gt;Now, Im going to dedicate a little blog post to the whole experience; it&amp;rsquo;s surprisingly easy to use .NET core, and setting up a Continuous Delivery pipeline in Jenkins is always a bunch of fun. So, let&amp;rsquo;s dive in.&lt;/p&gt;
+
+&lt;h2 id=&#34;hello-dotnet-core&#34;&gt;Hello dotnet core&lt;/h2&gt;
+
+&lt;p&gt;First, we get started with a new dotnet core program; using the dotnet core runtime and the CLI tooling.&lt;/p&gt;
+
+&lt;asciinema-player src=&#34;https://corstijank.github.io/asciinema/dotnet-new-project.json&#34; cols=&#34;90&#34; rows=&#34;20&#34; preload=&#34;true&#34; poster=&#34;data:text/plain,Click me to play&#34;&gt;&lt;/asciinema-player&gt;
+
+
+&lt;p&gt;Behold! The glory of &amp;ldquo;Hello World&amp;rdquo; in .NET Core. So, a couple of interesting things to note:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;dotnet new&lt;/code&gt; creates a simple, new C# project. Luckily, no VB.NET shenanigans. This basically creates a &lt;code&gt;Program.cs&lt;/code&gt; file and a &lt;code&gt;project.json&lt;/code&gt; file. The json file is kind of like your maven pom file or your gradle build file. Kind of.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dotnet restore&lt;/code&gt; downloads all dependencies into the local cache, so you&amp;rsquo;re good to go. Interesting fact; you always need to run &lt;code&gt;dotnet restore&lt;/code&gt; seperately, it is not included as a part of something like &lt;code&gt;dotnet run&lt;/code&gt; or &lt;code&gt;dotnet publish&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dotnet run&lt;/code&gt; does two things. Our program is not yet compiled, so it implicitely does a build of our program (&lt;code&gt;dotnet build&lt;/code&gt;). Then, it runs the program, resulting in our much desired &amp;lsquo;Hello World&amp;rsquo;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;deliver-first-develop-later&#34;&gt;Deliver first, develop later&lt;/h2&gt;
+</description>
+    </item>
     
     <item>
       <title>System.out.println(&#34;Hello World&#34;)</title>
