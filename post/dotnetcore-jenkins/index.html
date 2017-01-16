@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-    <meta charset="utf-8" /> 
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-
-    <title>.NET core delivery with Jenkins pipelines and Docker &middot; Statics Must Die!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+    
+    
+    <link rel="stylesheet" type="text/css" href="https://corstijank.github.io/css/asciinema-player.css" />
+    
+    <title>Crossing Styx - My journey into the (under)world of .NET - Part I &middot; Statics Must Die!</title>
     <meta name="author" content="Corstijan Kortsmit">
     <meta name="description" content="Read my ramblings here">
     <meta name="generator" content="Hugo 0.18.1" />
@@ -38,9 +40,6 @@
     h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #2079b4;}
     .older-posts:hover, .newer-posts:hover {color: #2079b4;}
 </style>
-    
-    
-    <link rel="stylesheet" type="text/css" href="/asciinema-player.css" />
 </head>
 
 <body class="home-template">
@@ -58,10 +57,10 @@
     
 <article class="post">
     <header>
-        <h1 class="post-title">.NET core delivery with Jenkins pipelines and Docker</h1>
+        <h1 class="post-title">Crossing Styx - My journey into the (under)world of .NET - Part I</h1>
         <div class="post-meta">
-            <time datetime="01 January 2017">
-                01 January 2017
+            <time datetime="16 January 2017">
+                16 January 2017
             </time>
         </div>
     </header>
@@ -71,26 +70,159 @@
 
 <p>At the closing of last year, I presented an in-house talk, comparing Continuous Delivery solutions for both Java and .NET. Of course, this was not a simple side-by-side comparison; a microsoft oriented colleague and myself created a small challenge for ourselves. My colleague was going to build Java software in Team Foundation Server. And me? I was stuck creating a delivery pipeline for Microsoft .NET in Jenkins.</p>
 
-<p>Luckily for me, Microsoft has been busy in 2016 with the excellent .NET core runtime. This runtime will run .NET programs, much like the regular .NET runtime. What&rsquo;s new, however, is that the .NET core runtime is portable. It runs as well on windows as it does on Linux. I mean, it&rsquo;s only logical if my colleague get&rsquo;s to work with an awesome cross-platform runtime like the JVM, I should get an equal opportunity, right?</p>
+<p>Now, I had been thinking about looking into .NET since the appearance of <strong>.NET core</strong>, and this gave me all the excuse I needed&hellip;</p>
 
-<p>Now, Im going to dedicate a little blog post to the whole experience; it&rsquo;s surprisingly easy to use .NET core, and setting up a Continuous Delivery pipeline in Jenkins is always a bunch of fun. So, let&rsquo;s dive in.</p>
+<p>So, this is going to be the first in a series of blog posts journalling my adventures in .NET core. For this first post, Im going to be talking mostly on starting up a simple delivery pipeline using Jenkins. From this basic delivery pipeline, other posts in this series will focus on developing the developing the application, with unit tests, acceptance tests, all the while making sure our delivery pipeline stays up to date.</p>
 
-<h2 id="hello-dotnet-core">Hello dotnet core</h2>
+<p>Well then, let&rsquo;s begin!</p>
 
-<p>First, we get started with a new dotnet core program; using the dotnet core runtime and the CLI tooling.</p>
+<h2 id="hello-net-core">Hello .NET core</h2>
 
-<asciinema-player src="/asciinema/dotnet-new-project.json" cols="90" rows="20" preload="true" poster="data:text/plain,Click me to play"></asciinema-player>
+<p>So first off, we get started with a new .NET core application; using the .NET core runtime and the CLI tooling.</p>
+
+<asciinema-player src="/asciinema/dotnet-new-project.json" cols="90" rows="20" preload="true" poster="npt:0:07"></asciinema-player>
 
 
 <p>Behold! The glory of &ldquo;Hello World&rdquo; in .NET Core. So, a couple of interesting things to note:</p>
 
 <ul>
-<li><code>dotnet new</code> creates a simple, new C# project. Luckily, no VB.NET shenanigans. This basically creates a <code>Program.cs</code> file and a <code>project.json</code> file. The json file is kind of like your maven pom file or your gradle build file. Kind of.</li>
-<li><code>dotnet restore</code> downloads all dependencies into the local cache, so you&rsquo;re good to go. Interesting fact; you always need to run <code>dotnet restore</code> seperately, it is not included as a part of something like <code>dotnet run</code> or <code>dotnet publish</code></li>
-<li><code>dotnet run</code> does two things. Our program is not yet compiled, so it implicitely does a build of our program (<code>dotnet build</code>). Then, it runs the program, resulting in our much desired &lsquo;Hello World&rsquo;</li>
+<li><code>dotnet new</code> creates a simple, new C# project. Luckily, no VB.NET shenanigans. This basically creates a <code>Program.cs</code> file and a <code>project.json</code> file. The JSON file is kind of like your Maven pom file or your Gradle build file. Kind of.</li>
+<li><code>dotnet restore</code> downloads all dependencies into the local cache, so you&rsquo;re good to go. Interesting fact; you always need to run <code>dotnet restore</code> separately, it is not included as a part of something like <code>dotnet run</code> or <code>dotnet publish</code></li>
+<li><code>dotnet run</code> does two things. Our program is not yet compiled, so it implicitly does a build of our program (<code>dotnet build</code>). Then, it runs the program, resulting in our much desired &lsquo;Hello World&rsquo;</li>
 </ul>
 
+<p>For now, this is about all I need. I have a &lsquo;Hello World&rsquo; program, I can clone it anywhere, and get it building and running.</p>
+
+<p>So, coolest thing about this all? It&rsquo;s all native on my Mac. And want to know what&rsquo;s even better? It works just as well on Linux. And just like that, running and distributing our application got a whole lot easier, as I, for one, hail our Docker overlords.</p>
+
+<h2 id="on-jenkins-2">On Jenkins 2</h2>
+
+<p>Now, as I said, I had extra motivation for my experiments to use Jenkins as a build tool. One, it was the topic of the talk. And of course two, it&rsquo;s just better then TFS or VSTS <em>coughs</em>.</p>
+
+<p>Ok, well, let&rsquo;s not go into that comparison on here.</p>
+
+<p>At the very least, Jenkins&rsquo; delivery pipelines are fun to experiment with, and allow us to create a delivery pipeline, as code (as opposed to clicking through a bunch of screens). Last year, while Microsoft was busy developing dotnet core, Cloudbees (the company mostly behind Jenkins) has been busy developing Jenkins 2, and focussing on delivery pipelines.</p>
+
+<p>Though still in development, the delivery pipeline vision from Jenkins has been clear throughout; All build configuration is scripted, in a file called <code>Jenkinsfile</code> that you keep in git with your software.</p>
+
+<p>There are, at this moment, two &lsquo;flavors&rsquo; of Jenkinsfile;
+-  a pure groovy script. Allows for maximal freedom, but is error prone, and often not as readable
+- a declarative script. Syntax is more defined; less chance for errors at the cost of flexibility. Also, the syntax is not quite final yet (beta2 at this moment of writing)</p>
+
+<blockquote>
+<p>If your <code>Jenkinsfile</code> starts with something akin to <code>node{</code> you&rsquo;re looking at a script that allows all kinds of groovy code. You can do anything, but it&rsquo;s easy to make mistakes. If the file starts with <code>pipeline{</code> the syntax is much more strictly defined, but more readable. I would advice to use the declarative <code>pipeline{</code> style for new projects.</p>
+</blockquote>
+
+<p>For this project, we&rsquo;re going to use the declarative style. In my opinion, it&rsquo;s cleaner, and it certainly looks like it&rsquo;s the direction Cloudbees is heading towards.</p>
+
+<h2 id="back-to-the-core-of-things">Back to the core of things.</h2>
+
+<p>Now, that&rsquo;s all nice and well, but what about our awesome hello world application? Well, let&rsquo;s get started on a delivery pipeline for that. What&rsquo;s going to be delivery architecture? Our application is going to be packaged into a docker container, and uploaded to docker hub. From there, deployment to production should be easy enough. Let&rsquo;s begin.</p>
+
+<h3 id="building-the-code">Building the code</h3>
+
+<p>So, I created a first stage called &lsquo;Build Binaries&rsquo; to begin with. It builds our .NET core binaries.</p>
+
+<pre><code class="language-java">stage('Build binaries'){
+  agent { docker 'microsoft/dotnet:latest'}
+  steps{
+    git url: 'https://github.com/corstijank/blog-dotnet-jenkins.git'
+    sh 'dotnet restore'
+    sh 'dotnet publish project.json -c Release -r ubuntu.14.04-x64 -o ./publish'
+    stash includes: 'publish/**', name: 'prod_bins' 
+  }
+}
+</code></pre>
+
+<p>Let&rsquo;s start with the line where declare which agent we are going to use for this stage. We use a docker container as our agent, and base it on the <code>microsoft/dotnet:latest</code> image. This is a simple line, but this has some pretty neat implications. It basically means, for this pipeline to run, we don&rsquo;t need to install the .NET core SDK anywhere. All we need is access to a docker host. The pipeline downloads the image, starts a container, and executes the steps of our stage <em>inside</em> the container.</p>
+
+<p>Need to pin a specific version? No problem. Just use a different docker tag. Want to build on a new version of the SDK? Use a different docker tag. Never install a .NET SDK on a build server again. It&rsquo;s <strong>glorious</strong></p>
+
+<p>So, what do we run our container? Basically three things; we clone the git repository, restore the dependencies, and publish our application. This is all pretty basic .NET core CLI stuff.</p>
+
+<p>Lastly, and this is important, we use <code>stash</code> to copy the resulting binaries <strong>out</strong> of our container. This basically creates a zip file of everything in the specified directory, and ensures that zipfile is made available on request to later stages in the pipeline under the specified name.</p>
+
+<h3 id="3-2-1-dockerize">3&hellip;2&hellip;1&hellip;Dockerize!</h3>
+
+<p>Now that we have our binaries, it&rsquo;s time to create our docker image. I purposefully put this as a separate stage.</p>
+
+<blockquote>
+<p>Simply said, the requirements for the <strong>steps</strong> in this stage, being, access to a Docker daemon, are different than the requirements for the <strong>steps</strong>of the previous stage (access to the .NET core sdk). Much like object oriented programming, this is a pretty good pointer to decouple stages in the delivery pipeline.</p>
+</blockquote>
+
+<p>Let&rsquo;s look at the pipeline:</p>
+
+<pre><code class="language-java">stage('Create docker image'){
+    agent { label 'hasDocker' }
+    environment {
+        DOCKER_ID = credentials('docker-id')
+    }
+    steps{
+        // Unstash the binaries from the previous tage
+        unstash 'prod_bins'
+        sh &quot;&quot;&quot;  docker build -t corstijank/blog-dotnet-jenkins:1.0-${env.BUILD_NUMBER} .
+                docker tag corstijank/blog-dotnet-jenkins:1.0-${env.BUILD_NUMBER} corstijank/blog-dotnet-jenkins:latest
+                docker login -u ${DOCKER_ID_USR} -p ${DOCKER_ID_PSW}
+                docker push corstijank/blog-dotnet-jenkins:1.0-${env.BUILD_NUMBER}
+                docker push corstijank/blog-dotnet-jenkins:latest &quot;&quot;&quot;
+    }
+}
+</code></pre>
+
+<p>There&rsquo;s a bunch of new stuff going on here. Let&rsquo;s inspect. We run this stage on any Jenkins agent that has a label called &lsquo;hasDocker&rsquo;. The label is just something I made up; but it&rsquo;s a nice way of identify if a Jenkins agent comes with access to a Docker daemon or not. Mind you, this stage does not run <strong>in</strong> in a docker container. It&rsquo;s just a simple process on the agent executing it.</p>
+
+<p>Also, we ask Jenkins for credentials, under the ID &lsquo;docker-id&rsquo;. Again, this is an identifier I made up myself. It&rsquo;s up the Jenkins administrator to create some credentials to a DockerHub id in the Jenkins instance.</p>
+
+<p>From there on, it&rsquo;s pretty self-explanatory. We unstash (read: unzip) the created binaries. We use docker build to create an image based on a <code>Dockerfile</code> in our repository. We tag it using both the build number, and a latest tag. We log in to DockerHub with our credentials, and we push our images.</p>
+
+<p>Here&rsquo;s the Dockerfile;</p>
+
+<pre><code class="language-Dockerfile">FROM microsoft/dotnet:runtime
+COPY publish /app
+WORKDIR /app
+RUN [&quot;chmod&quot;, &quot;744&quot;, &quot;./blog-dotnet-jenkins&quot;] 
+ENTRYPOINT [&quot;./blog-dotnet-jenkins&quot;]
+</code></pre>
+
+<p>We use the .NET core runtime here; as we don&rsquo;t need the full SDK. We add our <code>publish</code> folder as <code>/app</code>, and mark the executable file as such. The <code>ENTRYPOINT</code> points to the executable file, ensuring its execution when starting the container.</p>
+
+<p>If we run this pipeline in our Jenkins instance, we have achieved, a fully runnable docker image!</p>
+
+<p>Success!</p>
+
+<asciinema-player src="/asciinema/dotnet-jenkins-firstrun.json" cols="90" rows="10" preload="true" poster="npt:0:07"></asciinema-player>
+
+
+<h3 id="f-ck-it-ship-it">F*ck it, ship it</h3>
+
+<p>The final stage really isn&rsquo;t anything special for now:</p>
+
+<pre><code class="language-java">stage('Run in production'){
+  agent { label 'hasDocker' }
+  steps{
+    sh &quot;docker run -d corstijank/blog-dotnet-jenkins:1.0-${env.BUILD_NUMBER}&quot;
+  }
+}
+</code></pre>
+
+<p>Of course, this is not anywhere near a satisfying production environment. I promise to extend our pipeline to make sure we deploy nicely to separate docker host representing our production server. Or maybe some container service somewhere. At this point, it&rsquo;s all Docker anyway, and that should be the least of my struggles in the coming adventure.</p>
+
 <h2 id="deliver-first-develop-later">Deliver first, develop later</h2>
+
+<p>So, maybe I went a bit overboard for a simple <code>Hello World</code> application. I think many developers tend to focus too much first on developing features, instead of delivering features. The whole idea was to test if a .NET core application could be delivered using Jenkins. Never mind the feature yet. For now, it&rsquo;s looking rather glorious. Of course there are going to be add ons and challenges later;</p>
+
+<ul>
+<li>unit testing</li>
+<li>acceptance testing with some kind of database backend</li>
+<li>actual deployment to an actual production environment</li>
+<li>gathering test and deployment results</li>
+</ul>
+
+<p>But honestly, after this experiment I feel confident about using .NET core on Jenkins. And it almost pains me to say it, but Im kind of looking forward into experiment and building this little project. So, definitely to be continued soon.</p>
+
+<p>If you&rsquo;re curious about the full sources, or just want to peek at the complete picture, you can check out the <a href="https://github.com/corstijank/blog-dotnet-jenkins">repository at github</a>.</p>
+
+<p>Any questions? Feel free to shoot away below!</p>
 
     </section>
 
@@ -106,7 +238,7 @@
 <script type="text/javascript">
     var disqus_shortname = 'corstijank-github-io';
     var disqus_identifier = 'https:\/\/corstijank.github.io\/post\/dotnetcore-jenkins\/';
-    var disqus_title = '.NET core delivery with Jenkins pipelines and Docker';
+    var disqus_title = 'Crossing Styx - My journey into the (under)world of .NET - Part I';
     var disqus_url = 'https:\/\/corstijank.github.io\/post\/dotnetcore-jenkins\/';
 
     (function() {
@@ -120,7 +252,7 @@
     <section class="share">
     <p class="backtotop"><a data-scroll href="#site-head"><i class="fa fa-lg fa-fw fa-angle-double-up"></i></a><a data-scroll class="backtotoptext" href="#site-head"> Back to top</a></p>
     <p class="info prompt">Share</p>
-    <a href="http://twitter.com/share?text=.NET%20core%20delivery%20with%20Jenkins%20pipelines%20and%20Docker&url=https%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-jenkins%2f" title="Share on Twitter"
+    <a href="http://twitter.com/share?text=Crossing%20Styx%20-%20My%20journey%20into%20the%20%28under%29world%20of%20.NET%20-%20Part%20I&url=https%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-jenkins%2f" title="Share on Twitter"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
         <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
     </a>
@@ -173,7 +305,9 @@
 	</div>
 </footer>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+<script src="https://corstijank.github.io/js/asciinema-player.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://corstijank.github.io/js/index.js"></script>
 <script src="https://corstijank.github.io/js/smooth-scroll.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
@@ -188,9 +322,6 @@
     });
 </script>
 <script>hljs.initHighlightingOnLoad();</script>
-
-
-<script src="/asciinema-player.js"></script>
 
 
 
