@@ -12,10 +12,10 @@
     
     <item>
       <title>Crossing Styx - My journey into the (under)world of .NET - Part I</title>
-      <link>https://corstijank.github.io/post/dotnetcore-jenkins/</link>
+      <link>https://corstijank.github.io/post/dotnetcore-adventures-i/</link>
       <pubDate>Mon, 16 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://corstijank.github.io/post/dotnetcore-jenkins/</guid>
+      <guid>https://corstijank.github.io/post/dotnetcore-adventures-i/</guid>
       <description>
 
 &lt;p&gt;At the closing of last year, I presented an in-house talk, comparing Continuous Delivery solutions for both Java and .NET. Of course, this was not a simple side-by-side comparison; a microsoft oriented colleague and myself created a small challenge for ourselves. My colleague was going to build Java software in Team Foundation Server. And me? I was stuck creating a delivery pipeline for Microsoft .NET in Jenkins.&lt;/p&gt;
