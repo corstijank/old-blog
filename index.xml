@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Statics Must Die!</title>
-    <link>https://staticsmustdie.net/index.xml</link>
+    <link>http://staticsmustdie.net/index.xml</link>
     <description>Recent content on Statics Must Die!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</copyright>
     <lastBuildDate>Mon, 16 Jan 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://staticsmustdie.net/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://staticsmustdie.net/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Crossing Styx - My journey into the (under)world of .NET - Part I</title>
-      <link>https://staticsmustdie.net/post/dotnetcore-adventures-i/</link>
+      <link>http://staticsmustdie.net/post/dotnetcore-adventures-i/</link>
       <pubDate>Mon, 16 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://staticsmustdie.net/post/dotnetcore-adventures-i/</guid>
+      <guid>http://staticsmustdie.net/post/dotnetcore-adventures-i/</guid>
       <description>
 
 &lt;p&gt;At the closing of last year, I presented an in-house talk, comparing Continuous Delivery solutions for both Java and .NET. Of course, this was not a simple side-by-side comparison; a microsoft oriented colleague and myself created a small challenge for ourselves. My colleague was going to build Java software in Team Foundation Server. And me? I was stuck creating a delivery pipeline for Microsoft .NET in Jenkins.&lt;/p&gt;
@@ -30,7 +30,7 @@
 
 &lt;p&gt;So first off, we get started with a new .NET core application; using the .NET core runtime and the CLI tooling.&lt;/p&gt;
 
-&lt;asciinema-player src=&#34;https://staticsmustdie.net/asciinema/dotnet-new-project.json&#34; cols=&#34;90&#34; rows=&#34;20&#34; preload=&#34;true&#34; poster=&#34;npt:0:07&#34;&gt;&lt;/asciinema-player&gt;
+&lt;asciinema-player src=&#34;http://staticsmustdie.net/asciinema/dotnet-new-project.json&#34; cols=&#34;90&#34; rows=&#34;20&#34; preload=&#34;true&#34; poster=&#34;npt:0:07&#34;&gt;&lt;/asciinema-player&gt;
 
 
 &lt;p&gt;Behold! The glory of &amp;ldquo;Hello World&amp;rdquo; in .NET Core. So, a couple of interesting things to note:&lt;/p&gt;
@@ -140,7 +140,7 @@ ENTRYPOINT [&amp;quot;./blog-dotnet-jenkins&amp;quot;]
 
 &lt;p&gt;Success!&lt;/p&gt;
 
-&lt;asciinema-player src=&#34;https://staticsmustdie.net/asciinema/dotnet-jenkins-firstrun.json&#34; cols=&#34;90&#34; rows=&#34;10&#34; preload=&#34;true&#34; poster=&#34;npt:0:07&#34;&gt;&lt;/asciinema-player&gt;
+&lt;asciinema-player src=&#34;http://staticsmustdie.net/asciinema/dotnet-jenkins-firstrun.json&#34; cols=&#34;90&#34; rows=&#34;10&#34; preload=&#34;true&#34; poster=&#34;npt:0:07&#34;&gt;&lt;/asciinema-player&gt;
 
 
 &lt;h3 id=&#34;f-ck-it-ship-it&#34;&gt;F*ck it, ship it&lt;/h3&gt;
@@ -178,10 +178,10 @@ ENTRYPOINT [&amp;quot;./blog-dotnet-jenkins&amp;quot;]
     
     <item>
       <title>System.out.println(&#34;Hello World&#34;)</title>
-      <link>https://staticsmustdie.net/post/hello-world/</link>
+      <link>http://staticsmustdie.net/post/hello-world/</link>
       <pubDate>Tue, 27 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://staticsmustdie.net/post/hello-world/</guid>
+      <guid>http://staticsmustdie.net/post/hello-world/</guid>
       <description>&lt;p&gt;Greetings, dear reader, and welcome to my little corner of the web. It&amp;rsquo;s nearing the end of 2016, and I have decided I want to start my resolution of finally putting up some blogs before 2017 enters with a bang.&lt;/p&gt;
 
 &lt;p&gt;Or, at the very least, have a welcoming blog post up and running. Minimal Viable Product and all. So, with that ,I bid you welcome to &lt;strong&gt;Statics Must Die&lt;/strong&gt;, the ramblings of me, Corstijan Kortsmit.&lt;/p&gt;
