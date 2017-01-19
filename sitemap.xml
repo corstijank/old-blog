@@ -12,7 +12,25 @@
   </url>
   
   <url>
+    <loc>http://staticsmustdie.net/tags/dotnet/</loc>
+    <lastmod>2017-01-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://staticsmustdie.net/tags/jenkins/</loc>
+    <lastmod>2017-01-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://staticsmustdie.net/post/</loc>
+    <lastmod>2017-01-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://staticsmustdie.net/tags/programming/</loc>
     <lastmod>2017-01-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -20,6 +38,11 @@
   <url>
     <loc>http://staticsmustdie.net/</loc>
     <lastmod>2017-01-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://staticsmustdie.net/tags/</loc>
     <priority>0</priority>
   </url>
   
