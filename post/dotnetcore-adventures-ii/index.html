@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+    
+    
+    <link rel="stylesheet" type="text/css" href="http://staticsmustdie.net/css/asciinema-player.css" />
+    
+    <title>Crossing Styx - My journey into the (under)world of .NET - Part II &middot; Statics Must Die!</title>
+    <meta name="author" content="Corstijan Kortsmit">
+    <meta name="description" content="Read my ramblings here">
+    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <!-- RSS autodiscovery -->
+    
+
+    <link rel="shortcut icon" href="http://staticsmustdie.net/img/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="http://staticsmustdie.net/css/screen.css">
+    <link rel="stylesheet" href="http://staticsmustdie.net/css/github.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+    
+
+    
+    <link rel="shortcut icon" type="image/x-icon" href="http://staticsmustdie.net/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="http://staticsmustdie.net/favicon.ico">
+    
+
+    <!-- Stylesheet for theme color -->
+    <style type="text/css">
+    a, a:visited {color: #3498db;}
+    .pagination a {color: #3498db;}
+    .gist .gist-file .gist-meta a:visited {color: #3498db !important;}
+    a:focus, a:hover {color: #2079b4;}
+    h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #2079b4;}
+    .older-posts:hover, .newer-posts:hover {color: #2079b4;}
+</style>
+</head>
+
+<body class="home-template">
+    <header id="site-head">
+	
+	<h1 class="blog-title"><a href="http://staticsmustdie.net">Statics Must Die!</a></h1>
+	
+	
+	<h1 class="blog-subtitle">The digital ramblings of Corstijan Kortsmit</h1>
+	
+</header>
+    
+    
+    <main class="content" role="main">
+    
+<article class="post">
+    <header>
+        <h1 class="post-title">Crossing Styx - My journey into the (under)world of .NET - Part II</h1>
+        <div class="post-meta">
+            <time datetime="16 January 2017">
+                16 January 2017
+            </time>
+        </div>
+    </header>
+
+    <section class="post-content">
+        
+
+<p>In my previous <a href="http://staticsmustdie.net/post/dotnetcore-adventures-i/">post on this topic</a>, I somehow got the jitters to get started with .NET. Or more specifically, .NET core. Being stubborn as I am, I have created a simple delivery pipeline in Jenkins, for building and deploying a .NET core docker container.</p>
+
+<p>Now, this might sound like hell freezing over. Me, programming .NET? Blasphemy! Except one little thing. For my previous post, I didn&rsquo;t actually write one line of C# code. Now, I don&rsquo;t want to give off the impression Im uncomfortable in <strong>any</strong> programming language, and so  I made sure to end the last blog post with some unfulfilled promises of creating a more serious project from this &lsquo;Hello world&rsquo; example.</p>
+
+<p>Time to pay up.</p>
+
+
+<figure >
+    
+        <img src="/img/dotnet-jenkins-simple-pipeline.png" />
+    
+    
+    <figcaption>
+        <h4>Previously..... on StaticsMustDie</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<h2 id="the-freedom-of-choice">The freedom of choice</h2>
+
+<p>So, I spent some time fiddling around, on how C# services work. To create any kind of web service, there is the ASP.NET core framework. ASP.NET core and the base .NET core runtime seem kind of coupled in a non-technical way. Of course, nowadays, you&rsquo;d be hard pressed <strong>not</strong> to write some sort of web application. And so far, to my knowledge, ASP.NET is the way to go for all the .NET folks.</p>
+
+<p>Still, the distinction between .NET core and ASP.NET core might allow for some possible alternatives in the future? Or, maybe not. It&rsquo;s kind of like how, back in the day Java EE (back then still J2EE 1.2, 1.3) had the same kind of monopoly on the JVM when it came to developing back-end software (we didn&rsquo;t do any of your fancy &lsquo;web services&rsquo; back then). At one point, Spring came along and provided a (more pragmatic, in this case) alternative. Competition grew, and now, Java developers have a bunch of choices to make on what they use. But, ultimately, the choice kind of boils down to some stylistic differences, about which people love to get all religious. Yay for choice, right?</p>
+
+<p>Anyway, I digress. Back to the matter at hand.</p>
+
+<h2 id="to-code-or-not-to-code">To Code, or not to Code</h2>
+
+<p>So, the choice for ASP.NET core was simple. Now, was I going to write a small service myself? I had originally planned too, but then, life got in the way. The whole household came down with the flu, and suddenly I was feeling kind of pressed for time. If I&rsquo;m going to do this blog thing, I want to have at least some regularity to it, you know?</p>
+
+<p>The thing is, writing my own service&hellip;was it really that important? I could follow a tutorial like anybody else. If I were to blog on that, I would just reproduce the tutorial, and that would not be up to the standards I want to hold myself to. I want to focus on the interesting points, Docker, Jenkins, unit testing, acceptance testing.</p>
+
+<p>So, instead of writing about how to implement REST on C#/.NET core, I&rsquo;ll be starting with some simple tutorial code here. The ASP.NET core documentation site has some excellent <a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/" title="Awesome tutorials for learning ASP.NET core">tutorials</a>, and I really recommend you check them out. The code I&rsquo;m starting with is the code explained the <a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/" title="Awesome tutorials for learning ASP.NET core">ASP.NET core tutorial</a> on creating a simple rest service.</p>
+
+<h2 id="lessons-learned">Lessons learned</h2>
+
+<p>So, I had refactor some stuff, &lsquo;git mv&rsquo; some directory around, and basically wound up with something which was starting to look like a real project folder;</p>
+
+<pre><code class="language-bash">/global.json
+/TodoApi/Jenkinsfile
+/TodoApi/Dockerfile
+/TodoApi/project.json
+/TodoApi/**Code**
+</code></pre>
+
+<p>Our Dockerfile is clean and simple; and I&rsquo;m not going to bother going into detail on it here. All I had to do was edit the Jenkinsfile (read the previous post to get up to speed on that) to make sure any running version of the container would be stopped before the deploy. This was not necesary before as the previous iteration of our container was, well..just printing <code>hello world</code></p>
+
+<p>So, all should be well. Fire up the docker container. Query the service. Bask in .NET glory.</p>
+
+<p>Nope; ran into a few things that are well worth noting on here.</p>
+
+<h3 id="inversion-of-control-just-on-a-different-level">Inversion of Control. Just on a different level.</h3>
+
+<p>As I said, it was all relatively simple to start.  The container ran, but, when I tried to do a simple GET. It failed. Why? I got a simple <code>Empty Response</code> as body text on my response. Why? Well there we have to look a bit deeper into the C# code, what it does, and how that holds up in our delivery choices.</p>
+
+<p>So, what does the code that start an http service look like?</p>
+
+<pre><code class="language-C#">var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup&lt;Startup&gt;()
+                .Build();
+                
+host.run();
+</code></pre>
+
+<p>My first thought seeing this was &lsquo;Oh look, a simple builder that starts some kind of service. Nice. Just like we do it in Java in every (micro) service framework that is not JEE. They call it &lsquo;Kestrel&rsquo;? Well, that is a surprisingly non-utilitarian name for a Microsoft coined term. Shouldn&rsquo;t it be called &ldquo;InProcessIISAlternative&rdquo;? Possibly with IIS spelled out?</p>
+
+<p><code>&lt;/sarcasm&gt;</code></p>
+
+<p>So&hellip;going on&hellip;Use current directory as content root. Sure, integrate with IIS if you find it (tip: You won&rsquo;t). Use an stance of <code>Startup</code> as the startup object. All understandable. So why isn&rsquo;t the bloody thing working?!</p>
+
+<p>Well, the problem is not in the code that&rsquo;s there. The problem is in the code that <strong>is not</strong> there. By default, a service started like this <strong>only</strong> listens to <code>localhost:5000</code>. That seems logical enough, right? It should work, right? Well yes, if you&rsquo;re accessing form localhost.</p>
+
+<p>But, in our case, we are not. We are using Docker. Which means the service is running in a container. The container, from the perspective of our C# service, is <code>localhost</code>. That means that anything accessing the container, almost by definition, will not be coming from <code>localhost</code>, but rather as something more <code>remote</code> from our application&rsquo;s perspective.</p>
+
+<p>So, how to fix this? Well if you google around, you&rsquo;re going to find a whole lot of information on configuration files you can edit. Maybe even for various stages like production or testing. I honestly didn&rsquo;t really read into it that much. Not because I don&rsquo;t care, but rather;</p>
+
+<blockquote>
+<p>Application configuration files for network settings make no sense when you&rsquo;re developing in containers. Whatever you configure in the configuration file, you can, and will override it when you deploy the container. For example, you could specify it with <code>-p</code> or have Docker decide for you, or just ignore the port alltogether. Point is, the port that is going to be used to access your servie is not decided by your service. So don&rsquo;t add another configuration file. Just hardcode it. You won&rsquo;t be running any other services inside your container anyway, so port collisions are not an issue.</p>
+</blockquote>
+
+<p>And hardcode I did;</p>
+
+<pre><code class="language-C#">var host = new WebHostBuilder()
+                .UseUrls(&quot;http://0.0.0.0:5000/&quot;)
+         		.UseContentRoot(Directory.GetCurrentDirectory())
+                .UseStartup&lt;Startup&gt;()
+                .Build();
+</code></pre>
+
+<p>Note I also deleted the IIS integration. I&rsquo;ll have none of your shenanigans, IIS.</p>
+
+<p>After this, we end up with a runnable container;
+<asciinema-player src="/asciinema/dotnet-jenkins-secondrun.json" cols="90" rows="20" preload="true" poster="npt:0:07"></asciinema-player>
+</p>
+
+<h3 id="crash-test-dummy">Crash test dummy</h3>
+
+<p>So, I have a service running, a delivery pipeline  from the previous blog post, and actual value we can deliver to our shell using clients. At this point, even I am considering it might be smart to start adding some tests. The common practice for .NET projects seems to be to put the tests in a separate &lsquo;project&rsquo; if you will. So, create an empty directory, run <code>dotnet new -t xunittest</code> and Bob&rsquo;s your uncle.</p>
+
+<p>From here, it&rsquo;s time implement the unit test. Again, not going to go into that much here. Suffice to say I managed to create something. If you&rsquo;re interested on the unit test capabilities in (ASP).NET Core. There are some <a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/" title="Awesome tutorials for learning ASP.NET core">really excellent tutorials here</a> - what are you even doing still reading this?</p>
+
+<p>Oh right. The Jenkins pipeline. So, as you might know (if you read the tutorials!) the command to run tests is a simple <code>dotnet test</code>. If you want to capture the results in a file, you should add some parameters to <code>dotnet</code> call. Still, should be easy enough to integrate into our pipeline.</p>
+
+<p>Also, since these are unit tests, I want to make sure they are run before any building of docker images or whatsoever. Here&rsquo;s the code in the <code>Jenkinsfile</code> for the (renewed!) building stage:</p>
+
+<pre><code class="language-groovy"> stage('Build binaries'){
+  // Run this stage in a docker container with the dotnet sdk
+  agent { docker 'microsoft/dotnet:latest'}
+  steps{
+    git url: 'https://github.com/corstijank/blog-dotnet-jenkins.git'
+    sh 'cd TodoApi &amp;&amp; dotnet restore'
+    sh 'cd TodoApi.Test &amp;&amp; dotnet restore'
+    sh 'cd TodoApi.Test &amp;&amp; dotnet test -xml xunit-results.xml'
+    sh 'cd TodoApi &amp;&amp; dotnet publish project.json -c Release -r ubuntu.14.04-x64 -o ./publish'
+    stash includes: 'TodoApi/publish/**', name: 'prod_bins' 
+  }
+  post{
+    always{
+      step([$class    : 'XUnitBuilder',
+      thresholds: [[$class: 'FailedThreshold', failedThreshold: '1']],
+         tools     : [[$class: 'XUnitDotNetTestType', pattern: '**/xunit-results.xml']]])
+    }
+  }
+}
+</code></pre>
+
+<p>There are basically two things that are important here. First off, and most simple, is the &lsquo;dotnet test&rsquo; directive. We pipe the output to XML; which we are going to use in recording the results.</p>
+
+<p>In a <code>Jenkinsfile</code>, each stage needs at least some <code>steps</code>, obviously. But, we can also add a <code>post</code> block. In this block, we can nest an <code>always</code> block. Here, we can record our results using the XUnit plugin.</p>
+
+<blockquote>
+<p>When you record test results in a <code>Jenkinsfile</code>, be sure to always put the recording in something like a <code>post/always</code> block, or if you&rsquo;re using pure script, use a <code>try/finally</code> construction. If your tests fail, the exit code will result in an exception. If you put the recording of your test results as a simple sequential step after the testing, it would mean execution would never reach the recording!</p>
+</blockquote>
+
+<p>
+<figure >
+    
+        <img src="/img/dotnet-jenkins-tests-succesful.png" />
+    
+    
+    <figcaption>
+        <h4>The serenity was not at a level I had hoped it to be</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<figure >
+    
+        <img src="/img/dotnet-jenkins-tests-failed.png" />
+    
+    
+    <figcaption>
+        <h4>Everything going as expected...</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<p>And&hellip; that actually concludes integrating simple unit testing. It really was that easy.</p>
+
+<p>At first it might look like that amount of low-level <code>dotnet</code> calls in our building stage might warrant some other, more abstract build tool to manage. But so far, I really don&rsquo;t mind it. Having to, for example, fix the ordering between my source and test projects doesn&rsquo;t seem like a big deal at all if you keep things small. For bigger things, well NuGet might help you with some dependency management there.</p>
+
+<p>There are <strong>probably</strong> a whole bunch of cases where the &lsquo;low-level&rsquo; attitude of the <code>dotnet</code> cli is going to fall short. I&rsquo;m no experienced .NET developer. And I&rsquo;m sure either Visual Studio or Team Foundation Server is going to offer some nice sugar on top, if they are not already. I don&rsquo;t know.</p>
+
+<p>I&rsquo;m just using VSCode and Jenkins.</p>
+
+<p>And I don&rsquo;t feel much need for anything else yet.</p>
+
+<h2 id="wrap-up">Wrap-up</h2>
+
+<p>So, that concludes the second part, in what looks like is going to be a three part adventure. The Jenkins pipeline we explored in the <a href="http://staticsmustdie.net/post/dotnetcore-adventures-i/">previous part</a> was a fun introduction, but it was mostly dealing with Jenkins. This time around, we got into some interesting lessons on using ASP.NET Core with Docker, and what it would mean for configuration management.</p>
+
+<p>Also, it was very nice to see how relatively easy it is to integrate test results from the cli into Jenkins. I&rsquo;ll admit that using the <code>step</code> method is still a bit rough. I would rather use something like <code>xunit **/xunit-results.xml -t XUnitDotNetTest</code> or something. But I&rsquo;m sure the authors of the Jenkins plugin are going to get on that sometime.</p>
+
+<p>For the next post I plan on getting more creative; we have all the ground work laid out now. Let&rsquo;s see what we can do with acceptance testing, docker-compose, and our Jenkins pipeline, to tear up and tear down a set of containers and some virtual networking as our acceptance testing environment. That&rsquo;s when things start to look really interesting, I think.</p>
+
+    </section>
+
+    
+    <section class="post-tags" style="padding-bottom:60px;">
+        <div class="post-meta tags">
+            <i class="fa fa-fw fa-tag"></i>
+            
+                
+                <a href="http://staticsmustdie.net/tags/dotnet">dotnet </a>
+            
+                
+                <a href="http://staticsmustdie.net/tags/jenkins">jenkins </a>
+            
+                
+                <a href="http://staticsmustdie.net/tags/programming">programming </a>
+            
+                
+                <a href="http://staticsmustdie.net/tags/testing">testing </a>
+            
+        </div>
+    </section>
+
+    <section class="share">
+    <p class="backtotop"><a data-scroll href="#site-head"><i class="fa fa-lg fa-fw fa-angle-double-up"></i></a><a data-scroll class="backtotoptext" href="#site-head"> Back to top</a></p>
+    <p class="info prompt">Share</p>
+    <a href="http://twitter.com/share?text=Crossing%20Styx%20-%20My%20journey%20into%20the%20%28under%29world%20of%20.NET%20-%20Part%20II&url=http%3a%2f%2fstaticsmustdie.net%2fpost%2fdotnetcore-adventures-ii%2f" title="Share on Twitter"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fstaticsmustdie.net%2fpost%2fdotnetcore-adventures-ii%2f" title="Share on Facebook"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+    </a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2fstaticsmustdie.net%2fpost%2fdotnetcore-adventures-ii%2f" title="Share on Google+"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+    </a>
+</section>
+    
+    <footer class="post-footer">
+        <section class="author">
+    <div class="authorimage" style="background: url(http://staticsmustdie.net/img/me.jpg)"></div>
+    <h4>Corstijan Kortsmit</h4>
+    <p class="bio">Engineer, Hater of statics, Connaisseur of french fries</p>
+    <p class="meta">
+      <i class="fa fa-fw fa-map-marker"></i> Netherlands
+    </p>
+</section>
+    </footer>
+    
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'corstijank-github-io';
+    var disqus_identifier = 'http:\/\/staticsmustdie.net\/post\/dotnetcore-adventures-ii\/';
+    var disqus_title = 'Crossing Styx - My journey into the (under)world of .NET - Part II';
+    var disqus_url = 'http:\/\/staticsmustdie.net\/post\/dotnetcore-adventures-ii\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+</article>
+
+    </main>
+
+    <footer class="site-footer">
+	<div class="inner">
+		<section class="footer-social">
+      
+      <a href="//twitter.com/corstijank" target="_blank" title="Twitter"><i class="fa fa-2x fa-fw fa-twitter"></i> <span class="hidden">Twitter</span></a>&nbsp;
+      
+      
+      <a href="//www.linkedin.com/in/corstijan-kortsmit" target="_blank" title="linkedIn"><i class="fa fa-2x fa-fw fa-linkedin"></i> <span class="hidden">LinkedIn</span></a>&nbsp;
+      
+      
+      
+      
+      
+      <a href="//github.com/corstijank" target="_blank" title="GitHub"><i class="fa fa-2x fa-fw fa-github"></i> <span class="hidden">GitHub</span></a>&nbsp;
+      
+      
+      <a href="//gitlab.com/u/corstijank" target="_blank" title="GitLab"><i class="fa fa-2x fa-fw fa-gitlab"></i> <span class="hidden">GitLab</span></a>&nbsp;
+      
+      
+      
+  </section>
+
+		<section class="copyright">&copy; 2017 <a href="http://staticsmustdie.net">Corstijan Kortsmit</a>. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</section>
+	</div>
+</footer>
+
+    
+<script src="http://staticsmustdie.net/js/asciinema-player.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://staticsmustdie.net/js/index.js"></script>
+<script src="http://staticsmustdie.net/js/smooth-scroll.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+
+
+<script>
+    smoothScroll.init({
+        speed: 800,
+        easing: 'easeInOutCubic',
+        updateURL: false,
+        offset: 125,
+    });
+</script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-90300195-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+</body>
+</html>
