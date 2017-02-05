@@ -200,6 +200,8 @@ host.run();
 &lt;p&gt;Also, it was very nice to see how relatively easy it is to integrate test results from the cli into Jenkins. I&amp;rsquo;ll admit that using the &lt;code&gt;step&lt;/code&gt; method is still a bit rough. I would rather use something like &lt;code&gt;xunit **/xunit-results.xml -t XUnitDotNetTest&lt;/code&gt; or something. But I&amp;rsquo;m sure the authors of the Jenkins plugin are going to get on that sometime.&lt;/p&gt;
 
 &lt;p&gt;For the next post I plan on getting more creative; we have all the ground work laid out now. Let&amp;rsquo;s see what we can do with acceptance testing, docker-compose, and our Jenkins pipeline, to tear up and tear down a set of containers and some virtual networking as our acceptance testing environment. That&amp;rsquo;s when things start to look really interesting, I think.&lt;/p&gt;
+
+&lt;p&gt;Again, if you&amp;rsquo;re curious about the full sources, or just want to peek at the complete picture, you can check out the &lt;a href=&#34;https://github.com/corstijank/blog-dotnet-jenkins&#34;&gt;repository at github&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
