@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://staticsmustdie.net/post/dotnetcore-adventures-iii/</loc>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://staticsmustdie.net/post/dotnetcore-adventures-ii/</loc>
     <lastmod>2017-02-05T00:00:00+00:00</lastmod>
   </url>
@@ -17,32 +22,44 @@
   </url>
   
   <url>
+    <loc>http://staticsmustdie.net/tags/docker/</loc>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://staticsmustdie.net/tags/dotnet/</loc>
-    <lastmod>2017-02-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://staticsmustdie.net/tags/jenkins/</loc>
-    <lastmod>2017-02-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://staticsmustdie.net/post/</loc>
-    <lastmod>2017-02-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://staticsmustdie.net/tags/programming/</loc>
-    <lastmod>2017-02-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://staticsmustdie.net/tags/sqlserver/</loc>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://staticsmustdie.net/</loc>
-    <lastmod>2017-02-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -53,7 +70,7 @@
   
   <url>
     <loc>http://staticsmustdie.net/tags/testing/</loc>
-    <lastmod>2017-02-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
