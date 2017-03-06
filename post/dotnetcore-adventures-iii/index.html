@@ -292,7 +292,7 @@ networks:
         sub a string matching this regex     with this string   all matches    in this file
 </code></pre>
 
-<p>The rest are basic git commands. I know, I could probably configure user email and name outside or globally. On the other hand, do I really want to depend on that? I don&rsquo;t think this is too bad. Same goes for the <code>checkout master</code> command. It just ensures we&rsquo;re working on the master branch (or whichever branch you want to commit on). You could <em>assume</em> you are in some state that might already be there, but why not <strong>ensure</strong>?</p>
+<p>The rest are basic git commands. I know, I could probably configure user email and name outside or globally. On the other hand, do I really want to depend on that? I don&rsquo;t think this is too bad. Same goes for the <code>checkout master</code> command. It just ensures we&rsquo;re working on the master branch (or whichever branch you want to commit on). You could <em>assume</em> you are in some state that might already be there, but why not <strong>make sure</strong>?</p>
 
 <p>Other side note: If you keep the compose file in the same git repository as the code, doing this might trigger another build if you&rsquo;re using a git hook. Some simple alternative solutions to circumvent this:</p>
 

@@ -241,7 +241,7 @@ networks:
         sub a string matching this regex     with this string   all matches    in this file
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The rest are basic git commands. I know, I could probably configure user email and name outside or globally. On the other hand, do I really want to depend on that? I don&amp;rsquo;t think this is too bad. Same goes for the &lt;code&gt;checkout master&lt;/code&gt; command. It just ensures we&amp;rsquo;re working on the master branch (or whichever branch you want to commit on). You could &lt;em&gt;assume&lt;/em&gt; you are in some state that might already be there, but why not &lt;strong&gt;ensure&lt;/strong&gt;?&lt;/p&gt;
+&lt;p&gt;The rest are basic git commands. I know, I could probably configure user email and name outside or globally. On the other hand, do I really want to depend on that? I don&amp;rsquo;t think this is too bad. Same goes for the &lt;code&gt;checkout master&lt;/code&gt; command. It just ensures we&amp;rsquo;re working on the master branch (or whichever branch you want to commit on). You could &lt;em&gt;assume&lt;/em&gt; you are in some state that might already be there, but why not &lt;strong&gt;make sure&lt;/strong&gt;?&lt;/p&gt;
 
 &lt;p&gt;Other side note: If you keep the compose file in the same git repository as the code, doing this might trigger another build if you&amp;rsquo;re using a git hook. Some simple alternative solutions to circumvent this:&lt;/p&gt;
 
