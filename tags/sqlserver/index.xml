@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>sqlserver on The blog of Corstijan Kortsmit</title>
-    <link>http://corstijank.github.io/tags/sqlserver/</link>
+    <link>https://corstijank.github.io/tags/sqlserver/</link>
     <description>Recent content in sqlserver on The blog of Corstijan Kortsmit</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 05 Mar 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://corstijank.github.io/tags/sqlserver/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://corstijank.github.io/tags/sqlserver/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Crossing Styx - My journey into the (under)world of .NET - Part III</title>
-      <link>http://corstijank.github.io/post/dotnetcore-adventures-iii/</link>
+      <link>https://corstijank.github.io/post/dotnetcore-adventures-iii/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://corstijank.github.io/post/dotnetcore-adventures-iii/</guid>
+      <guid>https://corstijank.github.io/post/dotnetcore-adventures-iii/</guid>
       <description>In the third part of the series, our adventure is slowly but surely heading to its climax. All &amp;lsquo;characters&amp;rsquo; have been introduced. There&amp;rsquo;s DotNet Core, the new, misunderstood (or at least by me?) kid with a bunch of talent. Docker, the awesome supporting character that actually deserves his own movie. Surely there&amp;rsquo;ll be a spin-off! There&amp;rsquo;s the antagonist, Jenkins, who might end up working along with our main character more then either had hoped for.</description>
     </item>
     

@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>dotnet on The blog of Corstijan Kortsmit</title>
-    <link>http://corstijank.github.io/tags/dotnet/</link>
+    <link>https://corstijank.github.io/tags/dotnet/</link>
     <description>Recent content in dotnet on The blog of Corstijan Kortsmit</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 05 Mar 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://corstijank.github.io/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://corstijank.github.io/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Crossing Styx - My journey into the (under)world of .NET - Part III</title>
-      <link>http://corstijank.github.io/post/dotnetcore-adventures-iii/</link>
+      <link>https://corstijank.github.io/post/dotnetcore-adventures-iii/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://corstijank.github.io/post/dotnetcore-adventures-iii/</guid>
+      <guid>https://corstijank.github.io/post/dotnetcore-adventures-iii/</guid>
       <description>In the third part of the series, our adventure is slowly but surely heading to its climax. All &amp;lsquo;characters&amp;rsquo; have been introduced. There&amp;rsquo;s DotNet Core, the new, misunderstood (or at least by me?) kid with a bunch of talent. Docker, the awesome supporting character that actually deserves his own movie. Surely there&amp;rsquo;ll be a spin-off! There&amp;rsquo;s the antagonist, Jenkins, who might end up working along with our main character more then either had hoped for.</description>
     </item>
     
     <item>
       <title>Crossing Styx - My journey into the (under)world of .NET - Part II</title>
-      <link>http://corstijank.github.io/post/dotnetcore-adventures-ii/</link>
+      <link>https://corstijank.github.io/post/dotnetcore-adventures-ii/</link>
       <pubDate>Sun, 05 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://corstijank.github.io/post/dotnetcore-adventures-ii/</guid>
+      <guid>https://corstijank.github.io/post/dotnetcore-adventures-ii/</guid>
       <description>In my previous post on this topic, I somehow got the jitters to get started with .NET. Or more specifically, .NET core. Being stubborn as I am, I have created a simple delivery pipeline in Jenkins, for building and deploying a .NET core docker container.
 Now, this might sound like hell freezing over. Me, programming .NET? Blasphemy! Except one little thing. For my previous post, I didn&amp;rsquo;t actually write one line of C# code.</description>
     </item>
     
     <item>
       <title>Crossing Styx - My journey into the (under)world of .NET - Part I</title>
-      <link>http://corstijank.github.io/post/dotnetcore-adventures-i/</link>
+      <link>https://corstijank.github.io/post/dotnetcore-adventures-i/</link>
       <pubDate>Mon, 16 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://corstijank.github.io/post/dotnetcore-adventures-i/</guid>
+      <guid>https://corstijank.github.io/post/dotnetcore-adventures-i/</guid>
       <description>At the closing of last year, I presented an in-house talk, comparing Continuous Delivery solutions for both Java and .NET. Of course, this was not a simple side-by-side comparison; a microsoft oriented colleague and myself created a small challenge for ourselves. My colleague was going to build Java software in Team Foundation Server. And me? I was stuck creating a delivery pipeline for Microsoft .NET in Jenkins.
 Now, I had been thinking about looking into .</description>
     </item>

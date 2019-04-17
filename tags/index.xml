@@ -2,66 +2,66 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on The blog of Corstijan Kortsmit</title>
-    <link>http://corstijank.github.io/tags/</link>
+    <link>https://corstijank.github.io/tags/</link>
     <description>Recent content in Tags on The blog of Corstijan Kortsmit</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 05 Mar 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://corstijank.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://corstijank.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>docker</title>
-      <link>http://corstijank.github.io/tags/docker/</link>
+      <link>https://corstijank.github.io/tags/docker/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://corstijank.github.io/tags/docker/</guid>
+      <guid>https://corstijank.github.io/tags/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>dotnet</title>
-      <link>http://corstijank.github.io/tags/dotnet/</link>
+      <link>https://corstijank.github.io/tags/dotnet/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://corstijank.github.io/tags/dotnet/</guid>
+      <guid>https://corstijank.github.io/tags/dotnet/</guid>
       <description></description>
     </item>
     
     <item>
       <title>jenkins</title>
-      <link>http://corstijank.github.io/tags/jenkins/</link>
+      <link>https://corstijank.github.io/tags/jenkins/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://corstijank.github.io/tags/jenkins/</guid>
+      <guid>https://corstijank.github.io/tags/jenkins/</guid>
       <description></description>
     </item>
     
     <item>
       <title>programming</title>
-      <link>http://corstijank.github.io/tags/programming/</link>
+      <link>https://corstijank.github.io/tags/programming/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://corstijank.github.io/tags/programming/</guid>
+      <guid>https://corstijank.github.io/tags/programming/</guid>
       <description></description>
     </item>
     
     <item>
       <title>sqlserver</title>
-      <link>http://corstijank.github.io/tags/sqlserver/</link>
+      <link>https://corstijank.github.io/tags/sqlserver/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://corstijank.github.io/tags/sqlserver/</guid>
+      <guid>https://corstijank.github.io/tags/sqlserver/</guid>
       <description></description>
     </item>
     
     <item>
       <title>testing</title>
-      <link>http://corstijank.github.io/tags/testing/</link>
+      <link>https://corstijank.github.io/tags/testing/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://corstijank.github.io/tags/testing/</guid>
+      <guid>https://corstijank.github.io/tags/testing/</guid>
       <description></description>
     </item>
     
