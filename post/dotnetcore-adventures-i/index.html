@@ -4,12 +4,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
     
     
-    <link rel="stylesheet" type="text/css" href="http://staticsmustdie.net/css/asciinema-player.css" />
+    <link rel="stylesheet" type="text/css" href="http://corstijank.github.io/css/asciinema-player.css" />
     
-    <title>Crossing Styx - My journey into the (under)world of .NET - Part I &middot; Statics Must Die!</title>
+    <title>Crossing Styx - My journey into the (under)world of .NET - Part I &middot; The blog of Corstijan Kortsmit</title>
     <meta name="author" content="Corstijan Kortsmit">
     <meta name="description" content="Read my ramblings here">
-    <meta name="generator" content="Hugo 0.19" />
+    <meta name="generator" content="Hugo 0.55.1" />
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,18 +17,18 @@
     <!-- RSS autodiscovery -->
     
 
-    <link rel="shortcut icon" href="http://staticsmustdie.net/img/favicon.ico">
+    <link rel="shortcut icon" href="http://corstijank.github.io/img/favicon.ico">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="http://staticsmustdie.net/css/screen.css">
-    <link rel="stylesheet" href="http://staticsmustdie.net/css/github.css">
+    <link rel="stylesheet" href="http://corstijank.github.io/css/screen.css">
+    <link rel="stylesheet" href="http://corstijank.github.io/css/github.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
     
 
     
-    <link rel="shortcut icon" type="image/x-icon" href="http://staticsmustdie.net/favicon.ico">
-    <link rel="icon" type="image/x-icon" href="http://staticsmustdie.net/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="http://corstijank.github.io/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="http://corstijank.github.io/favicon.ico">
     
 
     <!-- Stylesheet for theme color -->
@@ -45,7 +45,7 @@
 <body class="home-template">
     <header id="site-head">
 	
-	<h1 class="blog-title"><a href="http://staticsmustdie.net">Statics Must Die!</a></h1>
+	<h1 class="blog-title"><a href="http://corstijank.github.io">Statics Must Die!</a></h1>
 	
 	
 	<h1 class="blog-subtitle">The digital ramblings of Corstijan Kortsmit</h1>
@@ -80,8 +80,7 @@
 
 <p>So first off, we get started with a new .NET core application; using the .NET core runtime and the CLI tooling.</p>
 
-<asciinema-player src="/asciinema/dotnet-new-project.json" cols="90" rows="20" preload="true" poster="npt:0:07"></asciinema-player>
-
+<p><asciinema-player src="/asciinema/dotnet-new-project.json" cols="90" rows="20" preload="true" poster="npt:0:07"></asciinema-player></p>
 
 <p>Behold! The glory of &ldquo;Hello World&rdquo; in .NET Core. So, a couple of interesting things to note:</p>
 
@@ -105,9 +104,12 @@
 
 <p>Though still in development, the delivery pipeline vision from Jenkins has been clear throughout; All build configuration is scripted, in a file called <code>Jenkinsfile</code> that you keep in git with your software.</p>
 
-<p>There are, at this moment, two &lsquo;flavors&rsquo; of Jenkinsfile;
--  a pure groovy script. Allows for maximal freedom, but is error prone, and often not as readable
-- a declarative script. Syntax is more defined; less chance for errors at the cost of flexibility. Also, the syntax is not quite final yet (beta2 at this moment of writing)</p>
+<p>There are, at this moment, two &lsquo;flavors&rsquo; of Jenkinsfile;</p>
+
+<ul>
+<li>a pure groovy script. Allows for maximal freedom, but is error prone, and often not as readable</li>
+<li>a declarative script. Syntax is more defined; less chance for errors at the cost of flexibility. Also, the syntax is not quite final yet (beta2 at this moment of writing)</li>
+</ul>
 
 <blockquote>
 <p>If your <code>Jenkinsfile</code> starts with something akin to <code>node{</code> you&rsquo;re looking at a script that allows all kinds of groovy code. You can do anything, but it&rsquo;s easy to make mistakes. If the file starts with <code>pipeline{</code> the syntax is much more strictly defined, but more readable. I would advice to use the declarative <code>pipeline{</code> style for new projects.</p>
@@ -190,8 +192,7 @@ ENTRYPOINT [&quot;./blog-dotnet-jenkins&quot;]
 
 <p>Success!</p>
 
-<asciinema-player src="/asciinema/dotnet-jenkins-firstrun.json" cols="90" rows="10" preload="true" poster="npt:0:07"></asciinema-player>
-
+<p><asciinema-player src="/asciinema/dotnet-jenkins-firstrun.json" cols="90" rows="10" preload="true" poster="npt:0:07"></asciinema-player></p>
 
 <h3 id="f-ck-it-ship-it">F*ck it, ship it</h3>
 
@@ -232,13 +233,13 @@ ENTRYPOINT [&quot;./blog-dotnet-jenkins&quot;]
             <i class="fa fa-fw fa-tag"></i>
             
                 
-                <a href="http://staticsmustdie.net/tags/dotnet">dotnet </a>
+                <a href="http://corstijank.github.io/tags/dotnet">dotnet </a>
             
                 
-                <a href="http://staticsmustdie.net/tags/jenkins">jenkins </a>
+                <a href="http://corstijank.github.io/tags/jenkins">jenkins </a>
             
                 
-                <a href="http://staticsmustdie.net/tags/programming">programming </a>
+                <a href="http://corstijank.github.io/tags/programming">programming </a>
             
         </div>
     </section>
@@ -246,15 +247,15 @@ ENTRYPOINT [&quot;./blog-dotnet-jenkins&quot;]
     <section class="share">
     <p class="backtotop"><a data-scroll href="#site-head"><i class="fa fa-lg fa-fw fa-angle-double-up"></i></a><a data-scroll class="backtotoptext" href="#site-head"> Back to top</a></p>
     <p class="info prompt">Share</p>
-    <a href="http://twitter.com/share?text=Crossing%20Styx%20-%20My%20journey%20into%20the%20%28under%29world%20of%20.NET%20-%20Part%20I&url=http%3a%2f%2fstaticsmustdie.net%2fpost%2fdotnetcore-adventures-i%2f" title="Share on Twitter"
+    <a href="http://twitter.com/share?text=Crossing%20Styx%20-%20My%20journey%20into%20the%20%28under%29world%20of%20.NET%20-%20Part%20I&url=http%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-adventures-i%2f" title="Share on Twitter"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
         <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
     </a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fstaticsmustdie.net%2fpost%2fdotnetcore-adventures-i%2f" title="Share on Facebook"
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-adventures-i%2f" title="Share on Facebook"
         onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
         <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
     </a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2fstaticsmustdie.net%2fpost%2fdotnetcore-adventures-i%2f" title="Share on Google+"
+    <a href="https://plus.google.com/share?url=http%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-adventures-i%2f" title="Share on Google+"
        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
         <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
     </a>
@@ -262,7 +263,7 @@ ENTRYPOINT [&quot;./blog-dotnet-jenkins&quot;]
     
     <footer class="post-footer">
         <section class="author">
-    <div class="authorimage" style="background: url(http://staticsmustdie.net/img/me.jpg)"></div>
+    <div class="authorimage" style="background: url(http://corstijank.github.io/img/me.jpg)"></div>
     <h4>Corstijan Kortsmit</h4>
     <p class="bio">Engineer, Hater of statics, Connaisseur of french fries</p>
     <p class="meta">
@@ -272,20 +273,25 @@ ENTRYPOINT [&quot;./blog-dotnet-jenkins&quot;]
     </footer>
     
     <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'corstijank-github-io';
-    var disqus_identifier = 'http:\/\/staticsmustdie.net\/post\/dotnetcore-adventures-i\/';
-    var disqus_title = 'Crossing Styx - My journey into the (under)world of .NET - Part I';
-    var disqus_url = 'http:\/\/staticsmustdie.net\/post\/dotnetcore-adventures-i\/';
-
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "corstijank-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
     
 </article>
@@ -314,15 +320,15 @@ ENTRYPOINT [&quot;./blog-dotnet-jenkins&quot;]
       
   </section>
 
-		<section class="copyright">&copy; 2017 <a href="http://staticsmustdie.net">Corstijan Kortsmit</a>. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</section>
+		<section class="copyright">&copy; 2019 <a href="http://corstijank.github.io">Corstijan Kortsmit</a>. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</section>
 	</div>
 </footer>
 
     
-<script src="http://staticsmustdie.net/js/asciinema-player.js"></script>
+<script src="http://corstijank.github.io/js/asciinema-player.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="http://staticsmustdie.net/js/index.js"></script>
-<script src="http://staticsmustdie.net/js/smooth-scroll.min.js"></script>
+<script src="http://corstijank.github.io/js/index.js"></script>
+<script src="http://corstijank.github.io/js/smooth-scroll.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
 
 
@@ -338,14 +344,17 @@ ENTRYPOINT [&quot;./blog-dotnet-jenkins&quot;]
 
 
 
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90300195-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-90300195-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 </body>

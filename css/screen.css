@@ -104,7 +104,7 @@ a.archive-link,
 .article-nav,
 .terms-list {
   margin: 20px auto;
-  max-width: 600px;
+  max-width: 900px;
   width: 90%;
 }
 #site-head img {
@@ -301,7 +301,7 @@ footer section {
   font-weight: 300;
   font-size: 18px;
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 900px;
   text-transform: uppercase;
   width: 90%;
 }

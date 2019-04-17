@@ -1,76 +1,83 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://staticsmustdie.net/post/dotnetcore-adventures-iii/</loc>
+    <loc>http://corstijank.github.io/post/dotnetcore-adventures-iii/</loc>
     <lastmod>2017-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://staticsmustdie.net/post/dotnetcore-adventures-ii/</loc>
+    <loc>http://corstijank.github.io/post/</loc>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://corstijank.github.io/tags/</loc>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://corstijank.github.io/</loc>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://corstijank.github.io/tags/docker/</loc>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://corstijank.github.io/tags/dotnet/</loc>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://corstijank.github.io/tags/jenkins/</loc>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://corstijank.github.io/tags/programming/</loc>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://corstijank.github.io/tags/sqlserver/</loc>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://corstijank.github.io/tags/testing/</loc>
+    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://corstijank.github.io/post/dotnetcore-adventures-ii/</loc>
     <lastmod>2017-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://staticsmustdie.net/post/dotnetcore-adventures-i/</loc>
+    <loc>http://corstijank.github.io/post/dotnetcore-adventures-i/</loc>
     <lastmod>2017-01-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://staticsmustdie.net/post/hello-world/</loc>
+    <loc>http://corstijank.github.io/post/hello-world/</loc>
     <lastmod>2016-12-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://staticsmustdie.net/tags/docker/</loc>
-    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://staticsmustdie.net/tags/dotnet/</loc>
-    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://staticsmustdie.net/tags/jenkins/</loc>
-    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://staticsmustdie.net/post/</loc>
-    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://staticsmustdie.net/tags/programming/</loc>
-    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://staticsmustdie.net/tags/sqlserver/</loc>
-    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://staticsmustdie.net/</loc>
-    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://staticsmustdie.net/tags/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://staticsmustdie.net/tags/testing/</loc>
-    <lastmod>2017-03-05T00:00:00+00:00</lastmod>
+    <loc>http://corstijank.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   

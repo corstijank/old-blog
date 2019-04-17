@@ -1,0 +1,490 @@
+{
+  "version": 1,
+  "width": 80,
+  "height": 25,
+  "duration": 22.667191,
+  "command": null,
+  "title": null,
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/bin/zsh"
+  },
+  "stdout": [
+    [
+      0.5,
+      "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                               \r \r"
+    ],
+    [
+      8.9e-05,
+      "\u001b]2;corstijank@corstijank01-2: ~\u0007\u001b]1;~\u0007"
+    ],
+    [
+      0.02038,
+      "\r\u001b[0m\u001b[27m\u001b[24m\u001b[J\u001b[1m\u001b[35m~\u001b[1m\u001b[32m\u001b[1m\u001b[35m \u001b[00m% \u001b[K"
+    ],
+    [
+      2.5e-05,
+      "\u001b[?1h\u001b="
+    ],
+    [
+      0.000119,
+      "\u001b[?2004h"
+    ],
+    [
+      0.5,
+      "d"
+    ],
+    [
+      0.095051,
+      "\bdo"
+    ],
+    [
+      0.072011,
+      "c"
+    ],
+    [
+      0.087783,
+      "k"
+    ],
+    [
+      0.096276,
+      "e"
+    ],
+    [
+      0.055843,
+      "r"
+    ],
+    [
+      0.080018,
+      "-"
+    ],
+    [
+      0.207897,
+      "m"
+    ],
+    [
+      0.080072,
+      "a"
+    ],
+    [
+      0.15208,
+      "c"
+    ],
+    [
+      0.055845,
+      "h"
+    ],
+    [
+      0.032014,
+      "i"
+    ],
+    [
+      0.136036,
+      "n"
+    ],
+    [
+      0.056152,
+      "e"
+    ],
+    [
+      0.087802,
+      " "
+    ],
+    [
+      0.096049,
+      "c"
+    ],
+    [
+      0.160057,
+      "r"
+    ],
+    [
+      0.071918,
+      "e"
+    ],
+    [
+      0.103903,
+      "a"
+    ],
+    [
+      0.072054,
+      "t"
+    ],
+    [
+      0.064001,
+      "e"
+    ],
+    [
+      0.071999,
+      "a"
+    ],
+    [
+      0.5,
+      "\b \b"
+    ],
+    [
+      0.233411,
+      " "
+    ],
+    [
+      0.5,
+      "-"
+    ],
+    [
+      0.128062,
+      "-"
+    ],
+    [
+      0.407922,
+      "d"
+    ],
+    [
+      0.159984,
+      "r"
+    ],
+    [
+      0.104063,
+      "i"
+    ],
+    [
+      0.103939,
+      "v"
+    ],
+    [
+      0.119918,
+      "e"
+    ],
+    [
+      0.039939,
+      "r"
+    ],
+    [
+      0.5,
+      " "
+    ],
+    [
+      0.240295,
+      "v"
+    ],
+    [
+      0.095936,
+      "i"
+    ],
+    [
+      0.079908,
+      "r"
+    ],
+    [
+      0.5,
+      "t"
+    ],
+    [
+      0.096929,
+      "u"
+    ],
+    [
+      0.103077,
+      "a"
+    ],
+    [
+      0.168697,
+      "l"
+    ],
+    [
+      0.14424,
+      "b"
+    ],
+    [
+      0.07991,
+      "o"
+    ],
+    [
+      0.079382,
+      "x"
+    ],
+    [
+      0.328654,
+      " "
+    ],
+    [
+      0.319378,
+      "-"
+    ],
+    [
+      0.136585,
+      "-"
+    ],
+    [
+      0.079982,
+      "d"
+    ],
+    [
+      0.095791,
+      "i"
+    ],
+    [
+      0.08832,
+      "r"
+    ],
+    [
+      0.239722,
+      "v"
+    ],
+    [
+      0.175117,
+      "\b \b"
+    ],
+    [
+      0.144041,
+      "\b \b"
+    ],
+    [
+      0.127901,
+      "\b \b"
+    ],
+    [
+      0.136065,
+      "\b \b"
+    ],
+    [
+      0.137074,
+      "v"
+    ],
+    [
+      0.111875,
+      "i"
+    ],
+    [
+      0.104124,
+      "r"
+    ],
+    [
+      0.175742,
+      "t"
+    ],
+    [
+      0.136112,
+      "u"
+    ],
+    [
+      0.087969,
+      "a"
+    ],
+    [
+      0.152136,
+      "l"
+    ],
+    [
+      0.151976,
+      "b"
+    ],
+    [
+      0.080009,
+      "o"
+    ],
+    [
+      0.07994,
+      "x"
+    ],
+    [
+      0.5,
+      "-"
+    ],
+    [
+      0.175905,
+      "m"
+    ],
+    [
+      0.080139,
+      "e"
+    ],
+    [
+      0.095951,
+      "m"
+    ],
+    [
+      0.071847,
+      "o"
+    ],
+    [
+      0.144104,
+      "r"
+    ],
+    [
+      0.344036,
+      "y"
+    ],
+    [
+      0.247751,
+      " "
+    ],
+    [
+      0.5,
+      "\""
+    ],
+    [
+      0.5,
+      "1"
+    ],
+    [
+      0.119891,
+      "0"
+    ],
+    [
+      0.216143,
+      "2"
+    ],
+    [
+      0.214777,
+      "4"
+    ],
+    [
+      0.5,
+      "\""
+    ],
+    [
+      0.311757,
+      " "
+    ],
+    [
+      0.152191,
+      "m"
+    ],
+    [
+      0.095862,
+      "a"
+    ],
+    [
+      0.056134,
+      "s"
+    ],
+    [
+      0.127866,
+      "t"
+    ],
+    [
+      0.160031,
+      "e"
+    ],
+    [
+      0.07166,
+      "r"
+    ],
+    [
+      0.5,
+      "\u001b[?1l\u001b>"
+    ],
+    [
+      3.6e-05,
+      "\u001b[?2004l\r\r\n"
+    ],
+    [
+      0.001379,
+      "\u001b]2;docker-machine create --driver virtualbox --virtualbox-memory \"1024\" master\u0007\u001b]1;docker-machine\u0007"
+    ],
+    [
+      0.04208,
+      "Running pre-create checks...\r\n"
+    ],
+    [
+      0.5,
+      "(master) Default Boot2Docker ISO is out-of-date, downloading the latest release...\r\n"
+    ],
+    [
+      0.494542,
+      "(master) Latest release for github.com/boot2docker/boot2docker is v17.03.0-ce\r\n(master) Downloading /Users/corstijank/.docker/machine/cache/boot2docker.iso from https://github.com/boot2docker/boot2docker/releases/download/v17.03.0-ce/boot2docker.iso...\r\n"
+    ],
+    [
+      0.5,
+      "(master) 0%....10%....20%....30%....40%....50%....60%....70%....80%....90%....100%\r\n"
+    ],
+    [
+      0.395457,
+      "Creating machine...\r\n"
+    ],
+    [
+      0.5,
+      "(master) Copying /Users/corstijank/.docker/machine/cache/boot2docker.iso to /Users/corstijank/.docker/machine/machines/master/boot2docker.iso...\r\n"
+    ],
+    [
+      0.055744,
+      "(master) Creating VirtualBox VM...\r\n(master) Creating SSH key...\r\n"
+    ],
+    [
+      0.5,
+      "(master) Starting the VM...\r\n"
+    ],
+    [
+      0.070182,
+      "(master) Check network to re-create if needed...\r\n"
+    ],
+    [
+      0.5,
+      "(master) Found a new host-only adapter: \"vboxnet1\"\r\n"
+    ],
+    [
+      0.5,
+      "(master) Waiting for an IP...\r\n"
+    ],
+    [
+      0.5,
+      "Waiting for machine to be running, this may take a few minutes...\r\n"
+    ],
+    [
+      0.07106,
+      "Detecting operating system of created instance...\r\nWaiting for SSH to be available...\r\n"
+    ],
+    [
+      0.034532,
+      "Detecting the provisioner...\r\n"
+    ],
+    [
+      0.035865,
+      "Provisioning with boot2docker...\r\n"
+    ],
+    [
+      0.301391,
+      "Copying certs to the local machine directory...\r\n"
+    ],
+    [
+      0.5,
+      "Copying certs to the remote machine...\r\n"
+    ],
+    [
+      0.273467,
+      "Setting Docker configuration on the remote daemon...\r\n"
+    ],
+    [
+      0.5,
+      "Checking connection to Docker...\r\n"
+    ],
+    [
+      0.23375,
+      "Docker is up and running!\r\n"
+    ],
+    [
+      0.001123,
+      "To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env master\r\n"
+    ],
+    [
+      0.004808,
+      "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                               \r \r"
+    ],
+    [
+      0.000117,
+      "\u001b]2;corstijank@corstijank01-2: ~\u0007\u001b]1;~\u0007"
+    ],
+    [
+      0.013059,
+      "\r\u001b[0m\u001b[27m\u001b[24m\u001b[J\u001b[1m\u001b[35m~\u001b[1m\u001b[32m\u001b[1m\u001b[35m \u001b[00m% \u001b[K"
+    ],
+    [
+      4.8e-05,
+      "\u001b[?1h\u001b=\u001b[?2004h"
+    ],
+    [
+      0.5,
+      "\u001b[?2004l\r\r\n"
+    ]
+  ]
+}

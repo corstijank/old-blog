@@ -4,12 +4,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
     
     
-    <link rel="stylesheet" type="text/css" href="http://staticsmustdie.net/css/asciinema-player.css" />
+    <link rel="stylesheet" type="text/css" href="http://corstijank.github.io/css/asciinema-player.css" />
     
-    <title>Crossing Styx - My journey into the (under)world of .NET - Part II &middot; Statics Must Die!</title>
+    <title>Crossing Styx - My journey into the (under)world of .NET - Part II &middot; The blog of Corstijan Kortsmit</title>
     <meta name="author" content="Corstijan Kortsmit">
     <meta name="description" content="Read my ramblings here">
-    <meta name="generator" content="Hugo 0.19" />
+    <meta name="generator" content="Hugo 0.55.1" />
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,18 +17,18 @@
     <!-- RSS autodiscovery -->
     
 
-    <link rel="shortcut icon" href="http://staticsmustdie.net/img/favicon.ico">
+    <link rel="shortcut icon" href="http://corstijank.github.io/img/favicon.ico">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="http://staticsmustdie.net/css/screen.css">
-    <link rel="stylesheet" href="http://staticsmustdie.net/css/github.css">
+    <link rel="stylesheet" href="http://corstijank.github.io/css/screen.css">
+    <link rel="stylesheet" href="http://corstijank.github.io/css/github.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
     
 
     
-    <link rel="shortcut icon" type="image/x-icon" href="http://staticsmustdie.net/favicon.ico">
-    <link rel="icon" type="image/x-icon" href="http://staticsmustdie.net/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="http://corstijank.github.io/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="http://corstijank.github.io/favicon.ico">
     
 
     <!-- Stylesheet for theme color -->
@@ -45,7 +45,7 @@
 <body class="home-template">
     <header id="site-head">
 	
-	<h1 class="blog-title"><a href="http://staticsmustdie.net">Statics Must Die!</a></h1>
+	<h1 class="blog-title"><a href="http://corstijank.github.io">Statics Must Die!</a></h1>
 	
 	
 	<h1 class="blog-subtitle">The digital ramblings of Corstijan Kortsmit</h1>
@@ -68,23 +68,16 @@
     <section class="post-content">
         
 
-<p>In my previous <a href="http://staticsmustdie.net/post/dotnetcore-adventures-i/">post on this topic</a>, I somehow got the jitters to get started with .NET. Or more specifically, .NET core. Being stubborn as I am, I have created a simple delivery pipeline in Jenkins, for building and deploying a .NET core docker container.</p>
+<p>In my previous <a href="/post/dotnetcore-adventures-i">post on this topic</a>, I somehow got the jitters to get started with .NET. Or more specifically, .NET core. Being stubborn as I am, I have created a simple delivery pipeline in Jenkins, for building and deploying a .NET core docker container.</p>
 
 <p>Now, this might sound like hell freezing over. Me, programming .NET? Blasphemy! Except one little thing. For my previous post, I didn&rsquo;t actually write one line of C# code. Now, I don&rsquo;t want to give off the impression Im uncomfortable in <strong>any</strong> programming language, and so  I made sure to end the last blog post with some unfulfilled promises of creating a more serious project from this &lsquo;Hello world&rsquo; example.</p>
 
 <p>Time to pay up.</p>
 
-
-<figure >
-    
-        <img src="/img/dotnet-jenkins-simple-pipeline.png" />
-    
-    
-    <figcaption>
-        <h4>Previously..... on StaticsMustDie</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/img/dotnet-jenkins-simple-pipeline.png"/> <figcaption>
+            <h4>Previously..... on StaticsMustDie</h4>
+        </figcaption>
 </figure>
 
 
@@ -165,8 +158,7 @@ host.run();
 <p>Note I also deleted the IIS integration. I&rsquo;ll have none of your shenanigans, IIS.</p>
 
 <p>After this, we end up with a runnable container;
-<asciinema-player src="/asciinema/dotnet-jenkins-secondrun.json" cols="90" rows="20" preload="true" poster="npt:0:07"></asciinema-player>
-</p>
+<asciinema-player src="/asciinema/dotnet-jenkins-secondrun.json" cols="90" rows="20" preload="true" poster="npt:0:07"></asciinema-player></p>
 
 <h3 id="crash-test-dummy">Crash test dummy</h3>
 
@@ -207,30 +199,16 @@ host.run();
 <p>When you record test results in a <code>Jenkinsfile</code>, be sure to always put the recording in something like a <code>post/always</code> block, or if you&rsquo;re using pure script, use a <code>try/finally</code> construction. If your tests fail, the exit code will result in an exception. If you put the recording of your test results as a simple sequential step after the testing, it would mean execution would never reach the recording!</p>
 </blockquote>
 
-<p>
-<figure >
-    
-        <img src="/img/dotnet-jenkins-tests-succesful.png" />
-    
-    
-    <figcaption>
-        <h4>The serenity was not at a level I had hoped it to be</h4>
-        
-    </figcaption>
-    
+<p><figure>
+    <img src="/img/dotnet-jenkins-tests-succesful.png"/> <figcaption>
+            <h4>The serenity was not at a level I had hoped it to be</h4>
+        </figcaption>
 </figure>
 
-
-<figure >
-    
-        <img src="/img/dotnet-jenkins-tests-failed.png" />
-    
-    
-    <figcaption>
-        <h4>Everything going as expected...</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/img/dotnet-jenkins-tests-failed.png"/> <figcaption>
+            <h4>Everything going as expected...</h4>
+        </figcaption>
 </figure>
 </p>
 
@@ -246,7 +224,7 @@ host.run();
 
 <h2 id="wrap-up">Wrap-up</h2>
 
-<p>So, that concludes the second part, in what looks like is going to be a three part adventure. The Jenkins pipeline we explored in the <a href="http://staticsmustdie.net/post/dotnetcore-adventures-i/">previous part</a> was a fun introduction, but it was mostly dealing with Jenkins. This time around, we got into some interesting lessons on using ASP.NET Core with Docker, and what it would mean for configuration management.</p>
+<p>So, that concludes the second part, in what looks like is going to be a three part adventure. The Jenkins pipeline we explored in the [previous part]({{&lt;ref &ldquo;dotnetcore-adventures-i.md&rdquo;&gt;}}) was a fun introduction, but it was mostly dealing with Jenkins. This time around, we got into some interesting lessons on using ASP.NET Core with Docker, and what it would mean for configuration management.</p>
 
 <p>Also, it was very nice to see how relatively easy it is to integrate test results from the cli into Jenkins. I&rsquo;ll admit that using the <code>step</code> method is still a bit rough. I would rather use something like <code>xunit **/xunit-results.xml -t XUnitDotNetTest</code> or something. But I&rsquo;m sure the authors of the Jenkins plugin are going to get on that sometime.</p>
 
@@ -262,16 +240,16 @@ host.run();
             <i class="fa fa-fw fa-tag"></i>
             
                 
-                <a href="http://staticsmustdie.net/tags/dotnet">dotnet </a>
+                <a href="http://corstijank.github.io/tags/dotnet">dotnet </a>
             
                 
-                <a href="http://staticsmustdie.net/tags/jenkins">jenkins </a>
+                <a href="http://corstijank.github.io/tags/jenkins">jenkins </a>
             
                 
-                <a href="http://staticsmustdie.net/tags/programming">programming </a>
+                <a href="http://corstijank.github.io/tags/programming">programming </a>
             
                 
-                <a href="http://staticsmustdie.net/tags/testing">testing </a>
+                <a href="http://corstijank.github.io/tags/testing">testing </a>
             
         </div>
     </section>
@@ -279,15 +257,15 @@ host.run();
     <section class="share">
     <p class="backtotop"><a data-scroll href="#site-head"><i class="fa fa-lg fa-fw fa-angle-double-up"></i></a><a data-scroll class="backtotoptext" href="#site-head"> Back to top</a></p>
     <p class="info prompt">Share</p>
-    <a href="http://twitter.com/share?text=Crossing%20Styx%20-%20My%20journey%20into%20the%20%28under%29world%20of%20.NET%20-%20Part%20II&url=http%3a%2f%2fstaticsmustdie.net%2fpost%2fdotnetcore-adventures-ii%2f" title="Share on Twitter"
+    <a href="http://twitter.com/share?text=Crossing%20Styx%20-%20My%20journey%20into%20the%20%28under%29world%20of%20.NET%20-%20Part%20II&url=http%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-adventures-ii%2f" title="Share on Twitter"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
         <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
     </a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fstaticsmustdie.net%2fpost%2fdotnetcore-adventures-ii%2f" title="Share on Facebook"
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-adventures-ii%2f" title="Share on Facebook"
         onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
         <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
     </a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2fstaticsmustdie.net%2fpost%2fdotnetcore-adventures-ii%2f" title="Share on Google+"
+    <a href="https://plus.google.com/share?url=http%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-adventures-ii%2f" title="Share on Google+"
        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
         <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
     </a>
@@ -295,7 +273,7 @@ host.run();
     
     <footer class="post-footer">
         <section class="author">
-    <div class="authorimage" style="background: url(http://staticsmustdie.net/img/me.jpg)"></div>
+    <div class="authorimage" style="background: url(http://corstijank.github.io/img/me.jpg)"></div>
     <h4>Corstijan Kortsmit</h4>
     <p class="bio">Engineer, Hater of statics, Connaisseur of french fries</p>
     <p class="meta">
@@ -305,20 +283,25 @@ host.run();
     </footer>
     
     <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'corstijank-github-io';
-    var disqus_identifier = 'http:\/\/staticsmustdie.net\/post\/dotnetcore-adventures-ii\/';
-    var disqus_title = 'Crossing Styx - My journey into the (under)world of .NET - Part II';
-    var disqus_url = 'http:\/\/staticsmustdie.net\/post\/dotnetcore-adventures-ii\/';
-
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "corstijank-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
     
 </article>
@@ -347,15 +330,15 @@ host.run();
       
   </section>
 
-		<section class="copyright">&copy; 2017 <a href="http://staticsmustdie.net">Corstijan Kortsmit</a>. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</section>
+		<section class="copyright">&copy; 2019 <a href="http://corstijank.github.io">Corstijan Kortsmit</a>. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</section>
 	</div>
 </footer>
 
     
-<script src="http://staticsmustdie.net/js/asciinema-player.js"></script>
+<script src="http://corstijank.github.io/js/asciinema-player.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="http://staticsmustdie.net/js/index.js"></script>
-<script src="http://staticsmustdie.net/js/smooth-scroll.min.js"></script>
+<script src="http://corstijank.github.io/js/index.js"></script>
+<script src="http://corstijank.github.io/js/smooth-scroll.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
 
 
@@ -371,14 +354,17 @@ host.run();
 
 
 
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90300195-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-90300195-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 </body>

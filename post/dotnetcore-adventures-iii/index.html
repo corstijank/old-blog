@@ -4,12 +4,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
     
     
-    <link rel="stylesheet" type="text/css" href="http://staticsmustdie.net/css/asciinema-player.css" />
+    <link rel="stylesheet" type="text/css" href="http://corstijank.github.io/css/asciinema-player.css" />
     
-    <title>Crossing Styx - My journey into the (under)world of .NET - Part III &middot; Statics Must Die!</title>
+    <title>Crossing Styx - My journey into the (under)world of .NET - Part III &middot; The blog of Corstijan Kortsmit</title>
     <meta name="author" content="Corstijan Kortsmit">
     <meta name="description" content="Read my ramblings here">
-    <meta name="generator" content="Hugo 0.19" />
+    <meta name="generator" content="Hugo 0.55.1" />
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,18 +17,18 @@
     <!-- RSS autodiscovery -->
     
 
-    <link rel="shortcut icon" href="http://staticsmustdie.net/img/favicon.ico">
+    <link rel="shortcut icon" href="http://corstijank.github.io/img/favicon.ico">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="http://staticsmustdie.net/css/screen.css">
-    <link rel="stylesheet" href="http://staticsmustdie.net/css/github.css">
+    <link rel="stylesheet" href="http://corstijank.github.io/css/screen.css">
+    <link rel="stylesheet" href="http://corstijank.github.io/css/github.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
     
 
     
-    <link rel="shortcut icon" type="image/x-icon" href="http://staticsmustdie.net/favicon.ico">
-    <link rel="icon" type="image/x-icon" href="http://staticsmustdie.net/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="http://corstijank.github.io/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="http://corstijank.github.io/favicon.ico">
     
 
     <!-- Stylesheet for theme color -->
@@ -45,7 +45,7 @@
 <body class="home-template">
     <header id="site-head">
 	
-	<h1 class="blog-title"><a href="http://staticsmustdie.net">Statics Must Die!</a></h1>
+	<h1 class="blog-title"><a href="http://corstijank.github.io">Statics Must Die!</a></h1>
 	
 	
 	<h1 class="blog-subtitle">The digital ramblings of Corstijan Kortsmit</h1>
@@ -74,23 +74,16 @@
 
 <p>Let&rsquo;s just hope this story doesn&rsquo;t end up on rottentomatoes&hellip;</p>
 
-
-<figure >
-    
-        <img src="/img/dotnet-jenkins-tests-succesful.png" />
-    
-    
-    <figcaption>
-        <h4>You can tell it&#39;s not actually doing much by the green color.</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/img/dotnet-jenkins-tests-succesful.png"/> <figcaption>
+            <h4>You can tell it&#39;s not actually doing much by the green color.</h4>
+        </figcaption>
 </figure>
 
 
 <h2 id="challenge-accepted">Challenge accepted</h2>
 
-<p>In the previous posts (<a href="http://staticsmustdie.net/post/dotnetcore-adventures-i/">part I</a>, <a href="http://staticsmustdie.net/post/dotnetcore-adventures-ii/">part II</a>) I have been building a dotnet core application. Not wanting to start from scratch, I adopted a simple TodoAPI example from the (still excellent) ASP.NET core tutorials. I wound up with a REST api to <code>GET</code> and <code>POST</code> some todo items. This was a good starting point, but for me, I can&rsquo;t seriously say that I now know dotnet, or even have written something remotely useful in it. The biggest thing missing for me was something that most &lsquo;tutorial&rsquo; applications lack, and which every real life application has;</p>
+<p>In the previous posts ([part I]({{&lt;ref &ldquo;dotnetcore-adventures-i.md&rdquo;&gt;}}), [part II]({{&lt;ref &ldquo;dotnetcore-adventures-ii.md&rdquo;&gt;}})) I have been building a dotnet core application. Not wanting to start from scratch, I adopted a simple TodoAPI example from the (still excellent) ASP.NET core tutorials. I wound up with a REST api to <code>GET</code> and <code>POST</code> some todo items. This was a good starting point, but for me, I can&rsquo;t seriously say that I now know dotnet, or even have written something remotely useful in it. The biggest thing missing for me was something that most &lsquo;tutorial&rsquo; applications lack, and which every real life application has;</p>
 
 <p><strong>Run time dependencies</strong></p>
 
@@ -153,15 +146,15 @@ _dbContext.SaveChanges();
 
 <p>So, in our StartUp class, where all injectable services are configured, we add a simple line:</p>
 
-<pre><code class="language-csharp"> services.AddDbContext&lt;TodoContext&gt;(options =&gt;
-    options.UseSqlServer(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+<pre><code class="language-csharp">services.AddDbContext&lt;TodoContext&gt;(options =&gt;
+   options.UseSqlServer(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
 </code></pre>
 
 <p>And as you can imagine, we add a connectionstring &lsquo;DefaultConnection to the file called <code>AppSettings.json</code>;</p>
 
-<pre><code class="language-json"> &quot;DefaultConnection&quot;: &quot;Data Source=localhost,1433;
- 	Initial Catalog=TodoDev;Integrated Security=False;
- 	User ID=sa;Password=xihdG!8uNCavA!Rw&quot;
+<pre><code class="language-json">&quot;DefaultConnection&quot;: &quot;Data Source=localhost,1433;
+	Initial Catalog=TodoDev;Integrated Security=False;
+	User ID=sa;Password=xihdG!8uNCavA!Rw&quot;
 </code></pre>
 
 <p>I&rsquo;m sure it&rsquo;s a terrible connection string. But it works. Yes, you know the password to my sql server instance&hellip;. <em>Or do you</em>?</p>
@@ -237,11 +230,8 @@ networks:
 <ul>
 <li><code>version: &quot;2&quot;</code> - is just what version of the docker-compose syntax we&rsquo;re using. I believe &lsquo;3&rsquo; or &lsquo;3.1&rsquo; is out, but haven&rsquo;t gotten around to looking into that yet.</li>
 <li><code>services</code> - Here are good bits; here declared are which services that need to be running according to this compose file. This translates into one, or more running containers
-
-<ul>
-<li><code>mssql</code> is our SQL Server service. It&rsquo;s based on a docker image as you can see, has some environment variables (uh oh&hellip;there&rsquo;s my password again&hellip;OR IS IT?), and describes what ports to publish. I&rsquo;ll get to the networking in a bit</li>
-<li><code>todo-api</code> is the actual dotnet service. It publishes on port 5000, and depends on mssql. That at least ensure that the mssql is started first (sidenote: This does not necessarily mean todo-api gets started after SQL Server <em>has finished</em> starting. There&rsquo;s no check for that in here, for now)</li>
-</ul></li>
+    - <code>mssql</code> is our SQL Server service. It&rsquo;s based on a docker image as you can see, has some environment variables (uh oh&hellip;there&rsquo;s my password again&hellip;OR IS IT?), and describes what ports to publish. I&rsquo;ll get to the networking in a bit
+    - <code>todo-api</code> is the actual dotnet service. It publishes on port 5000, and depends on mssql. That at least ensure that the mssql is started first (sidenote: This does not necessarily mean todo-api gets started after SQL Server <em>has finished</em> starting. There&rsquo;s no check for that in here, for now)</li>
 <li><code>networks</code> - I verbosely declare a &lsquo;docker network&rsquo; where the services are going to attach to. Amongst things, this ensures that services on the same network, can find each other by simple dns, using the other service&rsquo;s name. So the hostname for SQL server service, from the todo-api container, is simply <code>mssql</code> - as they are both on the same docker network.</li>
 </ul>
 
@@ -312,8 +302,7 @@ networks:
 
 <p>Well it&rsquo;s been long run, but here we go:</p>
 
-<asciinema-player src="/asciinema/sqlserver.json" cols="90" rows="20" preload="true" poster="npt:0:07"></asciinema-player>
-
+<p><asciinema-player src="/asciinema/sqlserver.json" cols="90" rows="20" preload="true" poster="npt:0:07"></asciinema-player></p>
 
 <p>And there you have it. A working delivery pipeline, including Microsoft&rsquo;s own SQL server. Complete with database initialization, continuous delivery, you can even see in git log which version got deployed to production when.</p>
 
@@ -331,22 +320,22 @@ networks:
             <i class="fa fa-fw fa-tag"></i>
             
                 
-                <a href="http://staticsmustdie.net/tags/dotnet">dotnet </a>
+                <a href="http://corstijank.github.io/tags/dotnet">dotnet </a>
             
                 
-                <a href="http://staticsmustdie.net/tags/jenkins">jenkins </a>
+                <a href="http://corstijank.github.io/tags/jenkins">jenkins </a>
             
                 
-                <a href="http://staticsmustdie.net/tags/sqlserver">sqlserver </a>
+                <a href="http://corstijank.github.io/tags/sqlserver">sqlserver </a>
             
                 
-                <a href="http://staticsmustdie.net/tags/programming">programming </a>
+                <a href="http://corstijank.github.io/tags/programming">programming </a>
             
                 
-                <a href="http://staticsmustdie.net/tags/docker">docker </a>
+                <a href="http://corstijank.github.io/tags/docker">docker </a>
             
                 
-                <a href="http://staticsmustdie.net/tags/testing">testing </a>
+                <a href="http://corstijank.github.io/tags/testing">testing </a>
             
         </div>
     </section>
@@ -354,15 +343,15 @@ networks:
     <section class="share">
     <p class="backtotop"><a data-scroll href="#site-head"><i class="fa fa-lg fa-fw fa-angle-double-up"></i></a><a data-scroll class="backtotoptext" href="#site-head"> Back to top</a></p>
     <p class="info prompt">Share</p>
-    <a href="http://twitter.com/share?text=Crossing%20Styx%20-%20My%20journey%20into%20the%20%28under%29world%20of%20.NET%20-%20Part%20III&url=http%3a%2f%2fstaticsmustdie.net%2fpost%2fdotnetcore-adventures-iii%2f" title="Share on Twitter"
+    <a href="http://twitter.com/share?text=Crossing%20Styx%20-%20My%20journey%20into%20the%20%28under%29world%20of%20.NET%20-%20Part%20III&url=http%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-adventures-iii%2f" title="Share on Twitter"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
         <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
     </a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fstaticsmustdie.net%2fpost%2fdotnetcore-adventures-iii%2f" title="Share on Facebook"
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-adventures-iii%2f" title="Share on Facebook"
         onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
         <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
     </a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2fstaticsmustdie.net%2fpost%2fdotnetcore-adventures-iii%2f" title="Share on Google+"
+    <a href="https://plus.google.com/share?url=http%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-adventures-iii%2f" title="Share on Google+"
        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
         <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
     </a>
@@ -370,7 +359,7 @@ networks:
     
     <footer class="post-footer">
         <section class="author">
-    <div class="authorimage" style="background: url(http://staticsmustdie.net/img/me.jpg)"></div>
+    <div class="authorimage" style="background: url(http://corstijank.github.io/img/me.jpg)"></div>
     <h4>Corstijan Kortsmit</h4>
     <p class="bio">Engineer, Hater of statics, Connaisseur of french fries</p>
     <p class="meta">
@@ -380,20 +369,25 @@ networks:
     </footer>
     
     <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'corstijank-github-io';
-    var disqus_identifier = 'http:\/\/staticsmustdie.net\/post\/dotnetcore-adventures-iii\/';
-    var disqus_title = 'Crossing Styx - My journey into the (under)world of .NET - Part III';
-    var disqus_url = 'http:\/\/staticsmustdie.net\/post\/dotnetcore-adventures-iii\/';
-
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "corstijank-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
     
 </article>
@@ -422,15 +416,15 @@ networks:
       
   </section>
 
-		<section class="copyright">&copy; 2017 <a href="http://staticsmustdie.net">Corstijan Kortsmit</a>. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</section>
+		<section class="copyright">&copy; 2019 <a href="http://corstijank.github.io">Corstijan Kortsmit</a>. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</section>
 	</div>
 </footer>
 
     
-<script src="http://staticsmustdie.net/js/asciinema-player.js"></script>
+<script src="http://corstijank.github.io/js/asciinema-player.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="http://staticsmustdie.net/js/index.js"></script>
-<script src="http://staticsmustdie.net/js/smooth-scroll.min.js"></script>
+<script src="http://corstijank.github.io/js/index.js"></script>
+<script src="http://corstijank.github.io/js/smooth-scroll.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
 
 
@@ -446,14 +440,17 @@ networks:
 
 
 
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90300195-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-90300195-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 </body>
