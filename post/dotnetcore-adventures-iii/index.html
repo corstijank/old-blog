@@ -1,457 +1,366 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="en">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
-    
-    
-    <link rel="stylesheet" type="text/css" href="https://corstijank.github.io/css/asciinema-player.css" />
-    
-    <title>Crossing Styx - My journey into the (under)world of .NET - Part III &middot; The blog of Corstijan Kortsmit</title>
-    <meta name="author" content="Corstijan Kortsmit">
-    <meta name="description" content="Read my ramblings here">
-    <meta name="generator" content="Hugo 0.55.1" />
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <!-- RSS autodiscovery -->
-    
+<title>Crossing Styx - My journey into the (under)world of .NET - Part III | Statics Must Die! - Writings by Corstijan Kortsmit</title>
 
-    <link rel="shortcut icon" href="https://corstijank.github.io/img/favicon.ico">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<meta property='og:title' content='Crossing Styx - My journey into the (under)world of .NET - Part III - Statics Must Die! - Writings by Corstijan Kortsmit'>
+<meta property='og:description' content='In the third part of the series, our adventure is slowly but surely heading to its climax. All &#39;characters&#39; have been introduced. There&#39;s **DotNet Core**, the new, misunderstood (or at least by me?) kid with a bunch of talent. **Docker**, the awesome supporting character that actually deserves his own movie. Surely there&#39;ll be a spin-off! There&#39;s the antagonist, **Jenkins**, who might end up working along with our main character more then either had hoped for. Then, there&#39;s the mid movie surprise character, **Microsoft SQL server**!
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://corstijank.github.io/css/screen.css">
-    <link rel="stylesheet" href="https://corstijank.github.io/css/github.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
-    
+And then there&#39;s me, the engineer coming from a Java EE background trying to piece it all together. 
 
-    
-    <link rel="shortcut icon" type="image/x-icon" href="https://corstijank.github.io/favicon.ico">
-    <link rel="icon" type="image/x-icon" href="https://corstijank.github.io/favicon.ico">
-    
+Let&#39;s just hope this story doesn&#39;t end up on rottentomatoes...'>
+<meta property='og:url' content='https://staticsmustdie.net/post/dotnetcore-adventures-iii/'>
+<meta property='og:site_name' content='Statics Must Die! - Writings by Corstijan Kortsmit'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='dotnet'><meta property='article:tag' content='jenkins'><meta property='article:tag' content='sqlserver'><meta property='article:tag' content='programming'><meta property='article:tag' content='docker'><meta property='article:tag' content='testing'><meta property='article:published_time' content='2017-03-05T00:00:00Z'/><meta property='article:modified_time' content='2017-03-05T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@corstijank'><meta name='twitter:creator' content='@corstijank'>
 
-    <!-- Stylesheet for theme color -->
-    <style type="text/css">
-    a, a:visited {color: #3498db;}
-    .pagination a {color: #3498db;}
-    .gist .gist-file .gist-meta a:visited {color: #3498db !important;}
-    a:focus, a:hover {color: #2079b4;}
-    h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #2079b4;}
-    .older-posts:hover, .newer-posts:hover {color: #2079b4;}
-</style>
+
+<link href="https://staticsmustdie.net/index.xml" rel="alternate" type="application/rss+xml" title="Statics Must Die! - Writings by Corstijan Kortsmit" />
+
+<link rel="stylesheet" href="/css/style.css"/><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="canonical" href="https://staticsmustdie.net/post/dotnetcore-adventures-iii/">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" type="text/css" href="https://staticsmustdie.net/css/asciinema-player.css" />
 </head>
-
-<body class="home-template">
-    <header id="site-head">
-	
-	<h1 class="blog-title"><a href="https://corstijank.github.io">Statics Must Die!</a></h1>
-	
-	
-	<h1 class="blog-subtitle">The digital ramblings of Corstijan Kortsmit</h1>
-	
-</header>
+<body>
+<section class="section">
+  <div class="container">
+    <nav id="nav-main" class="nav">
+      <div id="nav-name" class="nav-left">
+        <a id="nav-anchor" class="nav-item" href="https://staticsmustdie.net">
+          <h1 id="nav-heading" class="title is-4">Statics Must Die! - Writings by Corstijan Kortsmit</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <nav id="nav-items" class="nav-item level is-mobile"><a class="level-item" aria-label="github" href='https://github.com/corstijank'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
     
+    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
     
-    <main class="content" role="main">
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="gitlab" href='https://gitlab.com/corstijank'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
     
-<article class="post">
-    <header>
-        <h1 class="post-title">Crossing Styx - My journey into the (under)world of .NET - Part III</h1>
-        <div class="post-meta">
-            <time datetime="05 March 2017">
-                05 March 2017
-            </time>
-        </div>
-    </header>
+    <path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0 1 18.6 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z"></path>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="twitter" href='https://twitter.com/corstijank'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="linkedin" href='https://linkedin.com/in/corstijan-kortsmit'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path stroke-width="1.8" d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z"/>
+    
+  </svg></i>
+            </span>
+          </a></nav>
+      </div>
+    </nav>
 
-    <section class="post-content">
-        
+    <nav class="nav">
+      
 
-<p>In the third part of the series, our adventure is slowly but surely heading to its climax. All &lsquo;characters&rsquo; have been introduced. There&rsquo;s <strong>DotNet Core</strong>, the new, misunderstood (or at least by me?) kid with a bunch of talent. <strong>Docker</strong>, the awesome supporting character that actually deserves his own movie. Surely there&rsquo;ll be a spin-off! There&rsquo;s the antagonist, <strong>Jenkins</strong>, who might end up working along with our main character more then either had hoped for. Then, there&rsquo;s the mid movie surprise character, <strong>Microsoft SQL server</strong>!</p>
+      
+    </nav>
 
+  </div>
+  <script src="/js/navicon-shift.js"></script>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="subtitle tags is-6 is-pulled-right">
+      
+      
+<a class="subtitle is-6" href="/tags/dotnet">#dotnet</a>
+
+
+
+  
+  | <a class="subtitle is-6" href="/tags/jenkins">#jenkins</a>
+  
+  | <a class="subtitle is-6" href="/tags/sqlserver">#sqlserver</a>
+  
+  | <a class="subtitle is-6" href="/tags/programming">#programming</a>
+  
+  | <a class="subtitle is-6" href="/tags/docker">#docker</a>
+  
+  | <a class="subtitle is-6" href="/tags/testing">#testing</a>
+  
+
+      
+    </div>
+    <h2 class="subtitle is-6">March 5, 2017</h2>
+    <h1 class="title">Crossing Styx - My journey into the (under)world of .NET - Part III</h1>
+    
+    <div class="content">
+      <p>In the third part of the series, our adventure is slowly but surely heading to its climax. All &lsquo;characters&rsquo; have been introduced. There&rsquo;s <strong>DotNet Core</strong>, the new, misunderstood (or at least by me?) kid with a bunch of talent. <strong>Docker</strong>, the awesome supporting character that actually deserves his own movie. Surely there&rsquo;ll be a spin-off! There&rsquo;s the antagonist, <strong>Jenkins</strong>, who might end up working along with our main character more then either had hoped for. Then, there&rsquo;s the mid movie surprise character, <strong>Microsoft SQL server</strong>!</p>
 <p>And then there&rsquo;s me, the engineer coming from a Java EE background trying to piece it all together.</p>
-
 <p>Let&rsquo;s just hope this story doesn&rsquo;t end up on rottentomatoes&hellip;</p>
-
 <figure>
     <img src="/img/dotnet-jenkins-tests-succesful.png"/> <figcaption>
             <h4>You can tell it&#39;s not actually doing much by the green color.</h4>
         </figcaption>
 </figure>
 
-
 <h2 id="challenge-accepted">Challenge accepted</h2>
-
-<p>In the previous posts ([part I]({{&lt;ref &ldquo;dotnetcore-adventures-i.md&rdquo;&gt;}}), [part II]({{&lt;ref &ldquo;dotnetcore-adventures-ii.md&rdquo;&gt;}})) I have been building a dotnet core application. Not wanting to start from scratch, I adopted a simple TodoAPI example from the (still excellent) ASP.NET core tutorials. I wound up with a REST api to <code>GET</code> and <code>POST</code> some todo items. This was a good starting point, but for me, I can&rsquo;t seriously say that I now know dotnet, or even have written something remotely useful in it. The biggest thing missing for me was something that most &lsquo;tutorial&rsquo; applications lack, and which every real life application has;</p>
-
+<p>In the previous posts ([part I]({{&lt;ref &ldquo;dotnetcore-adventures-i.md&quot;&gt;}}), [part II]({{&lt;ref &ldquo;dotnetcore-adventures-ii.md&quot;&gt;}})) I have been building a dotnet core application. Not wanting to start from scratch, I adopted a simple TodoAPI example from the (still excellent) ASP.NET core tutorials. I wound up with a REST api to <code>GET</code> and <code>POST</code> some todo items. This was a good starting point, but for me, I can&rsquo;t seriously say that I now know dotnet, or even have written something remotely useful in it. The biggest thing missing for me was something that most &lsquo;tutorial&rsquo; applications lack, and which every real life application has;</p>
 <p><strong>Run time dependencies</strong></p>
-
 <p>I mean, sure it has dependencies on ASP.NET core. But when it comes to deploying and running, it&rsquo;s a simple application. Very few real services are like that. Services, ironically, often require other services to run. A backend needs databases or messages, a frontend needs a backend, and so on. Even if you go all fancy microservices in your architecture, chances are you&rsquo;re still managing processes for databases or message queuing. I&rsquo;m just going to assume you&rsquo;re not writing your services from http to flat files all yourself. Anyway, inter-process dependencies like that are often the challenging factor in delivering software. So, let&rsquo;s not shy away from a challenge.</p>
-
 <p>For a todo rest api, the most logical thing would be to add persistence. Right now, if we restart our container, we lose all todo items previously registered. Not the most user-friendly experience. I&rsquo;m out of metaphor&rsquo;s to explain this, but when I think persistence and Microsoft technology, I think SQL server. For a long while, it would not have been an option, since it used to run exclusively on Windows. But, a few months back, a new SQL server version was released, which ran on Linux. Not even that, it ran in a Docker container too.</p>
-
-<p><img src="/img/sqlserver-linux.png" alt="" /></p>
-
+<p><img src="/img/sqlserver-linux.png" alt=""></p>
 <p>Excellent&hellip;&hellip;<em>cue evil laughter</em></p>
-
 <h2 id="core-makes-everything-cooler">Core makes everything cooler</h2>
-
 <p>So, persistence for a dotnet application. What to framework to use. On the java side of things, we have basically two &lsquo;flavors&rsquo; of frameworks. A kind of Object Relation Mapping solution; think Hibernate, if you will. If you&rsquo;re more into writing pure SQL, and mapping that to objects, you can use a query mapping framework. Think something like myBatis. There are probably a bunch more in both categories, but I&rsquo;m not writing about Java now.</p>
-
 <p>Looking at the (once again, excellent) dotnet and ASP.NET core tutorials, one quickly stumbles upon something called EntityFrameworkCore. Now, I know I have criticized Microsofts naming strategy for frameworks before. Usually it&rsquo;s just boring, summarizing what the framework does. Blergh. Same goes here, except&hellip;for some reason, I like EntityFrameworkCore. Probably because &lsquo;core&rsquo; bit makes it sound more&hellip;well..hardCore? If it had just been EntityFramework (which I believe it&rsquo;s still called in the &lsquo;vanilla&rsquo; .NET variant), I&rsquo;d not be a fan.</p>
-
 <p>Anyway, as you can guess by now, there&rsquo;s a bunch of tutorials on EntityFrameworkCore. But, none of those actually &lsquo;integrate&rsquo; into the Todo tutorial.</p>
-
 <p>But, no worries; I can still program some myself, believe it or not.</p>
-
 <p>So, first off, I can just use my plain old TodoItem class as an entity;</p>
-
-<pre><code class="language-csharp">public class TodoItem
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TodoItem</span>
 {
-    public string TodoItemID { get; set; }
-    public string Name { get; set; }
-    public bool IsComplete { get; set; }
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> TodoItemID { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> Name { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> IsComplete { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
 }
-</code></pre>
-
-<p>The idea, as far as I can tell, is that there is a user-created &lsquo;context&rsquo; class, that extends <code>DbContext</code>. So, I made a TodoContext, with the idea it&rsquo;ll manage all entities for my todo api.  In the TodoContext class, I register the entity TodoItem and state which table it is to be saved in. I give the TodoContext class a public property <code>DbSet&lt;TodoItem&gt; TodoItems</code> and all should be good to go for my business methods;</p>
-
-<pre><code class="language-csharp">public class TodoContext : DbContext
+</code></pre></div><p>The idea, as far as I can tell, is that there is a user-created &lsquo;context&rsquo; class, that extends <code>DbContext</code>. So, I made a TodoContext, with the idea it&rsquo;ll manage all entities for my todo api.  In the TodoContext class, I register the entity TodoItem and state which table it is to be saved in. I give the TodoContext class a public property <code>DbSet&lt;TodoItem&gt; TodoItems</code> and all should be good to go for my business methods;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TodoContext</span> : DbContext
 {
-    public TodoContext(DbContextOptions&lt;TodoContext&gt; options) : base(options)
+    <span style="color:#66d9ef">public</span> TodoContext(DbContextOptions&lt;TodoContext&gt; options) : <span style="color:#66d9ef">base</span>(options)
     {
     }
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity&lt;TodoItem&gt;().ToTable(&quot;TodoItem&quot;);
+        modelBuilder.Entity&lt;TodoItem&gt;().ToTable(<span style="color:#e6db74">&#34;TodoItem&#34;</span>);
     }
-    public DbSet&lt;TodoItem&gt; TodoItems { get; set; }
+    <span style="color:#66d9ef">public</span> DbSet&lt;TodoItem&gt; TodoItems { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
 }
-</code></pre>
-
-<p>And yes,  behold, my &lsquo;business&rsquo; logic can now use the TodoContext to do some persistence stuff:</p>
-
-<pre><code class="language-csharp">_dbContext.Update(item);
+</code></pre></div><p>And yes,  behold, my &lsquo;business&rsquo; logic can now use the TodoContext to do some persistence stuff:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">_dbContext.Update(item);
 _dbContext.SaveChanges();
-</code></pre>
-
-<p>Yes, there needs to be a call to <code>.SaveChanges()</code> - Which, for me as a java programmer coming from a Java EE world, is a bit silly. As in, I honestly forgot to do it in my first go. Why isn&rsquo;t there a container to manage this transactional stuff? But then, when I&rsquo;m completely honest with myself, in that question lies the answer already. There is no container, it&rsquo;s not Java EE, and doing something like this is not all that weird even in other languages.</p>
-
+</code></pre></div><p>Yes, there needs to be a call to <code>.SaveChanges()</code> - Which, for me as a java programmer coming from a Java EE world, is a bit silly. As in, I honestly forgot to do it in my first go. Why isn&rsquo;t there a container to manage this transactional stuff? But then, when I&rsquo;m completely honest with myself, in that question lies the answer already. There is no container, it&rsquo;s not Java EE, and doing something like this is not all that weird even in other languages.</p>
 <p>I know, I know,  but it&rsquo;s so much more easy to hate then it is to tolerate, right?</p>
-
 <h2 id="holding-the-line">Holding the line</h2>
-
 <p>Of course, doing all this work still did not connect it to any SQL server instance, make a database or tables, or actually even run at all. There&rsquo;s still initialization and setup to do!</p>
-
 <p>So, in our StartUp class, where all injectable services are configured, we add a simple line:</p>
-
-<pre><code class="language-csharp">services.AddDbContext&lt;TodoContext&gt;(options =&gt;
-   options.UseSqlServer(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
-</code></pre>
-
-<p>And as you can imagine, we add a connectionstring &lsquo;DefaultConnection to the file called <code>AppSettings.json</code>;</p>
-
-<pre><code class="language-json">&quot;DefaultConnection&quot;: &quot;Data Source=localhost,1433;
-	Initial Catalog=TodoDev;Integrated Security=False;
-	User ID=sa;Password=xihdG!8uNCavA!Rw&quot;
-</code></pre>
-
-<p>I&rsquo;m sure it&rsquo;s a terrible connection string. But it works. Yes, you know the password to my sql server instance&hellip;. <em>Or do you</em>?</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">services.AddDbContext&lt;TodoContext&gt;(options =&gt;
+   options.UseSqlServer(Configuration.GetConnectionString(<span style="color:#e6db74">&#34;DefaultConnection&#34;</span>)));
+</code></pre></div><p>And as you can imagine, we add a connectionstring &lsquo;DefaultConnection to the file called <code>AppSettings.json</code>;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#e6db74">&#34;DefaultConnection&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;Data Source=localhost,1433;
+</span><span style="color:#e6db74">	Initial Catalog=TodoDev;Integrated Security=False;
+</span><span style="color:#e6db74">	User ID=sa;Password=xihdG!8uNCavA!Rw&#34;</span>
+</code></pre></div><p>I&rsquo;m sure it&rsquo;s a terrible connection string. But it works. Yes, you know the password to my sql server instance&hellip;. <em>Or do you</em>?</p>
 <p>That all seems to work fine, assuming the database exists. And here we get into a pickle. Because, I do not want to depend on that. I want EntityFrameworkCore to create it for me. Not just the tables, but the whole database. Luckily, the tutorials help me out there, and tell me how to set up an initializer class, with even some code to populate some data into it. Nice.</p>
-
 <p>Just create a <code>DbInitializer</code> class, and make sure to call the method in the startup class&rsquo; <code>configure</code> method. Let&rsquo;s copy and past&hellip;..wait a minute&hellip;is that a <code>static</code> method in that <a href="https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro#add-code-to-initialize-the-database-with-test-data">initializer example</a>?</p>
-
-<p><img src="/img/stayalert.png" alt="" /></p>
-
+<p><img src="/img/stayalert.png" alt=""></p>
 <p>Now, there are lines to be held. The url you are currently browsing is <code>staticsmustdie.net</code> - I cannot go and claim we need a static method for something as silly as database initialization. It&rsquo;s not necessary, it&rsquo;s lazy, and it must be stopped. So, as that <em>Rage Against the Machine</em> song goes&hellip;.yeah&hellip; I won&rsquo;t do what you tell me.</p>
-
 <p>So what do I do? Simple enough, drop the static, inject a new instance. Create testable code. Boom.</p>
-
-<pre><code class="language-csharp">public class DbInitializer
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DbInitializer</span>
 {
-    public void Initialize(TodoContext context)
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Initialize(TodoContext context)
     {
         context.Database.EnsureCreated();
     }
 }
-</code></pre>
-
-<pre><code class="language-csharp">public void ConfigureServices(...)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ConfigureServices(...)
 {
-	// other stuff going on as well
-    services.AddSingleton&lt;DbInitializer,DbInitializer&gt;();  
+	<span style="color:#75715e">// other stuff going on as well
+</span><span style="color:#75715e"></span>    services.AddSingleton&lt;DbInitializer,DbInitializer&gt;();  
 }
-public void Configure(...)
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Configure(...)
 {
-    // other stuff going on as well
-    dbInitializer.Initialize(dbContext);
+    <span style="color:#75715e">// other stuff going on as well
+</span><span style="color:#75715e"></span>    dbInitializer.Initialize(dbContext);
 }
-</code></pre>
-
-<p>This leaves me with a nice <code>DbInitializer</code> class, where I can add some dummy data if I want as well. But honestly, if that were to be all the code in a <code>DbInitializer</code> in a &lsquo;real&rsquo; project, I would probably just inline the <code>context.Database.ensureCreated()</code> call to the StartUp&rsquo;s <code>Configure</code> method.</p>
-
+</code></pre></div><p>This leaves me with a nice <code>DbInitializer</code> class, where I can add some dummy data if I want as well. But honestly, if that were to be all the code in a <code>DbInitializer</code> in a &lsquo;real&rsquo; project, I would probably just inline the <code>context.Database.ensureCreated()</code> call to the StartUp&rsquo;s <code>Configure</code> method.</p>
 <p>But I wanted to make a statement. <strong>Against statics</strong>.</p>
-
 <h2 id="composing-like-mozart-but-less-classical">Composing. Like Mozart. But less classical.</h2>
-
 <p>So, our service is coming along nicely. Using a local SQL Server (thanks to Docker!), this all <em>just works</em>. And I have to hand it out here to the ASP.NET core guys. That&rsquo;s pretty awesome. Back in the day, I had a harder time getting started with any JPA framework / configuration. But that might have been me as well.  Or the overwhelming amount of frameworks and choices. Oh well.</p>
-
 <p>Anyway, this all has no value unless it is delivered to production, right? So, how do ensure that there&rsquo;s a SQL Server instance running in production? And that the TodoApi service can connect to it? Well, let&rsquo;s keep it simple enough for now, and use docker-compose for that. Docker Compose is a tool that allows you to put container configuration (mind you, container, not image) in a <code>docker-compose.yml</code> file. You can put in multiple containers, configure them, and then use something simple as <code>docker-compose up</code> to ensure all containers are running.</p>
-
 <p>So, how does that look for our TodoApi?</p>
-
-<pre><code class="language-yml">version: &quot;2&quot;
-services:
-  mssql:
-    image: microsoft/mssql-server-linux
-    environment: 
-      ACCEPT_EULA: &quot;Y&quot;
-      SA_PASSWORD: &quot;xihdG!8uNCavA!Rw&quot;
-    ports: 
-      - 1433:1433
-    networks:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">version</span>: <span style="color:#e6db74">&#34;2&#34;</span>
+<span style="color:#66d9ef">services</span>:
+  <span style="color:#66d9ef">mssql</span>:
+    <span style="color:#66d9ef">image</span>: microsoft/mssql-server-linux
+    <span style="color:#66d9ef">environment</span>: 
+      <span style="color:#66d9ef">ACCEPT_EULA</span>: <span style="color:#e6db74">&#34;Y&#34;</span>
+      <span style="color:#66d9ef">SA_PASSWORD</span>: <span style="color:#e6db74">&#34;xihdG!8uNCavA!Rw&#34;</span>
+    <span style="color:#66d9ef">ports</span>: 
+      - <span style="color:#ae81ff">1433</span>:<span style="color:#ae81ff">1433</span>
+    <span style="color:#66d9ef">networks</span>:
       - production
-  todo-api:
-    image: corstijank/blog-dotnet-jenkins:2.0-59
-    ports: 
-      - 5000:5000
-    networks: 
+  <span style="color:#66d9ef">todo-api</span>:
+    <span style="color:#66d9ef">image</span>: corstijank/blog-dotnet-jenkins:<span style="color:#ae81ff">2.0-59</span>
+    <span style="color:#66d9ef">ports</span>: 
+      - <span style="color:#ae81ff">5000</span>:<span style="color:#ae81ff">5000</span>
+    <span style="color:#66d9ef">networks</span>: 
       - production
-    depends_on: 
+    <span style="color:#66d9ef">depends_on</span>: 
       - mssql
-networks:
-  production:
-</code></pre>
-
-<p>I like to think this is all pretty self-explanatory, but still, I&rsquo;m going to give it a quick round-up:</p>
-
+<span style="color:#66d9ef">networks</span>:
+  <span style="color:#66d9ef">production</span>:
+</code></pre></div><p>I like to think this is all pretty self-explanatory, but still, I&rsquo;m going to give it a quick round-up:</p>
 <ul>
 <li><code>version: &quot;2&quot;</code> - is just what version of the docker-compose syntax we&rsquo;re using. I believe &lsquo;3&rsquo; or &lsquo;3.1&rsquo; is out, but haven&rsquo;t gotten around to looking into that yet.</li>
 <li><code>services</code> - Here are good bits; here declared are which services that need to be running according to this compose file. This translates into one, or more running containers
-    - <code>mssql</code> is our SQL Server service. It&rsquo;s based on a docker image as you can see, has some environment variables (uh oh&hellip;there&rsquo;s my password again&hellip;OR IS IT?), and describes what ports to publish. I&rsquo;ll get to the networking in a bit
-    - <code>todo-api</code> is the actual dotnet service. It publishes on port 5000, and depends on mssql. That at least ensure that the mssql is started first (sidenote: This does not necessarily mean todo-api gets started after SQL Server <em>has finished</em> starting. There&rsquo;s no check for that in here, for now)</li>
+- <code>mssql</code> is our SQL Server service. It&rsquo;s based on a docker image as you can see, has some environment variables (uh oh&hellip;there&rsquo;s my password again&hellip;OR IS IT?), and describes what ports to publish. I&rsquo;ll get to the networking in a bit
+- <code>todo-api</code> is the actual dotnet service. It publishes on port 5000, and depends on mssql. That at least ensure that the mssql is started first (sidenote: This does not necessarily mean todo-api gets started after SQL Server <em>has finished</em> starting. There&rsquo;s no check for that in here, for now)</li>
 <li><code>networks</code> - I verbosely declare a &lsquo;docker network&rsquo; where the services are going to attach to. Amongst things, this ensures that services on the same network, can find each other by simple dns, using the other service&rsquo;s name. So the hostname for SQL server service, from the todo-api container, is simply <code>mssql</code> - as they are both on the same docker network.</li>
 </ul>
-
 <p>Now, it gets interesting. Remember that dreaded <code>appsettings.json</code>? The connection string clearly had SQL Server running on localhost. But if we run these containers, from the perspective of the todo-api container, SQL Server is not running on localhost, but rather on the hostname <code>mssql</code></p>
-
 <p>So, there is a  need for another JSON file. I called it <code>appsettings.docker.json</code>. In this file, I switched out localhost for <code>mssql</code>. I made sure to edit the <code>project.json</code> file to include it when publishing the app, so it&rsquo;ll get picked up into our container. Nice.</p>
-
 <blockquote>
 <p>Now, I know pretty much all documentation and examples state to call it the JSON file something like <code>appsettings.production.json</code> or for whichever environment it is. But, for building a docker container, I am against it those kind naming conventions. It implies something that might not be true. The settings file is going into the container. And the container does not know if it is running <code>production</code> or <code>staging</code> or whatever. So, I prefer to stick to a simple name that implies where the file is going; <code>appsettings.docker.json</code></p>
 </blockquote>
-
 <h2 id="final-steps">Final steps</h2>
-
 <p>Finally, we need to make sure this is all executed in the pipeline when deploying to production. Tricky point here being the Todo-Api image name in the compose file. It points to a specific build number. So, when deploying, we need to:</p>
-
 <ol>
 <li>Automatically edit the compose file and switch in the new image label</li>
 <li>Run docker compose</li>
 <li>Create a git commit for our edited compose file and push it</li>
 </ol>
-
 <p>That sounds complicated, but it&rsquo;s actually not that bad:</p>
-
-<pre><code class="language-groovy">stage('Run in production'){
-    agent { label 'hasDocker' }
-    steps{
-        dir('Environments/Production'){
-            sshagent(['corstijank-ssh']){
-                sh &quot;&quot;&quot; sed -ie 's#corstijank/blog-dotnet-jenkins:.*#${IMAGETAG_VERSIONED}#g' docker-compose.yml
-                    docker-compose up -d
-                    git config user.email &quot;jenkins@staticsmustdie.net&quot;
-                    git config user.name &quot;Jenkins&quot;
-                    git checkout master
-                    git commit -am &quot;updated to ${IMAGETAG_VERSIONED}&quot;
-                    git push &quot;&quot;&quot;
-            }
-        }
-    }
-}
-</code></pre>
-
-<p>Probably the scariest part there is the <code>sed</code> command. Yes, that is the UNIX Stream EDitor. If you&rsquo;re on Mac OS or Linux, &lsquo;man&rsquo; it. It&rsquo;s awesome. I&rsquo;m sure there&rsquo;s something equivalent on Windows that allows you to do that in a one-liner. Or rather, I hope. If not, there&rsquo;s always BASH on Windows 10.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Run in production&#39;</span><span style="color:#f92672">){</span>
+    agent <span style="color:#f92672">{</span> label <span style="color:#e6db74">&#39;hasDocker&#39;</span> <span style="color:#f92672">}</span>
+    steps<span style="color:#f92672">{</span>
+        dir<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Environments/Production&#39;</span><span style="color:#f92672">){</span>
+            sshagent<span style="color:#f92672">([</span><span style="color:#e6db74">&#39;corstijank-ssh&#39;</span><span style="color:#f92672">]){</span>
+                sh <span style="color:#e6db74">&#34;&#34;&#34; sed -ie &#39;s#corstijank/blog-dotnet-jenkins:.*#${IMAGETAG_VERSIONED}#g&#39; docker-compose.yml
+</span><span style="color:#e6db74">                    docker-compose up -d
+</span><span style="color:#e6db74">                    git config user.email &#34;jenkins@staticsmustdie.net&#34;
+</span><span style="color:#e6db74">                    git config user.name &#34;Jenkins&#34;
+</span><span style="color:#e6db74">                    git checkout master
+</span><span style="color:#e6db74">                    git commit -am &#34;updated to ${IMAGETAG_VERSIONED}&#34;
+</span><span style="color:#e6db74">                    git push &#34;&#34;&#34;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Probably the scariest part there is the <code>sed</code> command. Yes, that is the UNIX Stream EDitor. If you&rsquo;re on Mac OS or Linux, &lsquo;man&rsquo; it. It&rsquo;s awesome. I&rsquo;m sure there&rsquo;s something equivalent on Windows that allows you to do that in a one-liner. Or rather, I hope. If not, there&rsquo;s always BASH on Windows 10.</p>
 <p>So a quick explanation of the <code>sed</code> line:</p>
-
-<pre><code class="language-bash">sed -ie 's#corstijank/blog-dotnet-jenkins:.*#${IMAGETAG_VERSIONED}#g' docker-compose.yml
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed -ie <span style="color:#e6db74">&#39;s#corstijank/blog-dotnet-jenkins:.*#${IMAGETAG_VERSIONED}#g&#39;</span> docker-compose.yml
          ^  ^                                ^                     ^           ^
         sub a string matching this regex     with this string   all matches    in this file
-</code></pre>
-
-<p>The rest are basic git commands. I know, I could probably configure user email and name outside or globally. On the other hand, do I really want to depend on that? I don&rsquo;t think this is too bad. Same goes for the <code>checkout master</code> command. It just ensures we&rsquo;re working on the master branch (or whichever branch you want to commit on). You could <em>assume</em> you are in some state that might already be there, but why not <strong>make sure</strong>?</p>
-
+</code></pre></div><p>The rest are basic git commands. I know, I could probably configure user email and name outside or globally. On the other hand, do I really want to depend on that? I don&rsquo;t think this is too bad. Same goes for the <code>checkout master</code> command. It just ensures we&rsquo;re working on the master branch (or whichever branch you want to commit on). You could <em>assume</em> you are in some state that might already be there, but why not <strong>make sure</strong>?</p>
 <p>Other side note: If you keep the compose file in the same git repository as the code, doing this might trigger another build if you&rsquo;re using a git hook. Some simple alternative solutions to circumvent this:</p>
-
 <ol>
 <li>Use a smarter git hook that excludes pushes from Jenkins</li>
 <li>Push to  a separate branch that doesn&rsquo;t start a build</li>
 <li>Push all infrastructure configuration to a separate git repository, separating infrastructure and business code.</li>
 </ol>
-
 <p>I&rsquo;m not going to state one is better then the other. Sorry, it&rsquo;s just a choice. And one that could warrant a whole separate blog post.</p>
-
 <p>You could also do without the commit, but then you lose some pretty nice auditing.</p>
-
 <p>Finally, note I am using git over SSH. It&rsquo;s just a bit easier to configure in Jenkins using the SSHAgent as in the example. There are workarounds when using http(s), but they basically all include substituting username and password in the url, which is just&hellip;well&hellip;I don&rsquo;t like it.</p>
-
-<h2 id="all-s-well-that-ends-well">All&rsquo;s well, that ends well</h2>
-
+<h2 id="alls-well-that-ends-well">All&rsquo;s well, that ends well</h2>
 <p>Well it&rsquo;s been long run, but here we go:</p>
 
-<p><asciinema-player src="/asciinema/sqlserver.json" cols="90" rows="20" preload="true" poster="npt:0:07"></asciinema-player></p>
+<asciinema-player src="/asciinema/sqlserver.json" cols="90" rows="20" preload="true" poster="npt:0:07"></asciinema-player>
 
 <p>And there you have it. A working delivery pipeline, including Microsoft&rsquo;s own SQL server. Complete with database initialization, continuous delivery, you can even see in git log which version got deployed to production when.</p>
-
 <p>Also, you have managed to read through this ridiculously long blog post. It was too long in the making. Mostly due to circumstances such as vacation and the common cold, but also due to the fact that it&rsquo;s not a small change to achieve. I could have split the topic up into two posts, but then I&rsquo;d have to leave one blog post with a pipeline that either wasn&rsquo;t working, or wasn&rsquo;t representative for the way the code worked. Either was a no-no for me.</p>
-
 <p>But, I&rsquo;m glad you stuck with me to the end ;-)</p>
-
 <p>Until the next time!</p>
 
-    </section>
+      
+      <div class="related">
 
+<h3>Similar articles:</h3>
+<ul>
+	
+	<li><a href="/post/dotnetcore-adventures-ii/">Crossing Styx - My journey into the (under)world of .NET - Part II</a></li>
+	
+	<li><a href="/post/dotnetcore-adventures-i/">Crossing Styx - My journey into the (under)world of .NET - Part I</a></li>
+	
+</ul>
+</div>
+      
+    </div>
     
-    <section class="post-tags" style="padding-bottom:60px;">
-        <div class="post-meta tags">
-            <i class="fa fa-fw fa-tag"></i>
-            
-                
-                <a href="https://corstijank.github.io/tags/dotnet">dotnet </a>
-            
-                
-                <a href="https://corstijank.github.io/tags/jenkins">jenkins </a>
-            
-                
-                <a href="https://corstijank.github.io/tags/sqlserver">sqlserver </a>
-            
-                
-                <a href="https://corstijank.github.io/tags/programming">programming </a>
-            
-                
-                <a href="https://corstijank.github.io/tags/docker">docker </a>
-            
-                
-                <a href="https://corstijank.github.io/tags/testing">testing </a>
-            
-        </div>
-    </section>
-
-    <section class="share">
-    <p class="backtotop"><a data-scroll href="#site-head"><i class="fa fa-lg fa-fw fa-angle-double-up"></i></a><a data-scroll class="backtotoptext" href="#site-head"> Back to top</a></p>
-    <p class="info prompt">Share</p>
-    <a href="http://twitter.com/share?text=Crossing%20Styx%20-%20My%20journey%20into%20the%20%28under%29world%20of%20.NET%20-%20Part%20III&url=https%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-adventures-iii%2f" title="Share on Twitter"
-        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-        <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
-    </a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-adventures-iii%2f" title="Share on Facebook"
-        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-        <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
-    </a>
-    <a href="https://plus.google.com/share?url=https%3a%2f%2fcorstijank.github.io%2fpost%2fdotnetcore-adventures-iii%2f" title="Share on Google+"
-       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-        <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
-    </a>
+  </div>
 </section>
-    
-    <footer class="post-footer">
-        <section class="author">
-    <div class="authorimage" style="background: url(https://corstijank.github.io/img/me.jpg)"></div>
-    <h4>Corstijan Kortsmit</h4>
-    <p class="bio">Engineer, Hater of statics, Connaisseur of french fries</p>
-    <p class="meta">
-      <i class="fa fa-fw fa-map-marker"></i> Netherlands
-    </p>
+
+    <script src="/js/copycode.js"></script>
+
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+  
+    <div id="show_comments"><a id="load_comments" class="button is-link">Load comments</a></div>
+  
+    <script type="text/javascript">
+      var disqus_shortname = 'corstijank-github-io';
+      function disqus() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+  
+      
+      var hash = window.location.hash.substr(1);
+      if ((hash.length > 8) && (hash.substring(0, 8) === "comment-")) {
+        disqus();
+        document.getElementById("show_comments").style.display = "none";
+      } else {
+        document.getElementById('load_comments').onclick = function() {
+          disqus();
+          document.getElementById("show_comments").style.display = "none";
+        };
+      }
+  
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
 </section>
-    </footer>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>Corstijan Kortsmit 2020</p>
     
-    <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+      <p>Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/ribice/kiss">Kiss</a>.</p>
     
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "corstijank-github-io" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-</article>
-
-    </main>
-
-    <footer class="site-footer">
-	<div class="inner">
-		<section class="footer-social">
-      
-      <a href="//twitter.com/corstijank" target="_blank" title="Twitter"><i class="fa fa-2x fa-fw fa-twitter"></i> <span class="hidden">Twitter</span></a>&nbsp;
-      
-      
-      <a href="//www.linkedin.com/in/corstijan-kortsmit" target="_blank" title="linkedIn"><i class="fa fa-2x fa-fw fa-linkedin"></i> <span class="hidden">LinkedIn</span></a>&nbsp;
-      
-      
-      
-      
-      
-      <a href="//github.com/corstijank" target="_blank" title="GitHub"><i class="fa fa-2x fa-fw fa-github"></i> <span class="hidden">GitHub</span></a>&nbsp;
-      
-      
-      <a href="//gitlab.com/u/corstijank" target="_blank" title="GitLab"><i class="fa fa-2x fa-fw fa-gitlab"></i> <span class="hidden">GitLab</span></a>&nbsp;
-      
-      
-      
-  </section>
-
-		<section class="copyright">&copy; 2019 <a href="https://corstijank.github.io">Corstijan Kortsmit</a>. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</section>
-	</div>
-</footer>
-
-    
-<script src="https://corstijank.github.io/js/asciinema-player.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://corstijank.github.io/js/index.js"></script>
-<script src="https://corstijank.github.io/js/smooth-scroll.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
-
-
-<script>
-    smoothScroll.init({
-        speed: 800,
-        easing: 'easeInOutCubic',
-        updateURL: false,
-        offset: 125,
-    });
-</script>
-<script>hljs.initHighlightingOnLoad();</script>
-
+  </div>
+</section>
 
 
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 	ga('create', 'UA-90300195-1', 'auto');
 	
 	ga('send', 'pageview');
 }
 </script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
+
+
+
+<script src="https://staticsmustdie.net/js/asciinema-player.js"></script>
 </body>
 </html>
+
