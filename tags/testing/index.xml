@@ -6,27 +6,23 @@
     <description>Recent content in testing on Statics Must Die! - Writings by Corstijan Kortsmit</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>Corstijan Kortsmit 2020</copyright>
-    <lastBuildDate>Sun, 05 Mar 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://staticsmustdie.net/tags/testing/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Corstijan Kortsmit 2021</copyright>
+    <lastBuildDate>Sun, 05 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://staticsmustdie.net/tags/testing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Crossing Styx - My journey into the (under)world of .NET - Part III</title>
-      <link>https://staticsmustdie.net/post/dotnetcore-adventures-iii/</link>
+      <link>https://staticsmustdie.net/post/2017-03-04-dotnetcore-adventures-iii/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://staticsmustdie.net/post/dotnetcore-adventures-iii/</guid>
+      <guid>https://staticsmustdie.net/post/2017-03-04-dotnetcore-adventures-iii/</guid>
       <description>In the third part of the series, our adventure is slowly but surely heading to its climax. All &amp;lsquo;characters&amp;rsquo; have been introduced. There&amp;rsquo;s DotNet Core, the new, misunderstood (or at least by me?) kid with a bunch of talent. Docker, the awesome supporting character that actually deserves his own movie. Surely there&amp;rsquo;ll be a spin-off! There&amp;rsquo;s the antagonist, Jenkins, who might end up working along with our main character more then either had hoped for.</description>
     </item>
     
     <item>
       <title>Crossing Styx - My journey into the (under)world of .NET - Part II</title>
-      <link>https://staticsmustdie.net/post/dotnetcore-adventures-ii/</link>
+      <link>https://staticsmustdie.net/post/2017-02-05-dotnetcore-adventures-ii/</link>
       <pubDate>Sun, 05 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://staticsmustdie.net/post/dotnetcore-adventures-ii/</guid>
+      <guid>https://staticsmustdie.net/post/2017-02-05-dotnetcore-adventures-ii/</guid>
       <description>In my previous post on this topic, I somehow got the jitters to get started with .NET. Or more specifically, .NET core. Being stubborn as I am, I have created a simple delivery pipeline in Jenkins, for building and deploying a .NET core docker container.
 Now, this might sound like hell freezing over. Me, programming .NET? Blasphemy! Except one little thing. For my previous post, I didn&amp;rsquo;t actually write one line of C# code.</description>
     </item>

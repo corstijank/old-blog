@@ -1,26 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Statics Must Die! - Writings by Corstijan Kortsmit</title>
     <link>https://staticsmustdie.net/</link>
     <description>Recent content on Statics Must Die! - Writings by Corstijan Kortsmit</description>
-    <generator>Hugo - gohugo.io</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <contact></contact>
-    <copyright>Corstijan Kortsmit 2020</copyright>
-    
-        <atom:link href="https://staticsmustdie.net/index.xml" rel="self" type="application/rss+xml" />
-    
+    <copyright>Corstijan Kortsmit 2021</copyright>
+    <lastBuildDate>Sun, 05 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://staticsmustdie.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Crossing Styx - My journey into the (under)world of .NET - Part III</title>
+      <link>https://staticsmustdie.net/post/2017-03-04-dotnetcore-adventures-iii/</link>
+      <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://staticsmustdie.net/post/2017-03-04-dotnetcore-adventures-iii/</guid>
+      <description>In the third part of the series, our adventure is slowly but surely heading to its climax. All &amp;lsquo;characters&amp;rsquo; have been introduced. There&amp;rsquo;s DotNet Core, the new, misunderstood (or at least by me?) kid with a bunch of talent. Docker, the awesome supporting character that actually deserves his own movie. Surely there&amp;rsquo;ll be a spin-off! There&amp;rsquo;s the antagonist, Jenkins, who might end up working along with our main character more then either had hoped for.</description>
+    </item>
     
     <item>
-      <title>Posts</title>
-      <link>https://staticsmustdie.net/post/</link>
-      <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
-      <author>Corstijan Kortsmit</author>
-      <guid>https://staticsmustdie.net/post/</guid>
-      <description></description>
+      <title>Crossing Styx - My journey into the (under)world of .NET - Part II</title>
+      <link>https://staticsmustdie.net/post/2017-02-05-dotnetcore-adventures-ii/</link>
+      <pubDate>Sun, 05 Feb 2017 00:00:00 +0000</pubDate>
       
-      <content></content>
+      <guid>https://staticsmustdie.net/post/2017-02-05-dotnetcore-adventures-ii/</guid>
+      <description>In my previous post on this topic, I somehow got the jitters to get started with .NET. Or more specifically, .NET core. Being stubborn as I am, I have created a simple delivery pipeline in Jenkins, for building and deploying a .NET core docker container.
+Now, this might sound like hell freezing over. Me, programming .NET? Blasphemy! Except one little thing. For my previous post, I didn&amp;rsquo;t actually write one line of C# code.</description>
+    </item>
+    
+    <item>
+      <title>Crossing Styx - My journey into the (under)world of .NET - Part I</title>
+      <link>https://staticsmustdie.net/post/2017-01-16-dotnetcore-adventures-i/</link>
+      <pubDate>Mon, 16 Jan 2017 00:00:00 +0000</pubDate>
       
+      <guid>https://staticsmustdie.net/post/2017-01-16-dotnetcore-adventures-i/</guid>
+      <description>At the closing of last year, I presented an in-house talk, comparing Continuous Delivery solutions for both Java and .NET. Of course, this was not a simple side-by-side comparison; a microsoft oriented colleague and myself created a small challenge for ourselves. My colleague was going to build Java software in Team Foundation Server. And me? I was stuck creating a delivery pipeline for Microsoft .NET in Jenkins.
+Now, I had been thinking about looking into .</description>
+    </item>
+    
+    <item>
+      <title>System.out.println(&#34;Hello World&#34;)</title>
+      <link>https://staticsmustdie.net/post/2016-12-27-hello-world/</link>
+      <pubDate>Tue, 27 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://staticsmustdie.net/post/2016-12-27-hello-world/</guid>
+      <description>Greetings, dear reader, and welcome to my little corner of the web. It&amp;rsquo;s nearing the end of 2016, and I have decided I want to start my resolution of finally putting up some blogs before 2017 enters with a bang.
+Or, at the very least, have a welcoming blog post up and running. Minimal Viable Product and all. So, with that ,I bid you welcome to Statics Must Die, the ramblings of me, Corstijan Kortsmit.</description>
     </item>
     
   </channel>
