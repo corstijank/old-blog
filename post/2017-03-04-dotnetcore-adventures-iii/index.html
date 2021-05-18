@@ -129,8 +129,7 @@ Let&#39;s just hope this story doesn&#39;t end up on rottentomatoes...'>
       <p>In the third part of the series, our adventure is slowly but surely heading to its climax. All &lsquo;characters&rsquo; have been introduced. There&rsquo;s <strong>DotNet Core</strong>, the new, misunderstood (or at least by me?) kid with a bunch of talent. <strong>Docker</strong>, the awesome supporting character that actually deserves his own movie. Surely there&rsquo;ll be a spin-off! There&rsquo;s the antagonist, <strong>Jenkins</strong>, who might end up working along with our main character more then either had hoped for. Then, there&rsquo;s the mid movie surprise character, <strong>Microsoft SQL server</strong>!</p>
 <p>And then there&rsquo;s me, the engineer coming from a Java EE background trying to piece it all together.</p>
 <p>Let&rsquo;s just hope this story doesn&rsquo;t end up on rottentomatoes&hellip;</p>
-<figure>
-    <img src="/img/dotnet-jenkins-tests-succesful.png"/> <figcaption>
+<figure><img src="/img/dotnet-jenkins-tests-succesful.png"/><figcaption>
             <h4>You can tell it&#39;s not actually doing much by the green color.</h4>
         </figcaption>
 </figure>
@@ -148,89 +147,97 @@ Let&#39;s just hope this story doesn&#39;t end up on rottentomatoes...'>
 <p>Anyway, as you can guess by now, there&rsquo;s a bunch of tutorials on EntityFrameworkCore. But, none of those actually &lsquo;integrate&rsquo; into the Todo tutorial.</p>
 <p>But, no worries; I can still program some myself, believe it or not.</p>
 <p>So, first off, I can just use my plain old TodoItem class as an entity;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TodoItem</span>
+<pre><code class="language-csharp">public class TodoItem
 {
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> TodoItemID { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> Name { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> IsComplete { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
+    public string TodoItemID { get; set; }
+    public string Name { get; set; }
+    public bool IsComplete { get; set; }
 }
-</code></pre></div><p>The idea, as far as I can tell, is that there is a user-created &lsquo;context&rsquo; class, that extends <code>DbContext</code>. So, I made a TodoContext, with the idea it&rsquo;ll manage all entities for my todo api.  In the TodoContext class, I register the entity TodoItem and state which table it is to be saved in. I give the TodoContext class a public property <code>DbSet&lt;TodoItem&gt; TodoItems</code> and all should be good to go for my business methods;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TodoContext</span> : DbContext
+</code></pre>
+<p>The idea, as far as I can tell, is that there is a user-created &lsquo;context&rsquo; class, that extends <code>DbContext</code>. So, I made a TodoContext, with the idea it&rsquo;ll manage all entities for my todo api.  In the TodoContext class, I register the entity TodoItem and state which table it is to be saved in. I give the TodoContext class a public property <code>DbSet&lt;TodoItem&gt; TodoItems</code> and all should be good to go for my business methods;</p>
+<pre><code class="language-csharp">public class TodoContext : DbContext
 {
-    <span style="color:#66d9ef">public</span> TodoContext(DbContextOptions&lt;TodoContext&gt; options) : <span style="color:#66d9ef">base</span>(options)
+    public TodoContext(DbContextOptions&lt;TodoContext&gt; options) : base(options)
     {
     }
-    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity&lt;TodoItem&gt;().ToTable(<span style="color:#e6db74">&#34;TodoItem&#34;</span>);
+        modelBuilder.Entity&lt;TodoItem&gt;().ToTable(&quot;TodoItem&quot;);
     }
-    <span style="color:#66d9ef">public</span> DbSet&lt;TodoItem&gt; TodoItems { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
+    public DbSet&lt;TodoItem&gt; TodoItems { get; set; }
 }
-</code></pre></div><p>And yes,  behold, my &lsquo;business&rsquo; logic can now use the TodoContext to do some persistence stuff:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">_dbContext.Update(item);
+</code></pre>
+<p>And yes,  behold, my &lsquo;business&rsquo; logic can now use the TodoContext to do some persistence stuff:</p>
+<pre><code class="language-csharp">_dbContext.Update(item);
 _dbContext.SaveChanges();
-</code></pre></div><p>Yes, there needs to be a call to <code>.SaveChanges()</code> - Which, for me as a java programmer coming from a Java EE world, is a bit silly. As in, I honestly forgot to do it in my first go. Why isn&rsquo;t there a container to manage this transactional stuff? But then, when I&rsquo;m completely honest with myself, in that question lies the answer already. There is no container, it&rsquo;s not Java EE, and doing something like this is not all that weird even in other languages.</p>
+</code></pre>
+<p>Yes, there needs to be a call to <code>.SaveChanges()</code> - Which, for me as a java programmer coming from a Java EE world, is a bit silly. As in, I honestly forgot to do it in my first go. Why isn&rsquo;t there a container to manage this transactional stuff? But then, when I&rsquo;m completely honest with myself, in that question lies the answer already. There is no container, it&rsquo;s not Java EE, and doing something like this is not all that weird even in other languages.</p>
 <p>I know, I know,  but it&rsquo;s so much more easy to hate then it is to tolerate, right?</p>
 <h2 id="holding-the-line">Holding the line</h2>
 <p>Of course, doing all this work still did not connect it to any SQL server instance, make a database or tables, or actually even run at all. There&rsquo;s still initialization and setup to do!</p>
 <p>So, in our StartUp class, where all injectable services are configured, we add a simple line:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">services.AddDbContext&lt;TodoContext&gt;(options =&gt;
-   options.UseSqlServer(Configuration.GetConnectionString(<span style="color:#e6db74">&#34;DefaultConnection&#34;</span>)));
-</code></pre></div><p>And as you can imagine, we add a connectionstring &lsquo;DefaultConnection to the file called <code>AppSettings.json</code>;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#e6db74">&#34;DefaultConnection&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;Data Source=localhost,1433;
-</span><span style="color:#e6db74">  Initial Catalog=TodoDev;Integrated Security=False;
-</span><span style="color:#e6db74">  User ID=sa;Password=xihdG!8uNCavA!Rw&#34;</span>
-</code></pre></div><p>I&rsquo;m sure it&rsquo;s a terrible connection string. But it works. Yes, you know the password to my sql server instance&hellip;. <em>Or do you</em>?</p>
+<pre><code class="language-csharp">services.AddDbContext&lt;TodoContext&gt;(options =&gt;
+   options.UseSqlServer(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+</code></pre>
+<p>And as you can imagine, we add a connectionstring &lsquo;DefaultConnection to the file called <code>AppSettings.json</code>;</p>
+<pre><code class="language-json">&quot;DefaultConnection&quot;: &quot;Data Source=localhost,1433;
+  Initial Catalog=TodoDev;Integrated Security=False;
+  User ID=sa;Password=xihdG!8uNCavA!Rw&quot;
+</code></pre>
+<p>I&rsquo;m sure it&rsquo;s a terrible connection string. But it works. Yes, you know the password to my sql server instance&hellip;. <em>Or do you</em>?</p>
 <p>That all seems to work fine, assuming the database exists. And here we get into a pickle. Because, I do not want to depend on that. I want EntityFrameworkCore to create it for me. Not just the tables, but the whole database. Luckily, the tutorials help me out there, and tell me how to set up an initializer class, with even some code to populate some data into it. Nice.</p>
 <p>Just create a <code>DbInitializer</code> class, and make sure to call the method in the startup class&rsquo; <code>configure</code> method. Let&rsquo;s copy and past&hellip;..wait a minute&hellip;is that a <code>static</code> method in that <a href="https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro#add-code-to-initialize-the-database-with-test-data">initializer example</a>?</p>
 <p><img src="/img/stayalert.png" alt="StayAlert"></p>
 <p>Now, there are lines to be held. The url you are currently browsing is <code>staticsmustdie.net</code> - I cannot go and claim we need a static method for something as silly as database initialization. It&rsquo;s not necessary, it&rsquo;s lazy, and it must be stopped. So, as that <em>Rage Against the Machine</em> song goes&hellip;.yeah&hellip; I won&rsquo;t do what you tell me.</p>
 <p>So what do I do? Simple enough, drop the static, inject a new instance. Create testable code. Boom.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DbInitializer</span>
+<pre><code class="language-csharp">public class DbInitializer
 {
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Initialize(TodoContext context)
+    public void Initialize(TodoContext context)
     {
         context.Database.EnsureCreated();
     }
 }
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ConfigureServices(...)
+</code></pre>
+<pre><code class="language-csharp">public void ConfigureServices(...)
 {
-    <span style="color:#75715e">// other stuff going on as well
-</span><span style="color:#75715e"></span>    services.AddSingleton&lt;DbInitializer,DbInitializer&gt;();  
+    // other stuff going on as well
+    services.AddSingleton&lt;DbInitializer,DbInitializer&gt;();  
 }
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Configure(...)
+public void Configure(...)
 {
-    <span style="color:#75715e">// other stuff going on as well
-</span><span style="color:#75715e"></span>    dbInitializer.Initialize(dbContext);
+    // other stuff going on as well
+    dbInitializer.Initialize(dbContext);
 }
-</code></pre></div><p>This leaves me with a nice <code>DbInitializer</code> class, where I can add some dummy data if I want as well. But honestly, if that were to be all the code in a <code>DbInitializer</code> in a &lsquo;real&rsquo; project, I would probably just inline the <code>context.Database.ensureCreated()</code> call to the StartUp&rsquo;s <code>Configure</code> method.</p>
+</code></pre>
+<p>This leaves me with a nice <code>DbInitializer</code> class, where I can add some dummy data if I want as well. But honestly, if that were to be all the code in a <code>DbInitializer</code> in a &lsquo;real&rsquo; project, I would probably just inline the <code>context.Database.ensureCreated()</code> call to the StartUp&rsquo;s <code>Configure</code> method.</p>
 <p>But I wanted to make a statement. <strong>Against statics</strong>.</p>
 <h2 id="composing-like-mozart-but-less-classical">Composing. Like Mozart. But less classical</h2>
 <p>So, our service is coming along nicely. Using a local SQL Server (thanks to Docker!), this all <em>just works</em>. And I have to hand it out here to the ASP.NET core guys. That&rsquo;s pretty awesome. Back in the day, I had a harder time getting started with any JPA framework / configuration. But that might have been me as well.  Or the overwhelming amount of frameworks and choices. Oh well.</p>
 <p>Anyway, this all has no value unless it is delivered to production, right? So, how do ensure that there&rsquo;s a SQL Server instance running in production? And that the TodoApi service can connect to it? Well, let&rsquo;s keep it simple enough for now, and use docker-compose for that. Docker Compose is a tool that allows you to put container configuration (mind you, container, not image) in a <code>docker-compose.yml</code> file. You can put in multiple containers, configure them, and then use something simple as <code>docker-compose up</code> to ensure all containers are running.</p>
 <p>So, how does that look for our TodoApi?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#34;2&#34;</span>
-<span style="color:#f92672">services</span>:
-  <span style="color:#f92672">mssql</span>:
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">microsoft/mssql-server-linux</span>
-    <span style="color:#f92672">environment</span>: 
-      <span style="color:#f92672">ACCEPT_EULA</span>: <span style="color:#e6db74">&#34;Y&#34;</span>
-      <span style="color:#f92672">SA_PASSWORD</span>: <span style="color:#e6db74">&#34;xihdG!8uNCavA!Rw&#34;</span>
-    <span style="color:#f92672">ports</span>: 
-      - <span style="color:#ae81ff">1433</span>:<span style="color:#ae81ff">1433</span>
-    <span style="color:#f92672">networks</span>:
-      - <span style="color:#ae81ff">production</span>
-  <span style="color:#f92672">todo-api</span>:
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">corstijank/blog-dotnet-jenkins:2.0-59</span>
-    <span style="color:#f92672">ports</span>: 
-      - <span style="color:#ae81ff">5000</span>:<span style="color:#ae81ff">5000</span>
-    <span style="color:#f92672">networks</span>: 
-      - <span style="color:#ae81ff">production</span>
-    <span style="color:#f92672">depends_on</span>: 
-      - <span style="color:#ae81ff">mssql</span>
-<span style="color:#f92672">networks</span>:
-  <span style="color:#f92672">production</span>:
-</code></pre></div><p>I like to think this is all pretty self-explanatory, but still, I&rsquo;m going to give it a quick round-up:</p>
+<pre><code class="language-yml">version: &quot;2&quot;
+services:
+  mssql:
+    image: microsoft/mssql-server-linux
+    environment: 
+      ACCEPT_EULA: &quot;Y&quot;
+      SA_PASSWORD: &quot;xihdG!8uNCavA!Rw&quot;
+    ports: 
+      - 1433:1433
+    networks:
+      - production
+  todo-api:
+    image: corstijank/blog-dotnet-jenkins:2.0-59
+    ports: 
+      - 5000:5000
+    networks: 
+      - production
+    depends_on: 
+      - mssql
+networks:
+  production:
+</code></pre>
+<p>I like to think this is all pretty self-explanatory, but still, I&rsquo;m going to give it a quick round-up:</p>
 <ul>
 <li><code>version: &quot;2&quot;</code> - is just what version of the docker-compose syntax we&rsquo;re using. I believe &lsquo;3&rsquo; or &lsquo;3.1&rsquo; is out, but haven&rsquo;t gotten around to looking into that yet.</li>
 <li><code>services</code> - Here are good bits; here declared are which services that need to be running according to this compose file. This translates into one, or more running containers
@@ -254,28 +261,30 @@ _dbContext.SaveChanges();
 <li>Create a git commit for our edited compose file and push it</li>
 </ol>
 <p>That sounds complicated, but it&rsquo;s actually not that bad:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Run in production&#39;</span><span style="color:#f92672">){</span>
-    agent <span style="color:#f92672">{</span> label <span style="color:#e6db74">&#39;hasDocker&#39;</span> <span style="color:#f92672">}</span>
-    steps<span style="color:#f92672">{</span>
-        dir<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Environments/Production&#39;</span><span style="color:#f92672">){</span>
-            sshagent<span style="color:#f92672">([</span><span style="color:#e6db74">&#39;corstijank-ssh&#39;</span><span style="color:#f92672">]){</span>
-                sh <span style="color:#e6db74">&#34;&#34;&#34; sed -ie &#39;s#corstijank/blog-dotnet-jenkins:.*#${IMAGETAG_VERSIONED}#g&#39; docker-compose.yml
-</span><span style="color:#e6db74">                    docker-compose up -d
-</span><span style="color:#e6db74">                    git config user.email &#34;jenkins@staticsmustdie.net&#34;
-</span><span style="color:#e6db74">                    git config user.name &#34;Jenkins&#34;
-</span><span style="color:#e6db74">                    git checkout master
-</span><span style="color:#e6db74">                    git commit -am &#34;updated to ${IMAGETAG_VERSIONED}&#34;
-</span><span style="color:#e6db74">                    git push &#34;&#34;&#34;</span>
-            <span style="color:#f92672">}</span>
-        <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Probably the scariest part there is the <code>sed</code> command. Yes, that is the UNIX Stream EDitor. If you&rsquo;re on Mac OS or Linux, &lsquo;man&rsquo; it. It&rsquo;s awesome. I&rsquo;m sure there&rsquo;s something equivalent on Windows that allows you to do that in a one-liner. Or rather, I hope. If not, there&rsquo;s always BASH on Windows 10.</p>
+<pre><code class="language-groovy">stage('Run in production'){
+    agent { label 'hasDocker' }
+    steps{
+        dir('Environments/Production'){
+            sshagent(['corstijank-ssh']){
+                sh &quot;&quot;&quot; sed -ie 's#corstijank/blog-dotnet-jenkins:.*#${IMAGETAG_VERSIONED}#g' docker-compose.yml
+                    docker-compose up -d
+                    git config user.email &quot;jenkins@staticsmustdie.net&quot;
+                    git config user.name &quot;Jenkins&quot;
+                    git checkout master
+                    git commit -am &quot;updated to ${IMAGETAG_VERSIONED}&quot;
+                    git push &quot;&quot;&quot;
+            }
+        }
+    }
+}
+</code></pre>
+<p>Probably the scariest part there is the <code>sed</code> command. Yes, that is the UNIX Stream EDitor. If you&rsquo;re on Mac OS or Linux, &lsquo;man&rsquo; it. It&rsquo;s awesome. I&rsquo;m sure there&rsquo;s something equivalent on Windows that allows you to do that in a one-liner. Or rather, I hope. If not, there&rsquo;s always BASH on Windows 10.</p>
 <p>So a quick explanation of the <code>sed</code> line:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed -ie <span style="color:#e6db74">&#39;s#corstijank/blog-dotnet-jenkins:.*#${IMAGETAG_VERSIONED}#g&#39;</span> docker-compose.yml
+<pre><code class="language-bash">sed -ie 's#corstijank/blog-dotnet-jenkins:.*#${IMAGETAG_VERSIONED}#g' docker-compose.yml
          ^  ^                                ^                     ^           ^
         sub a string matching this regex     with this string   all matches    in this file
-</code></pre></div><p>The rest are basic git commands. I know, I could probably configure user email and name outside or globally. On the other hand, do I really want to depend on that? I don&rsquo;t think this is too bad. Same goes for the <code>checkout master</code> command. It just ensures we&rsquo;re working on the master branch (or whichever branch you want to commit on). You could <em>assume</em> you are in some state that might already be there, but why not <strong>make sure</strong>?</p>
+</code></pre>
+<p>The rest are basic git commands. I know, I could probably configure user email and name outside or globally. On the other hand, do I really want to depend on that? I don&rsquo;t think this is too bad. Same goes for the <code>checkout master</code> command. It just ensures we&rsquo;re working on the master branch (or whichever branch you want to commit on). You could <em>assume</em> you are in some state that might already be there, but why not <strong>make sure</strong>?</p>
 <p>Other side note: If you keep the compose file in the same git repository as the code, doing this might trigger another build if you&rsquo;re using a git hook. Some simple alternative solutions to circumvent this:</p>
 <ol>
 <li>Use a smarter git hook that excludes pushes from Jenkins</li>

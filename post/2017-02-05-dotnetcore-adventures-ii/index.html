@@ -125,8 +125,7 @@
       <p>In my previous <a href="/post/dotnetcore-adventures-i">post on this topic</a>, I somehow got the jitters to get started with .NET. Or more specifically, .NET core. Being stubborn as I am, I have created a simple delivery pipeline in Jenkins, for building and deploying a .NET core docker container.</p>
 <p>Now, this might sound like hell freezing over. Me, programming .NET? Blasphemy! Except one little thing. For my previous post, I didn&rsquo;t actually write one line of C# code. Now, I don&rsquo;t want to give off the impression Im uncomfortable in <strong>any</strong> programming language, and so  I made sure to end the last blog post with some unfulfilled promises of creating a more serious project from this &lsquo;Hello world&rsquo; example.</p>
 <p>Time to pay up.</p>
-<figure>
-    <img src="/img/dotnet-jenkins-simple-pipeline.png"/> <figcaption>
+<figure><img src="/img/dotnet-jenkins-simple-pipeline.png"/><figcaption>
             <h4>Previously..... on StaticsMustDie</h4>
         </figcaption>
 </figure>
@@ -141,18 +140,19 @@
 <p>So, instead of writing about how to implement REST on C#/.NET core, I&rsquo;ll be starting with some simple tutorial code here. The ASP.NET core documentation site has some excellent <a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/" title="Awesome tutorials for learning ASP.NET core">tutorials</a>, and I really recommend you check them out. The code I&rsquo;m starting with is the code explained the <a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/" title="Awesome tutorials for learning ASP.NET core">ASP.NET core tutorial</a> on creating a simple rest service.</p>
 <h2 id="lessons-learned">Lessons learned</h2>
 <p>So, I had refactor some stuff, &lsquo;git mv&rsquo; some directory around, and basically wound up with something which was starting to look like a real project folder;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/global.json
+<pre><code class="language-bash">/global.json
 /TodoApi/Jenkinsfile
 /TodoApi/Dockerfile
 /TodoApi/project.json
 /TodoApi/**Code**
-</code></pre></div><p>Our Dockerfile is clean and simple; and I&rsquo;m not going to bother going into detail on it here. All I had to do was edit the Jenkinsfile (read the previous post to get up to speed on that) to make sure any running version of the container would be stopped before the deploy. This was not necesary before as the previous iteration of our container was, well..just printing <code>hello world</code></p>
+</code></pre>
+<p>Our Dockerfile is clean and simple; and I&rsquo;m not going to bother going into detail on it here. All I had to do was edit the Jenkinsfile (read the previous post to get up to speed on that) to make sure any running version of the container would be stopped before the deploy. This was not necesary before as the previous iteration of our container was, well..just printing <code>hello world</code></p>
 <p>So, all should be well. Fire up the docker container. Query the service. Bask in .NET glory.</p>
 <p>Nope; ran into a few things that are well worth noting on here.</p>
 <h3 id="inversion-of-control-just-on-a-different-level">Inversion of Control. Just on a different level</h3>
 <p>As I said, it was all relatively simple to start.  The container ran, but, when I tried to do a simple GET. It failed. Why? I got a simple <code>Empty Response</code> as body text on my response. Why? Well there we have to look a bit deeper into the C# code, what it does, and how that holds up in our delivery choices.</p>
 <p>So, what does the code that start an http service look like?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">var</span> host = <span style="color:#66d9ef">new</span> WebHostBuilder()
+<pre><code class="language-C#">var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
@@ -160,7 +160,8 @@
                 .Build();
                 
 host.run();
-</code></pre></div><p>My first thought seeing this was &lsquo;Oh look, a simple builder that starts some kind of service. Nice. Just like we do it in Java in every (micro) service framework that is not JEE. They call it &lsquo;Kestrel&rsquo;? Well, that is a surprisingly non-utilitarian name for a Microsoft coined term. Shouldn&rsquo;t it be called &ldquo;InProcessIISAlternative&rdquo;? Possibly with IIS spelled out?</p>
+</code></pre>
+<p>My first thought seeing this was &lsquo;Oh look, a simple builder that starts some kind of service. Nice. Just like we do it in Java in every (micro) service framework that is not JEE. They call it &lsquo;Kestrel&rsquo;? Well, that is a surprisingly non-utilitarian name for a Microsoft coined term. Shouldn&rsquo;t it be called &ldquo;InProcessIISAlternative&rdquo;? Possibly with IIS spelled out?</p>
 <p><code>&lt;/sarcasm&gt;</code></p>
 <p>So&hellip;going on&hellip;Use current directory as content root. Sure, integrate with IIS if you find it (tip: You won&rsquo;t). Use an stance of <code>Startup</code> as the startup object. All understandable. So why isn&rsquo;t the bloody thing working?!</p>
 <p>Well, the problem is not in the code that&rsquo;s there. The problem is in the code that <strong>is not</strong> there. By default, a service started like this <strong>only</strong> listens to <code>localhost:5000</code>. That seems logical enough, right? It should work, right? Well yes, if you&rsquo;re accessing form localhost.</p>
@@ -170,12 +171,13 @@ host.run();
 <p>Application configuration files for network settings make no sense when you&rsquo;re developing in containers. Whatever you configure in the configuration file, you can, and will override it when you deploy the container. For example, you could specify it with <code>-p</code> or have Docker decide for you, or just ignore the port alltogether. Point is, the port that is going to be used to access your servie is not decided by your service. So don&rsquo;t add another configuration file. Just hardcode it. You won&rsquo;t be running any other services inside your container anyway, so port collisions are not an issue.</p>
 </blockquote>
 <p>And hardcode I did;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">var</span> host = <span style="color:#66d9ef">new</span> WebHostBuilder()
-                .UseUrls(<span style="color:#e6db74">&#34;http://0.0.0.0:5000/&#34;</span>)
+<pre><code class="language-C#">var host = new WebHostBuilder()
+                .UseUrls(&quot;http://0.0.0.0:5000/&quot;)
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup&lt;Startup&gt;()
                 .Build();
-</code></pre></div><p>Note I also deleted the IIS integration. I&rsquo;ll have none of your shenanigans, IIS.</p>
+</code></pre>
+<p>Note I also deleted the IIS integration. I&rsquo;ll have none of your shenanigans, IIS.</p>
 <p>After this, we end up with a runnable container;
 
 <asciinema-player src="/asciinema/dotnet-jenkins-secondrun.json" cols="90" rows="20" preload="true" poster="npt:0:07"></asciinema-player>
@@ -185,38 +187,37 @@ host.run();
 <p>From here, it&rsquo;s time implement the unit test. Again, not going to go into that much here. Suffice to say I managed to create something. If you&rsquo;re interested on the unit test capabilities in (ASP).NET Core. There are some <a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/" title="Awesome tutorials for learning ASP.NET core">really excellent tutorials here</a> - what are you even doing still reading this?</p>
 <p>Oh right. The Jenkins pipeline. So, as you might know (if you read the tutorials!) the command to run tests is a simple <code>dotnet test</code>. If you want to capture the results in a file, you should add some parameters to <code>dotnet</code> call. Still, should be easy enough to integrate into our pipeline.</p>
 <p>Also, since these are unit tests, I want to make sure they are run before any building of docker images or whatsoever. Here&rsquo;s the code in the <code>Jenkinsfile</code> for the (renewed!) building stage:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy"> stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Build binaries&#39;</span><span style="color:#f92672">){</span>
-  <span style="color:#75715e">// Run this stage in a docker container with the dotnet sdk
-</span><span style="color:#75715e"></span>  agent <span style="color:#f92672">{</span> docker <span style="color:#e6db74">&#39;microsoft/dotnet:latest&#39;</span><span style="color:#f92672">}</span>
-  steps<span style="color:#f92672">{</span>
-    git url: <span style="color:#e6db74">&#39;https://github.com/corstijank/blog-dotnet-jenkins.git&#39;</span>
-    sh <span style="color:#e6db74">&#39;cd TodoApi &amp;&amp; dotnet restore&#39;</span>
-    sh <span style="color:#e6db74">&#39;cd TodoApi.Test &amp;&amp; dotnet restore&#39;</span>
-    sh <span style="color:#e6db74">&#39;cd TodoApi.Test &amp;&amp; dotnet test -xml xunit-results.xml&#39;</span>
-    sh <span style="color:#e6db74">&#39;cd TodoApi &amp;&amp; dotnet publish project.json -c Release -r ubuntu.14.04-x64 -o ./publish&#39;</span>
-    stash includes: <span style="color:#e6db74">&#39;TodoApi/publish/**&#39;</span><span style="color:#f92672">,</span> name: <span style="color:#e6db74">&#39;prod_bins&#39;</span> 
-  <span style="color:#f92672">}</span>
-  post<span style="color:#f92672">{</span>
-    always<span style="color:#f92672">{</span>
-      step<span style="color:#f92672">([</span>$class    <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;XUnitBuilder&#39;</span><span style="color:#f92672">,</span>
-      thresholds: <span style="color:#f92672">[[</span>$class<span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;FailedThreshold&#39;</span><span style="color:#f92672">,</span> failedThreshold: <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">]],</span>
-         tools     <span style="color:#f92672">:</span> <span style="color:#f92672">[[</span>$class<span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;XUnitDotNetTestType&#39;</span><span style="color:#f92672">,</span> pattern: <span style="color:#e6db74">&#39;**/xunit-results.xml&#39;</span><span style="color:#f92672">]]])</span>
-    <span style="color:#f92672">}</span>
-  <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>There are basically two things that are important here. First off, and most simple, is the &lsquo;dotnet test&rsquo; directive. We pipe the output to XML; which we are going to use in recording the results.</p>
+<pre><code class="language-groovy"> stage('Build binaries'){
+  // Run this stage in a docker container with the dotnet sdk
+  agent { docker 'microsoft/dotnet:latest'}
+  steps{
+    git url: 'https://github.com/corstijank/blog-dotnet-jenkins.git'
+    sh 'cd TodoApi &amp;&amp; dotnet restore'
+    sh 'cd TodoApi.Test &amp;&amp; dotnet restore'
+    sh 'cd TodoApi.Test &amp;&amp; dotnet test -xml xunit-results.xml'
+    sh 'cd TodoApi &amp;&amp; dotnet publish project.json -c Release -r ubuntu.14.04-x64 -o ./publish'
+    stash includes: 'TodoApi/publish/**', name: 'prod_bins' 
+  }
+  post{
+    always{
+      step([$class    : 'XUnitBuilder',
+      thresholds: [[$class: 'FailedThreshold', failedThreshold: '1']],
+         tools     : [[$class: 'XUnitDotNetTestType', pattern: '**/xunit-results.xml']]])
+    }
+  }
+}
+</code></pre>
+<p>There are basically two things that are important here. First off, and most simple, is the &lsquo;dotnet test&rsquo; directive. We pipe the output to XML; which we are going to use in recording the results.</p>
 <p>In a <code>Jenkinsfile</code>, each stage needs at least some <code>steps</code>, obviously. But, we can also add a <code>post</code> block. In this block, we can nest an <code>always</code> block. Here, we can record our results using the XUnit plugin.</p>
 <blockquote>
 <p>When you record test results in a <code>Jenkinsfile</code>, be sure to always put the recording in something like a <code>post/always</code> block, or if you&rsquo;re using pure script, use a <code>try/finally</code> construction. If your tests fail, the exit code will result in an exception. If you put the recording of your test results as a simple sequential step after the testing, it would mean execution would never reach the recording!</p>
 </blockquote>
-<p><figure>
-    <img src="/img/dotnet-jenkins-tests-succesful.png"/> <figcaption>
+<p><figure><img src="/img/dotnet-jenkins-tests-succesful.png"/><figcaption>
             <h4>The serenity was not at a level I had hoped it to be</h4>
         </figcaption>
 </figure>
 
-<figure>
-    <img src="/img/dotnet-jenkins-tests-failed.png"/> <figcaption>
+<figure><img src="/img/dotnet-jenkins-tests-failed.png"/><figcaption>
             <h4>Everything going as expected...</h4>
         </figcaption>
 </figure>

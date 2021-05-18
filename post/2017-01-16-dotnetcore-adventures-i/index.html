@@ -153,16 +153,17 @@
 <p>Now, that&rsquo;s all nice and well, but what about our awesome hello world application? Well, let&rsquo;s get started on a delivery pipeline for that. What&rsquo;s going to be delivery architecture? Our application is going to be packaged into a docker container, and uploaded to docker hub. From there, deployment to production should be easy enough. Let&rsquo;s begin.</p>
 <h3 id="building-the-code">Building the code</h3>
 <p>So, I created a first stage called &lsquo;Build Binaries&rsquo; to begin with. It builds our .NET core binaries.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">stage<span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>Build binaries<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">){</span>
-  agent <span style="color:#f92672">{</span> docker <span style="color:#960050;background-color:#1e0010">&#39;</span>microsoft<span style="color:#f92672">/</span>dotnet<span style="color:#f92672">:</span>latest<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">}</span>
-  steps<span style="color:#f92672">{</span>
-    git url<span style="color:#f92672">:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>https<span style="color:#f92672">:</span><span style="color:#75715e">//github.com/corstijank/blog-dotnet-jenkins.git&#39;
-</span><span style="color:#75715e"></span>    sh <span style="color:#960050;background-color:#1e0010">&#39;</span>dotnet restore<span style="color:#960050;background-color:#1e0010">&#39;</span>
-    sh <span style="color:#960050;background-color:#1e0010">&#39;</span>dotnet publish project<span style="color:#f92672">.</span><span style="color:#a6e22e">json</span> <span style="color:#f92672">-</span>c Release <span style="color:#f92672">-</span>r ubuntu<span style="color:#f92672">.</span><span style="color:#a6e22e">14</span><span style="color:#f92672">.</span><span style="color:#a6e22e">04</span><span style="color:#f92672">-</span>x64 <span style="color:#f92672">-</span>o <span style="color:#f92672">./</span>publish<span style="color:#960050;background-color:#1e0010">&#39;</span>
-    stash includes<span style="color:#f92672">:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>publish<span style="color:#f92672">/**</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">,</span> name<span style="color:#f92672">:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>prod_bins<span style="color:#960050;background-color:#1e0010">&#39;</span> 
-  <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Let&rsquo;s start with the line where declare which agent we are going to use for this stage. We use a docker container as our agent, and base it on the <code>microsoft/dotnet:latest</code> image. This is a simple line, but this has some pretty neat implications. It basically means, for this pipeline to run, we don&rsquo;t need to install the .NET core SDK anywhere. All we need is access to a docker host. The pipeline downloads the image, starts a container, and executes the steps of our stage <em>inside</em> the container.</p>
+<pre><code class="language-java">stage('Build binaries'){
+  agent { docker 'microsoft/dotnet:latest'}
+  steps{
+    git url: 'https://github.com/corstijank/blog-dotnet-jenkins.git'
+    sh 'dotnet restore'
+    sh 'dotnet publish project.json -c Release -r ubuntu.14.04-x64 -o ./publish'
+    stash includes: 'publish/**', name: 'prod_bins' 
+  }
+}
+</code></pre>
+<p>Let&rsquo;s start with the line where declare which agent we are going to use for this stage. We use a docker container as our agent, and base it on the <code>microsoft/dotnet:latest</code> image. This is a simple line, but this has some pretty neat implications. It basically means, for this pipeline to run, we don&rsquo;t need to install the .NET core SDK anywhere. All we need is access to a docker host. The pipeline downloads the image, starts a container, and executes the steps of our stage <em>inside</em> the container.</p>
 <p>Need to pin a specific version? No problem. Just use a different docker tag. Want to build on a new version of the SDK? Use a different docker tag. Never install a .NET SDK on a build server again. It&rsquo;s <strong>glorious</strong></p>
 <p>So, what do we run our container? Basically three things; we clone the git repository, restore the dependencies, and publish our application. This is all pretty basic .NET core CLI stuff.</p>
 <p>Lastly, and this is important, we use <code>stash</code> to copy the resulting binaries <strong>out</strong> of our container. This basically creates a zip file of everything in the specified directory, and ensures that zipfile is made available on request to later stages in the pipeline under the specified name.</p>
@@ -172,31 +173,33 @@
 <p>Simply said, the requirements for the <strong>steps</strong> in this stage, being, access to a Docker daemon, are different than the requirements for the <strong>steps</strong>of the previous stage (access to the .NET core sdk). Much like object oriented programming, this is a pretty good pointer to decouple stages in the delivery pipeline.</p>
 </blockquote>
 <p>Let&rsquo;s look at the pipeline:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">stage<span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>Create docker image<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">){</span>
-    agent <span style="color:#f92672">{</span> label <span style="color:#960050;background-color:#1e0010">&#39;</span>hasDocker<span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">}</span>
-    environment <span style="color:#f92672">{</span>
-        DOCKER_ID <span style="color:#f92672">=</span> credentials<span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>docker<span style="color:#f92672">-</span>id<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">)</span>
-    <span style="color:#f92672">}</span>
-    steps<span style="color:#f92672">{</span>
-        <span style="color:#75715e">// Unstash the binaries from the previous tage
-</span><span style="color:#75715e"></span>        unstash <span style="color:#960050;background-color:#1e0010">&#39;</span>prod_bins<span style="color:#960050;background-color:#1e0010">&#39;</span>
-        sh <span style="color:#e6db74">&#34;&#34;&#34;  docker build -t corstijank/blog-dotnet-jenkins:1.0-${env.BUILD_NUMBER} .
-</span><span style="color:#e6db74">                docker tag corstijank/blog-dotnet-jenkins:1.0-${env.BUILD_NUMBER} corstijank/blog-dotnet-jenkins:latest
-</span><span style="color:#e6db74">                docker login -u ${DOCKER_ID_USR} -p ${DOCKER_ID_PSW}
-</span><span style="color:#e6db74">                docker push corstijank/blog-dotnet-jenkins:1.0-${env.BUILD_NUMBER}
-</span><span style="color:#e6db74">                docker push corstijank/blog-dotnet-jenkins:latest &#34;&#34;&#34;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>There&rsquo;s a bunch of new stuff going on here. Let&rsquo;s inspect. We run this stage on any Jenkins agent that has a label called &lsquo;hasDocker&rsquo;. The label is just something I made up; but it&rsquo;s a nice way of identify if a Jenkins agent comes with access to a Docker daemon or not. Mind you, this stage does not run <strong>in</strong> in a docker container. It&rsquo;s just a simple process on the agent executing it.</p>
+<pre><code class="language-java">stage('Create docker image'){
+    agent { label 'hasDocker' }
+    environment {
+        DOCKER_ID = credentials('docker-id')
+    }
+    steps{
+        // Unstash the binaries from the previous tage
+        unstash 'prod_bins'
+        sh &quot;&quot;&quot;  docker build -t corstijank/blog-dotnet-jenkins:1.0-${env.BUILD_NUMBER} .
+                docker tag corstijank/blog-dotnet-jenkins:1.0-${env.BUILD_NUMBER} corstijank/blog-dotnet-jenkins:latest
+                docker login -u ${DOCKER_ID_USR} -p ${DOCKER_ID_PSW}
+                docker push corstijank/blog-dotnet-jenkins:1.0-${env.BUILD_NUMBER}
+                docker push corstijank/blog-dotnet-jenkins:latest &quot;&quot;&quot;
+    }
+}
+</code></pre>
+<p>There&rsquo;s a bunch of new stuff going on here. Let&rsquo;s inspect. We run this stage on any Jenkins agent that has a label called &lsquo;hasDocker&rsquo;. The label is just something I made up; but it&rsquo;s a nice way of identify if a Jenkins agent comes with access to a Docker daemon or not. Mind you, this stage does not run <strong>in</strong> in a docker container. It&rsquo;s just a simple process on the agent executing it.</p>
 <p>Also, we ask Jenkins for credentials, under the ID &lsquo;docker-id&rsquo;. Again, this is an identifier I made up myself. It&rsquo;s up the Jenkins administrator to create some credentials to a DockerHub id in the Jenkins instance.</p>
 <p>From there on, it&rsquo;s pretty self-explanatory. We unstash (read: unzip) the created binaries. We use docker build to create an image based on a <code>Dockerfile</code> in our repository. We tag it using both the build number, and a latest tag. We log in to DockerHub with our credentials, and we push our images.</p>
 <p>Here&rsquo;s the Dockerfile;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> microsoft/dotnet:runtime</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> publish /app<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> /app</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;chmod&#34;</span>, <span style="color:#e6db74">&#34;744&#34;</span>, <span style="color:#e6db74">&#34;./blog-dotnet-jenkins&#34;</span><span style="color:#f92672">]</span> <span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;./blog-dotnet-jenkins&#34;</span>]<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>We use the .NET core runtime here; as we don&rsquo;t need the full SDK. We add our <code>publish</code> folder as <code>/app</code>, and mark the executable file as such. The <code>ENTRYPOINT</code> points to the executable file, ensuring its execution when starting the container.</p>
+<pre><code class="language-Dockerfile">FROM microsoft/dotnet:runtime
+COPY publish /app
+WORKDIR /app
+RUN [&quot;chmod&quot;, &quot;744&quot;, &quot;./blog-dotnet-jenkins&quot;] 
+ENTRYPOINT [&quot;./blog-dotnet-jenkins&quot;]
+</code></pre>
+<p>We use the .NET core runtime here; as we don&rsquo;t need the full SDK. We add our <code>publish</code> folder as <code>/app</code>, and mark the executable file as such. The <code>ENTRYPOINT</code> points to the executable file, ensuring its execution when starting the container.</p>
 <p>If we run this pipeline in our Jenkins instance, we have achieved, a fully runnable docker image!</p>
 <p>Success!</p>
 
@@ -204,13 +207,14 @@
 
 <h3 id="fck-it-ship-it">F*ck it, ship it</h3>
 <p>The final stage really isn&rsquo;t anything special for now:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">stage<span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>Run in production<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">){</span>
-  agent <span style="color:#f92672">{</span> label <span style="color:#960050;background-color:#1e0010">&#39;</span>hasDocker<span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">}</span>
-  steps<span style="color:#f92672">{</span>
-    sh <span style="color:#e6db74">&#34;docker run -d corstijank/blog-dotnet-jenkins:1.0-${env.BUILD_NUMBER}&#34;</span>
-  <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Of course, this is not anywhere near a satisfying production environment. I promise to extend our pipeline to make sure we deploy nicely to separate docker host representing our production server. Or maybe some container service somewhere. At this point, it&rsquo;s all Docker anyway, and that should be the least of my struggles in the coming adventure.</p>
+<pre><code class="language-java">stage('Run in production'){
+  agent { label 'hasDocker' }
+  steps{
+    sh &quot;docker run -d corstijank/blog-dotnet-jenkins:1.0-${env.BUILD_NUMBER}&quot;
+  }
+}
+</code></pre>
+<p>Of course, this is not anywhere near a satisfying production environment. I promise to extend our pipeline to make sure we deploy nicely to separate docker host representing our production server. Or maybe some container service somewhere. At this point, it&rsquo;s all Docker anyway, and that should be the least of my struggles in the coming adventure.</p>
 <h2 id="deliver-first-develop-later">Deliver first, develop later</h2>
 <p>So, maybe I went a bit overboard for a simple <code>Hello World</code> application. I think many developers tend to focus too much first on developing features, instead of delivering features. The whole idea was to test if a .NET core application could be delivered using Jenkins. Never mind the feature yet. For now, it&rsquo;s looking rather glorious. Of course there are going to be add ons and challenges later;</p>
 <ul>
