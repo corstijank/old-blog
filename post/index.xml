@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Corstijan Kortsmit 2021</copyright>
-    <lastBuildDate>Sun, 05 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://staticsmustdie.net/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 May 2021 16:38:04 +0000</lastBuildDate><atom:link href="https://staticsmustdie.net/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Getting brave with Dapr</title>
+      <link>https://staticsmustdie.net/post/brave-dapr/</link>
+      <pubDate>Tue, 18 May 2021 16:38:04 +0000</pubDate>
+      
+      <guid>https://staticsmustdie.net/post/brave-dapr/</guid>
+      <description>A standardized library available to help developers in things like look-ups, persistence, security or messaging, has been a goal for platform creators since before even J2EE was first released. Today, we look at the latest incarnation of this goal. It&amp;rsquo;s called DAPR, and it&amp;rsquo;s made by Microsoft. Let&amp;rsquo;s go!
+Oh no, he didn&amp;rsquo;t Did he compare the latest hippest, fanciest, shiny technology to hit the market with the old-aged brontosaurus that is Java Enterprise?</description>
+    </item>
+    
     <item>
       <title>Crossing Styx - My journey into the (under)world of .NET - Part III</title>
       <link>https://staticsmustdie.net/post/2017-03-04-dotnetcore-adventures-iii/</link>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Getting brave with Dapr | Statics Must Die! - Writings by Corstijan Kortsmit</title>
+
+<meta property='og:title' content='Getting brave with Dapr - Statics Must Die! - Writings by Corstijan Kortsmit'>
+<meta property='og:description' content='A standardized library available to help developers in things like look-ups, persistence, security or messaging, has been a goal for platform creators since before even J2EE was first released. Today, we look at the latest incarnation of this goal. It&#39;s called DAPR, and it&#39;s made by Microsoft. Let&#39;s go!'>
+<meta property='og:url' content='https://staticsmustdie.net/post/brave-dapr/'>
+<meta property='og:site_name' content='Statics Must Die! - Writings by Corstijan Kortsmit'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='dapr'><meta property='article:tag' content='golang'><meta property='article:tag' content='programming'><meta property='article:published_time' content='2021-05-18T16:38:04Z'><meta property='article:modified_time' content='2021-05-18T16:38:04Z'><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@corstijank'><meta name='twitter:creator' content='@corstijank'>
+
+
+<link href="https://staticsmustdie.net/index.xml" rel="alternate" type="application/rss+xml" title="Statics Must Die! - Writings by Corstijan Kortsmit" />
+
+<link rel="stylesheet" href="/css/style.css"/><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="canonical" href="https://staticsmustdie.net/post/brave-dapr/">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" type="text/css" href="https://staticsmustdie.net/css/asciinema-player.css" />
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <nav id="nav-main" class="nav">
+      <div id="nav-name" class="nav-left">
+        <a id="nav-anchor" class="nav-item" href="https://staticsmustdie.net">
+          <h1 id="nav-heading" class="title is-4">Statics Must Die! - Writings by Corstijan Kortsmit</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <nav id="nav-items" class="nav-item level is-mobile"><a class="level-item" aria-label="github" href='https://github.com/corstijank'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="gitlab" href='https://gitlab.com/corstijank'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0 1 18.6 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z"></path>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="twitter" href='https://twitter.com/corstijank'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="linkedin" href='https://linkedin.com/in/corstijan-kortsmit'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path stroke-width="1.8" d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="rss" href='/index.xml'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle>
+    
+  </svg></i>
+            </span>
+          </a></nav>
+      </div>
+    </nav>
+
+    <nav class="nav">
+      
+
+      
+    </nav>
+
+  </div>
+  <script src="/js/navicon-shift.js"></script>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="subtitle tags is-6 is-pulled-right">
+      
+      
+<a class="subtitle is-6" href="/tags/dapr/">#dapr</a>
+
+
+
+  
+  | <a class="subtitle is-6" href="/tags/golang/">#golang</a>
+  
+  | <a class="subtitle is-6" href="/tags/programming/">#programming</a>
+  
+
+
+      
+    </div>
+    <h2 class="subtitle is-6">May 18, 2021</h2>
+    <h1 class="title">Getting brave with Dapr</h1>
+    
+    <div class="content">
+      <p>A standardized library available to help developers in things like look-ups, persistence, security or messaging, has been a goal for platform creators since before even J2EE was first released. Today, we look at the latest incarnation of this goal. It&rsquo;s called DAPR, and it&rsquo;s made by Microsoft. Let&rsquo;s go!</p>
+<h2 id="oh-no-he-didnt">Oh no, he didn&rsquo;t</h2>
+<p>Did he compare the latest hippest, fanciest, shiny technology to hit the market with the old-aged brontosaurus that is Java Enterprise? Have the oily vapors of his excessive Friday french frying dinners have finally gone to his head? I hear you think it - but before you ctrl/cmd-f4 this tab to read something else, allow me to explain my point of view.</p>
+<p>I mean, if you look at the abbreviation of Dapr - Distributed Application Runtime and wanted to apply that to a piece of software 20 years ago, you&rsquo;d be hard-pressed <em>NOT</em> to point</p>
+<p>Now, I am not talking about the implementation yet. I am merely stating the goals of either runtime. Offer a set of APIs to developers to build distributed applications, and handle earlier mentioned boring stuff like scaling, look-ups, state management. Both define a containerization format for packaging and shipping applications. In the old days, J(2)EE depended on application servers like Websphere or Weblogic. Nowadays, DAPR builds on the more modern container technology - Kubernetes.</p>
+<p>Enterprise Java depends on <em>A LOT</em> of specification and documentation. DAPR is a lot more lightweight and thankfully composed of all the cloud-native tools and practices that have become familiar to us over the last five years or so.</p>
+<h2 id="staying-clear-of-the-mesh">Staying clear of the mesh</h2>
+<p>So, in 2021, when you consider some of the earlier-mentioned aspects, service registration &amp; look-ups, security, logging, and the likes, it would be easy to think that this is another service mesh like Istio or Linkerd. These utilize sidecars that run next to your application pods and do a lot of that background work. As explained on the <a href="https://docs.dapr.io/concepts/service-mesh/">official Dapr site</a>, that&rsquo;s not a fair comparison, however.</p>
+<p>Long story short; Service meshes like Istio or Linkerd usually operate more on a networking level. Dapr works a bit on that same level but also very much provides &lsquo;higher&rsquo; services.</p>
+<p>Even simpler said - and very much my opinion - as a developer, you are not likely to code very much to, for example, an Istio API. Your platform team/provider will probably set Istio up, you provide some annotations in your deployment scripts, and bob&rsquo;s your uncle. Not so much with Dapr - which does have developer-facing APIs, and so, again, is quite like that old coffee slurping dinosaur I shall not name again.</p>
+<p>Of course, thanks to the flexibility of Kubernetes, you <em>can</em> have your cake and eat it too. You can run Dapr and a service mesh on your cluster and have the best of both worlds. Maybe I&rsquo;ll get around to figuring that out someday, but not today.</p>
+<p>Dapr is not a service mesh, though there is some overlap. It should work fine with existing meshes, though you&rsquo;ll need to pick which (the mesh or Dapr) does which parts of the work.</p>
+<h2 id="developers-developers-developers">Developers, developers, developers</h2>
+<p>Now, how does all this magic work in Kubernetes? After all, if you package your software in a container, that&rsquo;s it. There&rsquo;s no extra magic. To add this functionality, Dapr uses the sidecar pattern; I can best explain it using the following complicated architectural diagram:</p>
+<figure><img src="/img/sidecar-architecture.jpg"/><figcaption>
+            <h4>Dommel or Wowser? you be the judge!</h4>
+        </figcaption>
+</figure>
+
+<p>All of the service-meshes also use this pattern to do their magic, and it&rsquo;s common in Kubernetes land to do things like this. Of course, as a developer, using just a service mesh, in theory, you don&rsquo;t need Kubernetes to do some business logic development. The added benefits of a service mesh really come into play later down the &lsquo;software delivery road&rsquo; in an acceptance or production environment.</p>
+<p>But with Dapr, this does not apply; since we will be programming against the Dapr API as well, even our early development environment needs some instance of Dapr car to do the stuff the Dapr API promises us it will do. Now, one could imagine things getting a bit hairy - do we need a Kubernetes cluster to develop a <em>micro</em> service?</p>
+<p>I mean, I love Minikube as much as the next guy but still. Say I am developing 500kb of Golang binary. For me, getting Kubernetes in any form, complete with the YAML configuration and so on, just for some quick development and testing work, kind of defies the purpose. Like; 500 kb of executable code and two megabytes of YAML configuration? No, thank you.</p>
+<p>Luckily for us, this potentially disastrous developer experience was handily avoided by the Dapr team. Developer workflow in Dapr works with a CLI on your local machine/. This Dapr CLI can use a local Docker installation to spin up the sidecar. But your actual microservice doesn&rsquo;t have to run in Docker; rather, the local Dapr CLI can &lsquo;bind&rsquo; the sidecar container to a simple local process like so:</p>
+<pre><code class="language-sh">dapr run --dapr-http-port 3500 \
+--components-path components \
+--app-id myapp \
+--app-port 8080 \
+mvn clean compile exec:java
+</code></pre>
+<p>There&rsquo;s a lot to unpack here, and really, it would be easiest to start from the bottom up. This little command above ultimately starts a little java program. The last &lsquo;command&rsquo; in the pipeline is a simple <code>mvn clean compile exec:java</code> statement. As you can expect, this is what compiles and runs your code. It can be a <code>dotnet run</code> or a <code>go run</code> or - if you&rsquo;re not afraid of a little masochism - something like a <code>node</code> or <code>npm</code> command. Hey, I&rsquo;m not judging - you do you.</p>
+<p>The second to last line is the argument <code>--app-port 8080</code> - this tells the Dapr CLI that process running is going to be exposing something on port 8080. This port is where the sidecar will Thisforward the incoming requests. Likewise, <code>-app-id myapp</code> is like an identifier for an application used locally. It will be important for invoking services on this app via Dapr.</p>
+<p>This blog is already becoming quite long - so I won&rsquo;t go into too many details about <code>--components-path</code> yet; but to sum it up quickly, you need to specify a folder somewhere that contains definitions, if any, of components like a state store, pub/sub, and so on. If you&rsquo;re still thinking j2ee, and you think of the components folder as a declaration of services you want to be loaded into the jndi of your app server, you wouldn&rsquo;t that be far off. Kind of like all those XML files back in the day. But without the terrible IDE ui&rsquo;s and wizards for filling them out. If I ever see a wizard or UI for filling out my component YAML files, I&rsquo;ll be mildly disappointed.</p>
+<p>As you can guess, the last/first line is a simple <code>dapr run</code> command, followed by the http port we want to use to access our Dapr service something like <code>http get http://localhost:3500/v1.0/invoke/myapp/method/hello</code> This is a simple HTTPie command (I prefer it over <code>curl</code>) to do a get operation. A quick dissection learns that <code>/v1.0/invoke</code> means you are going to invoke something (via version 1.0 of the Dapr API) on the following app-id, being myapp. We&rsquo;ll call a method called <code>hello</code>. The sidecar forwards the HTTP get request to <code>localhost:8080/hello</code> and returns the result from that call. Of course, there is a bunch of other things happening as we do this. Let&rsquo;s dig deeper.</p>
+<h2 id="sidecar-shenanigans">Sidecar shenanigans</h2>
+<p>From the above example, we can establish that there is some API gatewaying already going on. You can invoke methods in Dapr using either plain old HTTP calls or using GRPC (which is protocol buffers over HTTP2); The Dapr runtime translates any invoke request to a GRPC payload between the various middlewares active inside the Dapr environment. Between these middlewares, Dapr does things like tracing or authentication before translating the invoke request to the protocol used by the actual service and calling that. The response is again wrapped, pushed back through a pipeline, and ultimately translated to the format used by the caller.</p>
+<h2 id="eternal-interface-issues">Eternal Interface Issues</h2>
+<p>This is all fine and well, but it does mean as a developer, we have some weird scenarios that could happen if you look at the invoke interface. I could create an HTTP service, listening to a path something like <em>/books/createNewBook</em>. Then, I could post an HTTP GET request with the book data and even have the service do the thing. It goes against all things REST and is the kind of offense that would get you a stern talk if I&rsquo;m reviewing the code. Remember that drill sergeant from Full Metal Jacket? Exactly</p>
+<figure><img src="/img/codereview.jpeg"/><figcaption>
+            <h4>Just another code review on faulty REST interfaces</h4>
+        </figcaption>
+</figure>
+
+<p>You can always do this using any language or service framework - God knows we engineers are very good at finding ways to take a perfectly good technology and mess it up - but, using Dapr; the new URL almost makes more sense if using HTTP to call it; <code>/v1.0/invoke/bookapp/method/books/createNewBook</code>. Of course, you still have to specify the correct HTTP method. So, I&rsquo;m not sure how to put it, but for me, it just feels off to use HTTP to do this RPC. Not so much because I hate the technology, but because, as a software developer, I suddenly feel it&rsquo;s feasible to pick a REST-like microservice framework and try to force it to do RPC. Which just feels icky.</p>
+<p>Of course, the easier way for this procedure call scenario would be to create a GRPC service. This works and is something I want to write about, but the biggest issue here is that your own GRPC service has to implement the actual GRPC interface contract of the DAPR invoke API. It makes a lot of sense if you know anything about protocol buffers. But if I write an HTTP server, I am left very free to muck up in any way I can. But, if I use GRPC, I need to abide by the straitjacket that is the invoke API.</p>
+<p>Now, call me kinky, but I will happily pick the straitjacket for RPC scenarios. Still, this is the kind of liberty for a developer that does worry me, as it&rsquo;s so very tempting to forget what type of interface we&rsquo;re implementing in our service if you just use HTTP in your microservice. I understand there&rsquo;s little choice - cause if you want to support REST-styled interfaces, you&rsquo;re saying to people: &lsquo;Hey, here&rsquo;s HTTP. Do your worst&rsquo;. But still, it did leave me with a bit of an odd taste, if only because I had to learn GRPC unexpectedly.</p>
+<h2 id="wrapping-up">Wrapping up</h2>
+<p>So, I&rsquo;m about 2000 words in. I&rsquo;ve covered the bare basics of the Dapr framework/platform/but-not-mesh. What do I think of it? Well, at the very least, it&rsquo;s refreshing. It&rsquo;s a framework that provides developers an actual API, much like any microservice framework would. But also, it&rsquo;s a sidecar and a combination of tools and components that knit into it.</p>
+<p>Therein lies a risk of coupling, but when setting up Dapr in an actual Kubernetes cluster, you can still pick which components you want to fulfill what role. You can do a state store in SQL or, by default, in Redis. Want to do Pub/Sub? Take a pick; RabbitMQ, Kafka, Redis(Streams) are among the few supported options. So, there is flexibility and choices to make, which is a good thing. If you are using a cloud platform, there are probably various component implementations that use that cloud&rsquo;s specific services (for example, Azure Service Bus or AWS SQS for pub/sub).</p>
+<p>But, as one will find out if, either looking deeper or just by, well, reasoning logically, there is a price to pay. Because while you can pick your choice of implementation for any of the building blocks, you can&rsquo;t, at least not via the Dapr APIs, actually use the product API of your choice that you might know and love. That, of course, makes sense, but it does take away some of the goodness of, for example, Kafka versus RabbitMQ from a developer point of view.</p>
+<p>In the end, Dapr is attempting an ambitious crossover between the world of Kubernetes/infra and developer APIs. In doing so, it has to make choices. Because it&rsquo;s doing <em>more</em>, it&rsquo;s not as good as any specialist component used for that bit. So, from a perfectionist view, it&rsquo;s never going to measure up in flexibility or speed. But then again, it does what needs to do well, and it hopes to be applicable for most application needs out there.</p>
+<p>One can (and I hope we will) debate whether or not it succeeds at that. But so far, I&rsquo;m just happy there&rsquo;s a new piece of developer technology out there that is attempting to alleviate the &lsquo;middleware burden&rsquo; - instead of adding to it and help engineers focus on implementing some actual business value.</p>
+<p>I&rsquo;m working on a bit of a hobby project with Dapr, and it might give me some more input to write about in the coming months. I&rsquo;ll hopefully be back soon with a deeper dive into State management, the freaky world of key/value data stores, and that slightly awkward feeling when I have my own opinions come back to haunt me.</p>
+
+      
+      <div class="related">
+
+<h3>Similar articles:</h3>
+<ul>
+	
+	<li><a href="/post/2017-03-04-dotnetcore-adventures-iii/">Crossing Styx - My journey into the (under)world of .NET - Part III</a></li>
+	
+	<li><a href="/post/2017-02-05-dotnetcore-adventures-ii/">Crossing Styx - My journey into the (under)world of .NET - Part II</a></li>
+	
+	<li><a href="/post/2017-01-16-dotnetcore-adventures-i/">Crossing Styx - My journey into the (under)world of .NET - Part I</a></li>
+	
+</ul>
+</div>
+      
+    </div>
+    
+  </div>
+</section>
+
+    <script src="/js/copycode.js"></script>
+
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+  
+    <div id="show_comments"><a id="load_comments" class="button is-link">Load comments</a></div>
+  
+    <script type="text/javascript">
+      var disqus_shortname = 'corstijank-github-io';
+      function disqus() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+  
+      
+      var hash = window.location.hash.substr(1);
+      if ((hash.length > 8) && (hash.substring(0, 8) === "comment-")) {
+        disqus();
+        document.getElementById("show_comments").style.display = "none";
+      } else {
+        document.getElementById('load_comments').onclick = function() {
+          disqus();
+          document.getElementById("show_comments").style.display = "none";
+        };
+      }
+  
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>Corstijan Kortsmit 2021</p>
+    
+      <p>Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/ribice/kiss">Kiss</a>.</p>
+    
+  </div>
+</section>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90300195-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+<script src="https://staticsmustdie.net/js/asciinema-player.js"></script>
+</body>
+</html>
+
