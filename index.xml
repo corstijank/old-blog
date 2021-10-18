@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Corstijan Kortsmit 2021</copyright>
-    <lastBuildDate>Tue, 18 May 2021 16:38:04 +0000</lastBuildDate><atom:link href="https://staticsmustdie.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Oct 2021 18:25:43 +0000</lastBuildDate><atom:link href="https://staticsmustdie.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Monday Mini: Protobufs from JSON in Java</title>
+      <link>https://staticsmustdie.net/post/monday-mini-protobufs-json-java/</link>
+      <pubDate>Mon, 18 Oct 2021 18:25:43 +0000</pubDate>
+      
+      <guid>https://staticsmustdie.net/post/monday-mini-protobufs-json-java/</guid>
+      <description>On my pet project, I am using protocol buffers as Interface Language (IDL). Using a simple, shared definition should speed things up, right? Well, kind of!
+Protocol Buffers are a message format commonly used in combination with Remote Procedure Calls (RPC; or specifically, GRPC if you&amp;rsquo;re doing RPC with protobufs). If you&amp;rsquo;re working in a microservices world, you can&amp;rsquo;t really just assume every service uses these protocol buffered messages (I&amp;rsquo;ll just call them protobufs from now on) over an RPC styled interface.</description>
+    </item>
+    
     <item>
       <title>Getting brave with Dapr</title>
       <link>https://staticsmustdie.net/post/brave-dapr/</link>
